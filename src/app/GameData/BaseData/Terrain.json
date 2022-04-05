@@ -1,0 +1,172 @@
+{
+    "terrains":[
+        {
+            "name":"road",
+            "stars":0
+        }
+        ,
+        {
+            "name":"plains",
+            "stars":1
+        }
+        ,
+        {
+            "name":"forest",
+            "stars":2,
+            "occludesVision":true
+        }
+        ,
+        {
+            "name":"mountain",
+            "stars":4
+        }
+        ,
+        {
+            "name":"silo",
+            "stars":3
+        }
+        ,
+        {
+            "name":"silo_flat",
+            "stars":3,
+            "sameAs":"silo"
+        }
+        ,
+        {
+            "name":"city",
+            "stars":3,
+            "maxCapturePoints":20,
+            "income":1000,
+            "repair":2,
+            "repairList":[
+                "infantry", "mech", "recon", "apc", "tank", "anti_air", 
+                "medium_tank", "neo_tank", "artillery", "rocket", "missile", 
+                "mega_tank"
+            ]
+        }
+        ,
+        {
+            "name":"base",
+            "stars":3,
+            "maxCapturePoints":20,
+            "income":1000,
+            "repair":2,
+            "sameAs":"city",
+            "buildList":[
+                "infantry", "mech", "recon", "apc", "tank", "anti_air", 
+                "medium_tank", "neo_tank", "artillery", "rocket", "missile", 
+                "mega_tank", "piperunner"
+            ],
+            "repairList":[
+                "infantry", "mech", "recon", "apc", "tank", "anti_air", 
+                "medium_tank", "neo_tank", "artillery", "rocket", "missile", 
+                "mega_tank", "piperunner"
+            ]
+        }
+        ,
+        {
+            "name":"airport",
+            "stars":3,
+            "maxCapturePoints":20,
+            "income":1000,
+            "repair":2,
+            "sameAs":"city",
+            "buildList": [
+                "battle_copter", "transport_copter", "fighter", "bomber", 
+                "stealth", "black_bomb"
+            ],
+            "repairList":[
+                "battle_copter", "transport_copter", "fighter", "bomber", 
+                "stealth", "black_bomb"
+            ]
+        }
+        ,
+        {
+            "name":"port",
+            "stars":3,
+            "maxCapturePoints":20,
+            "income":1000,
+            "repair":2,
+            "buildList":[
+                "black_boat", "lander", "cruiser", "battleship", "submarine"
+            ],
+            "repairList":[
+                "black_boat", "lander", "cruiser", "battleship", "submarine"
+            ]
+        }
+        ,
+        {
+            "name":"headquarters",
+            "income":1000,
+            "stars":4,
+            "repair":2,
+            "maxCapturePoints":20,
+            "repairList":[
+                "infantry", "mech", "recon", "apc", "tank", "anti_air", 
+                "medium_tank", "neo_tank", "artillery", "rocket", "missile", 
+                "mega_tank"
+            ]
+        }
+        ,
+        {
+            "name":"shoals",
+            "stars":0
+        }
+        ,
+        {
+            "name":"river",
+            "stars":0
+        }
+        ,
+        {
+            "name":"reef",
+            "stars":2,
+            "occludesVision":true
+        }
+        ,
+        {
+            "name":"sea",
+            "stars":0
+        }
+        ,
+        {
+            "name":"bridge",
+            "stars":0,
+            "sameAs":"road"
+        }
+        ,
+        {
+            "name":"pipeline",
+            "stars":0
+        }
+        ,
+        {
+            "name":"pipeline_seam",
+            "stars":0,
+            "sameAs":"pipeline",
+            "hitPoints":99,
+            "destroyed":"pipeline_seam_broken",
+            "damagedLike":"neo_tank"
+        }
+        ,
+        {
+            "name":"pipeline_seam_broken",
+            "stars":0,
+            "sameAs":"plains"
+        }
+        ,
+        {
+            "name":"lab",
+            "stars":3,
+            "maxCapturePoints":20,
+            "sameAs":"city"
+        }
+        ,
+        {
+            "name":"tower",
+            "stars":3,
+            "maxCapturePoints":20,
+            "sameAs":"city"
+        }
+    ]
+}

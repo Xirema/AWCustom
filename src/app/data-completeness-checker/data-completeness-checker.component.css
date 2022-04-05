@@ -1,0 +1,34 @@
+table {
+    border-collapse:collapse;
+    width:100%;
+    table-layout:auto;
+    align-self:center;
+}
+
+td {
+    border:1px solid;
+    border-color:gray;
+    padding:5px;
+}
+
+th {
+    font-size:small;
+    font-variant:small-caps;
+}
+
+.found {
+    color:darkgreen
+}
+
+.suspect {
+    color:darkgoldenrod
+}
+
+.missing {
+    color:red;
+    font-weight:bold;
+}
+
+ul, ol {
+    padding-left:18px;
+}

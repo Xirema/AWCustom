@@ -1,0 +1,863 @@
+<h2>Units</h2>
+<table>
+    <tr>
+        <th>name</th>
+        <th>cost</th>
+        <th>maxFuel</th>
+        <th>maxAmmo</th>
+        <th>visionRange</th>
+        <th>movementRange</th>
+        <th>movementClass</th>
+        <th>classifications</th>
+
+        <th>fuelPerDay</th>
+        <th>fuelPerDayStealth</th>
+        <th>weapons</th>
+        <th>supplyRepair</th>
+        <th>transportCapacity</th>
+        <th>transportList</th>
+        <th>hitPoints</th>
+        <th>captureSpeed</th>
+        <th>ignoresVisionOcclusion</th>
+        <th>stealthType</th>
+    </tr>
+    <tr *ngFor="let unit of unitTypes">
+        <td>{{unit.name ?? "--"}}</td>
+        <td>{{unit.cost ?? "--"}}</td>
+        <td>{{unit.maxFuel ?? "--"}}</td>
+        <td>{{unit.maxAmmo ?? "--"}}</td>
+        <td>{{unit.visionRange ?? "--"}}</td>
+        <td>{{unit.movementRange ?? "--"}}</td>
+        <td [class.found]="check(unit.movementClass, movementClasses)"
+            [class.missing]="!check(unit.movementClass, movementClasses)">
+            {{unit.movementClass ?? "--"}}
+        </td>
+        <td>
+            <ul *ngIf="unit.classifications && unit.classifications.length > 0; else noClassifications">
+                <li *ngFor="let classification of unit.classifications"
+                    [class.found]="foundClassifications.get(classification) > 1"
+                    [class.suspect]="foundClassifications.get(classification) === 1">
+                    {{classification}}
+                </li>
+            </ul>
+            <ng-template #noClassifications>
+                --
+            </ng-template>
+        </td>
+        <td>{{unit.fuelPerDay ?? "--"}}</td>
+        <td>{{unit.fuelPerDayStealth ?? "--"}}</td>
+        <td>
+            <ol *ngIf="unit.weapons && unit.weapons.length > 0; else noWeapons">
+                <li *ngFor="let weapon of unit.weapons" [class.found]="check(weapon, weaponTypes)"
+                    [class.missing]="!check(weapon, weaponTypes)">
+                    {{weapon}}
+                </li>
+            </ol>
+            <ng-template #noWeapons>
+                --
+            </ng-template>
+        </td>
+        <td>{{unit.supplyRepair ?? "--"}}</td>
+        <td>{{unit.transportCapacity ?? "--"}}</td>
+        <td>
+            <ul *ngIf="unit.transportList && unit.transportList.length > 0; else noTransports">
+                <li *ngFor="let transport of unit.transportList" [class.found]="check(transport, unitTypes)"
+                    [class.suspect]="!check(transport, unitTypes)">
+                    {{transport}}
+                </li>
+            </ul>
+            <ng-template #noTransports>
+                --
+            </ng-template>
+        </td>
+        <td>{{unit.hitPoints ?? "--"}}</td>
+        <td>{{unit.captureSpeed ?? "--"}}</td>
+        <td>{{unit.ignoresVisionOcclusion ?? "--"}}</td>
+        <td>{{unit.stealthType ?? "--"}}</td>
+    </tr>
+</table>
+<h2>Weapons</h2>
+<table>
+    <tr>
+        <th>name</th>
+        <th>ammoConsumed</th>
+        <th>maxRange</th>
+        <th>minRange</th>
+        <th>selfTarget</th>
+        <th>affectedByLuck</th>
+        <th>nonLethal</th>
+        <th>areaOfEffect</th>
+        <th>targetsStealth</th>
+        <th>flatDamage</th>
+        <th>baseDamage</th>
+    </tr>
+    <tr *ngFor="let weapon of weaponTypes">
+        <td [class.found]="findWeapon(weapon.name)" [class.missing]="!findWeapon(weapon.name)">
+            {{weapon.name}} ({{findWeapon(weapon.name)}})
+        </td>
+        <td>{{weapon.ammoConsumed}}</td>
+        <td>{{weapon.maxRange}}</td>
+        <td>{{weapon.minRange}}</td>
+        <td>{{weapon.selfTarget ?? "--"}}</td>
+        <td>{{weapon.affectedByLuck ?? "--"}}</td>
+        <td>{{weapon.nonLethal ?? "--"}}</td>
+        <td>{{weapon.areaOfEffect ?? "--"}}</td>
+        <td>
+            <ul *ngIf="weapon.targetsStealth; else noStealth">
+                <li *ngFor="let stealth of weapon.targetsStealth" [class.found]="findStealth(stealth)"
+                    [class.suspect]="!findStealth(stealth)">
+                    {{stealth}}
+                </li>
+            </ul>
+            <ng-template #noStealth>
+                --
+            </ng-template>
+        </td>
+        <td>{{weapon.flatDamage ?? "--"}}</td>
+        <td>
+            <ul>
+                <li *ngFor="let pair of entries(weapon.baseDamage)" [class.found]="check(pair[0], unitTypes)"
+                    [class.missing]="!check(pair[0], unitTypes)">
+                    {{pair[0]}}: {{pair[1]}}
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
+<h2>Terrains</h2>
+<table>
+    <tr>
+        <th>name</th>
+        <th>stars</th>
+        <th>maxCapturePoints</th>
+        <th>sameAs</th>
+        <th>income</th>
+        <th>repair</th>
+        <th>occludesVision</th>
+        <th>hitPoints</th>
+        <th>destroyed</th>
+        <th>damagedLike</th>
+        <th>repairList</th>
+        <th>buildList</th>
+    </tr>
+    <tr *ngFor="let terrain of terrainTypes">
+        <td>{{terrain.name}}</td>
+        <td>{{terrain.stars}}</td>
+        <td>{{terrain.maxCapturePoints ?? "--"}}</td>
+        <td [class.found]="check(terrain.sameAs, terrainTypes) && terrain.sameAs"
+            [class.missing]="!check(terrain.sameAs, terrainTypes) && terrain.sameAs">
+            {{terrain.sameAs ?? "--"}}
+        </td>
+        <td>{{terrain.income ?? "--"}}</td>
+        <td>{{terrain.repair ?? "--"}}</td>
+        <td>{{terrain.occludesVision ?? "--"}}</td>
+        <td>{{terrain.hitPoints ?? "--"}}</td>
+        <td [class.found]="check(terrain.destroyed, terrainTypes) && terrain.destroyed"
+            [class.missing]="!check(terrain.destroyed, terrainTypes) && terrain.destroyed">
+            {{terrain.destroyed ?? "--"}}
+        </td>
+        <td [class.found]="check(terrain.damagedLike, unitTypes) && terrain.damagedLike"
+            [class.missing]="!check(terrain.damagedLike, unitTypes) && terrain.damagedLike">
+            {{terrain.damagedLike ?? "--"}}
+        </td>
+        <td>
+            <ul *ngIf="terrain.repairList; else noRepair">
+                <li *ngFor="let unit of terrain.repairList" [class.found]="check(unit, unitTypes)"
+                    [class.suspect]="!check(unit, unitTypes)">
+                    {{unit}}
+                </li>
+            </ul>
+            <ng-template #noRepair>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="terrain.buildList; else noBuild">
+                <li *ngFor="let unit of terrain.buildList" [class.found]="check(unit, unitTypes)"
+                    [class.suspect]="!check(unit, unitTypes)">
+                    {{unit}}
+                </li>
+            </ul>
+            <ng-template #noBuild>
+                --
+            </ng-template>
+        </td>
+    </tr>
+</table>
+<h2>Movement Classes</h2>
+<table>
+    <tr>
+        <th>name</th>
+        <th>variant</th>
+        <th>movementCosts</th>
+    </tr>
+    <tr *ngFor="let movementClass of movementClasses">
+        <td [class.found]="findMovement(movementClass.name) != null"
+            [class.missing]="findMovement(movementClass.name) == null">
+            {{movementClass.name}}
+        </td>
+        <td>
+            {{movementClass.variant ?? "--"}}
+        </td>
+        <td>
+            <ul>
+                <li *ngFor="let pair of entries(movementClass.movementCosts)"
+                    [class.found]="check(pair[0], terrainTypes)" [class.missing]="!check(pair[0], terrainTypes)">
+                    {{pair[0]}}: {{pair[1]}}
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
+<h2>Effects</h2>
+<h4>Passive Unit Effects</h4>
+<table>
+    <tr>
+        <th>name</th>
+        <th>targets</th>
+        <th>unitTypeRequired</th>
+        <th>classificationRequired</th>
+        <th>terrainRequired</th>
+        <th>firepowerMod</th>
+        <th>defenseMod</th>
+        <th>indirectDefenseMod</th>
+        <th>minRangeMod</th>
+        <th>maxRangeMod</th>
+        <th>fuelUseMod</th>
+        <th>ammoUseMod</th>
+        <th>goodLuckMod</th>
+        <th>badLuckMod</th>
+        <th>movementMod</th>
+        <th>visionMod</th>
+        <th>terrainStarsMod</th>
+        <th>terrainStarsFlatMod</th>
+        <th>terrainStarsDefense</th>
+        <th>terrainStarsFirepower</th>
+        <th>flatMovement</th>
+        <th>counterfireMod</th>
+        <th>counterFirst</th>
+        <th>captureRateMod</th>
+        <th>unitCostMod</th>
+        <th>hiddenHitPoints</th>
+        <th>firepowerFromFunds</th>
+        <th>defenseFromFunds</th>
+        <th>fundsFromDamage</th>
+        <th>firepowerFromOwnedTerrain</th>
+        <th>defenseFromOwnedTerrain</th>
+    </tr>
+    <tr *ngFor="let effect of passiveUnitEffects">
+        <td [class.found]="checkEffect(effect.name, 'passiveUnit')"
+            [class.missing]="!checkEffect(effect.name, 'passiveUnit')">
+            {{effect.name ?? "--"}}
+        </td>
+        <td>
+            <ul *ngIf="effect.targets && effect.targets.length > 0; else noTargetsPU">
+                <li *ngFor="let target of effect.targets" [class.found]="checkEffectTarget(target)"
+                    [class.missing]="!checkEffectTarget(target)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noTargetsPU>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.unitTypeRequired && effect.unitTypeRequired.length > 0; else noUnitTypePU">
+                <li *ngFor="let target of effect.unitTypeRequired" [class.found]="check(target, unitTypes)"
+                    [class.missing]="!check(target, unitTypes)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noUnitTypePU>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul
+                *ngIf="effect.classificationRequired && effect.classificationRequired.length > 0; else noClassificationPU">
+                <li *ngFor="let target of effect.classificationRequired" [class.found]="checkClassification(target)"
+                    [class.missing]="!checkClassification(target)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noClassificationPU>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.terrainRequired && effect.terrainRequired.length > 0; else noTerrainPU">
+                <li *ngFor="let target of effect.terrainRequired" [class.found]="check(target, terrainTypes)"
+                    [class.missing]="!check(target, terrainTypes)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noTerrainPU>
+                --
+            </ng-template>
+        </td>
+        <td>{{effect.firepowerMod ?? "--"}}</td>
+        <td>{{effect.defenseMod ?? "--"}}</td>
+        <td>{{effect.indirectDefenseMod ?? "--"}}</td>
+        <td>{{effect.minRangeMod ?? "--"}}</td>
+        <td>{{effect.maxRangeMod ?? "--"}}</td>
+        <td>{{effect.fuelUseMod ?? "--"}}</td>
+        <td>{{effect.ammoUseMod ?? "--"}}</td>
+        <td>{{effect.goodLuckMod ?? "--"}}</td>
+        <td>{{effect.badLuckMod ?? "--"}}</td>
+        <td>{{effect.movementMod ?? "--"}}</td>
+        <td>{{effect.visionMod ?? "--"}}</td>
+        <td>{{effect.terrainStarsMod ?? "--"}}</td>
+        <td>{{effect.terrainStarsFlatMod ?? "--"}}</td>
+        <td>{{effect.terrainStarsDefense ?? "--"}}</td>
+        <td>{{effect.terrainStarsFirepower ?? "--"}}</td>
+        <td>{{effect.flatMovement ?? "--"}}</td>
+        <td>{{effect.counterfireMod ?? "--"}}</td>
+        <td>{{effect.counterFirst ?? "--"}}</td>
+        <td>{{effect.captureRateMod ?? "--"}}</td>
+        <td>{{effect.unitCostMod ?? "--"}}</td>
+        <td>{{effect.hiddenHitPoints ?? "--"}}</td>
+        <td>{{effect.firepowerFromFunds ?? "--"}}</td>
+        <td>{{effect.defenseFromFunds ?? "--"}}</td>
+        <td>{{effect.fundsFromDamage ?? "--"}}</td>
+        <td>
+            <ul *ngIf="effect.firepowerFromOwnedTerrain; else noFirepowerFromOwnedTerrain">
+                <li *ngFor="let pair of entries(effect.firepowerFromOwnedTerrain)"
+                    [class.found]="check(pair[0], terrainTypes)" [class.missing]="!check(pair[0], terrainTypes)">
+                    {{pair[0]}}: {{pair[1]}}
+                </li>
+            </ul>
+            <ng-template #noFirepowerFromOwnedTerrain>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.defenseFromOwnedTerrain; else noDefenseFromOwnedTerrain">
+                <li *ngFor="let pair of entries(effect.defenseFromOwnedTerrain)"
+                    [class.found]="check(pair[0], terrainTypes)" [class.missing]="!check(pair[0], terrainTypes)">
+                    {{pair[0]}}: {{pair[1]}}
+                </li>
+            </ul>
+            <ng-template #noDefenseFromOwnedTerrain>
+                --
+            </ng-template>
+        </td>
+    </tr>
+</table>
+<h4>Active Unit Effects</h4>
+<table>
+    <tr>
+        <th>name</th>
+        <th>targets</th>
+        <th>unitTypeRequired</th>
+        <th>classificationRequired</th>
+        <th>terrainRequired</th>
+        <th>hitPointMod</th>
+        <th>roundHitPoints</th>
+        <th>resupply</th>
+        <th>halveFuel</th>
+        <th>makeActive</th>
+        <th>stunDuration</th>
+    </tr>
+    <tr *ngFor="let effect of activeUnitEffects">
+        <td [class.found]="checkEffect(effect.name, 'activeUnit')"
+            [class.missing]="!checkEffect(effect.name, 'activeUnit')">
+            {{effect.name ?? "--"}}
+        </td>
+        <td>
+            <ul *ngIf="effect.targets && effect.targets.length > 0; else noTargetsAU">
+                <li *ngFor="let target of effect.targets" [class.found]="checkEffectTarget(target)"
+                    [class.missing]="!checkEffectTarget(target)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noTargetsAU>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.unitTypeRequired && effect.unitTypeRequired.length > 0; else noUnitTypeAU">
+                <li *ngFor="let target of effect.unitTypeRequired" [class.found]="check(target, unitTypes)"
+                    [class.missing]="!check(target, unitTypes)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noUnitTypeAU>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul
+                *ngIf="effect.classificationRequired && effect.classificationRequired.length > 0; else noClassificationAU">
+                <li *ngFor="let target of effect.classificationRequired" [class.found]="checkClassification(target)"
+                    [class.missing]="!checkClassification(target)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noClassificationAU>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.terrainRequired && effect.terrainRequired.length > 0; else noTerrainAU">
+                <li *ngFor="let target of effect.terrainRequired" [class.found]="check(target, terrainTypes)"
+                    [class.missing]="!check(target, terrainTypes)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noTerrainAU>
+                --
+            </ng-template>
+        </td>
+        <td>{{effect.hitPointMod ?? "--"}}</td>
+        <td>{{effect.roundHitPoints ?? "--"}}</td>
+        <td>{{effect.resupply ?? "--"}}</td>
+        <td>{{effect.halveFuel ?? "--"}}</td>
+        <td>{{effect.makeActive ?? "--"}}</td>
+        <td>{{effect.stunDuration ?? "--"}}</td>
+    </tr>
+</table>
+<h4>Passive Terrain Effects</h4>
+<table>
+    <tr>
+        <th>name</th>
+        <th>targets</th>
+        <th>affects</th>
+        <th>terrainRequired</th>
+        <th>incomeMod</th>
+        <th>incomeFlatMod</th>
+        <th>repairMod</th>
+        <th>occludesVisionMod</th>
+        <th>buildListMod</th>
+    </tr>
+    <tr *ngFor="let effect of passiveTerrainEffects">
+        <td [class.found]="checkEffect(effect.name, 'passiveTerrain')"
+            [class.missing]="!checkEffect(effect.name, 'passiveTerrain')">
+            {{effect.name ?? "--"}}
+        </td>
+        <td>
+            <ul *ngIf="effect.targets && effect.targets.length > 0; else noTargetsPT">
+                <li *ngFor="let target of effect.targets" [class.found]="checkEffectTarget(target)"
+                    [class.missing]="!checkEffectTarget(target)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noTargetsPT>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.affects && effect.affects.length > 0; else noAffectsPT">
+                <li *ngFor="let target of effect.affects" [class.found]="checkEffectTarget(target)"
+                    [class.missing]="!checkEffectTarget(target)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noAffectsPT>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.terrainRequired && effect.terrainRequired.length > 0; else noTerrainPT">
+                <li *ngFor="let target of effect.terrainRequired" [class.found]="check(target, terrainTypes)"
+                    [class.missing]="!check(target, terrainTypes)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noTerrainPT>
+                --
+            </ng-template>
+        </td>
+        <td>{{effect.incomeMod ?? "--"}}</td>
+        <td>{{effect.incomeFlatMod ?? "--"}}</td>
+        <td>{{effect.repairMod ?? "--"}}</td>
+        <td>{{effect.occludesVisionMod ?? "--"}}</td>
+        <td>
+            <ul *ngIf="effect.buildListMod && effect.buildListMod.length > 0; else noBuildListPT">
+                <li *ngFor="let target of effect.buildListMod" [class.found]="check(target, unitTypes)"
+                    [class.missing]="!check(target, unitTypes)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noBuildListPT>
+                --
+            </ng-template>
+        </td>
+    </tr>
+</table>
+<h4>Active Terrain Effects</h4>
+<table>
+    <tr>
+        <th>name</th>
+        <th>targets</th>
+        <th>affects</th>
+        <th>terrainRequired</th>
+        <th>unitSummoned</th>
+    </tr>
+    <tr *ngFor="let effect of activeTerrainEffects">
+        <td [class.found]="checkEffect(effect.name, 'activeTerrain')"
+            [class.missing]="!checkEffect(effect.name, 'activeTerrain')">
+            {{effect.name ?? "--"}}
+        </td>
+        <td>
+            <ul *ngIf="effect.targets && effect.targets.length > 0; else noTargetsAT">
+                <li *ngFor="let target of effect.targets" [class.found]="checkEffectTarget(target)"
+                    [class.missing]="!checkEffectTarget(target)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noTargetsAT>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.affects && effect.affects.length > 0; else noAffectsAT">
+                <li *ngFor="let target of effect.affects" [class.found]="checkEffectTarget(target)"
+                    [class.missing]="!checkEffectTarget(target)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noAffectsAT>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.terrainRequired && effect.terrainRequired.length > 0; else noTerrainAT">
+                <li *ngFor="let target of effect.terrainRequired" [class.found]="check(target, terrainTypes)"
+                    [class.missing]="!check(target, terrainTypes)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noTerrainAT>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.unitSummoned; else noUnitSummonedAT">
+                <li [class.found]="check(effect.unitSummoned.name, unitTypes)"
+                    [class.missing]="!check(effect.unitSummoned.name, unitTypes)">
+                    name: {{effect.unitSummoned.name}}
+                </li>
+                <li>
+                    initialDamage: {{effect.unitSummoned.initialDamage}}
+                </li>
+                <li>
+                    active: {{effect.unitSummoned.active}}
+                </li>
+            </ul>
+            <ng-template #noUnitSummonedAT>
+                --
+            </ng-template>
+        </td>
+    </tr>
+</table>
+<h4>Passive Global Effects</h4>
+<table>
+    <tr>
+        <th>name</th>
+        <th>targets</th>
+        <th>variantMod</th>
+        <th>movementClassVariantReplace</th>
+        <th>movementClassVariantOverride</th>
+        <th>variantHintMod</th>
+    </tr>
+    <tr *ngFor="let effect of passiveGlobalEffects">
+        <td [class.found]="checkEffect(effect.name, 'passiveGlobal')"
+            [class.missing]="!checkEffect(effect.name, 'passiveGlobal')">
+            {{effect.name ?? "--"}}
+        </td>
+        <td>
+            <ul *ngIf="effect.targets && effect.targets.length > 0; else noTargetsPG">
+                <li *ngFor="let target of effect.targets" [class.found]="checkEffectTarget(target)"
+                    [class.missing]="!checkEffectTarget(target)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noTargetsPG>
+                --
+            </ng-template>
+        </td>
+        <td>{{effect.variantMod ?? "--"}}</td>
+        <td>{{effect.movementClassVariantReplace ?? "--"}}</td>
+        <td>{{effect.movementClassVariantOverride ?? "--"}}</td>
+        <td>
+            <ul *ngIf="effect.variantHintMod; else noVariantHintModPG">
+                <li *ngFor="let pair of entries(effect.variantHintMod)">
+                    {{pair[0]}}: {{pair[1]}}
+                </li>
+            </ul>
+            <ng-template #noVariantHintModPG>
+                --
+            </ng-template>
+        </td>
+    </tr>
+</table>
+<h4>Active Global Effects</h4>
+<table>
+    <tr>
+        <th>name</th>
+        <th>targets</th>
+        <th>fundMod</th>
+        <th>fundFlatMod</th>
+        <th>powerBarMod</th>
+        <th>powerBarPerFunds</th>
+        <th>missileLaunch</th>
+    </tr>
+    <tr *ngFor="let effect of activeGlobalEffects">
+        <td [class.found]="checkEffect(effect.name, 'activeGlobal')"
+            [class.missing]="!checkEffect(effect.name, 'activeGlobal')">
+            {{effect.name ?? "--"}}
+        </td>
+        <td>
+            <ul *ngIf="effect.targets && effect.targets.length > 0; else noTargetsAG">
+                <li *ngFor="let target of effect.targets" [class.found]="checkEffectTarget(target)"
+                    [class.missing]="!checkEffectTarget(target)">
+                    {{target}}
+                </li>
+            </ul>
+            <ng-template #noTargetsAG>
+                --
+            </ng-template>
+        </td>
+        <td>{{effect.fundMod ?? "--"}}</td>
+        <td>{{effect.fundFlatMod ?? "--"}}</td>
+        <td>{{effect.powerBarMod ?? "--"}}</td>
+        <td>{{effect.powerBarPerFunds ?? "--"}}</td>
+        <td>
+            <ul *ngIf="effect.missileLaunch && effect.missileLaunch.length > 0; else noMissileLaunchAG">
+                <li *ngFor="let target of effect.missileLaunch">
+                    missileLaunch:
+                    <ul>
+                        <li>count: {{target.count}}</li>
+                        <li>
+                            targetMethod:
+                            <ul>
+                                <li *ngFor="let method of target.targetMethod"
+                                    [class.found]="checkMissileTargetMethod(method)"
+                                    [class.missing]="!checkMissileTargetMethod(method)">
+                                    {{method}}
+                                </li>
+                            </ul>
+                        </li>
+                        <li>damage: {{target.damage}}</li>
+                        <li>range: {{target.range}}</li>
+                        <li>stunDuration: {{target.stunDuration ?? "--"}}</li>
+                    </ul>
+                </li>
+            </ul>
+            <ng-template #noMissileLaunchAG>
+                --
+            </ng-template>
+        </td>
+    </tr>
+</table>
+<h2>CommanderTypes</h2>
+<table>
+    <tr>
+        <th>name</th>
+        <th>passiveUnitEffectsD2d</th>
+        <th>passiveTerrainEffectsD2d</th>
+        <th>passiveGlobalEffectsD2d</th>
+
+        <th>copCost</th>
+        <th>passiveUnitEffectsCop</th>
+        <th>activeUnitEffectsCop</th>
+        <th>passiveTerrainEffectsCop</th>
+        <th>activeTerrainEffectsCop</th>
+        <th>passiveGlobalEffectsCop</th>
+        <th>activeGlobalEffectsCop</th>
+
+        <th>scopCost</th>
+        <th>passiveUnitEffectsScop</th>
+        <th>activeUnitEffectsScop</th>
+        <th>passiveTerrainEffectsScop</th>
+        <th>activeTerrainEffectsScop</th>
+        <th>passiveGlobalEffectsScop</th>
+        <th>activeGlobalEffectsScop</th>
+    </tr>
+    <tr *ngFor="let commander of commanderTypes">
+        <td>{{commander.name ?? "--"}}</td>
+        <td>
+            <ul *ngIf="commander.passiveUnitEffectsD2d && commander.passiveUnitEffectsD2d.length > 0; else noPUD">
+                <li *ngFor="let effect of commander.passiveUnitEffectsD2d"
+                    [class.found]="check(effect, passiveUnitEffects)"
+                    [class.missing]="!check(effect, passiveUnitEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noPUD>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.passiveTerrainEffectsD2d && commander.passiveTerrainEffectsD2d.length > 0; else noPTD">
+                <li *ngFor="let effect of commander.passiveTerrainEffectsD2d"
+                    [class.found]="check(effect, passiveTerrainEffects)"
+                    [class.missing]="!check(effect, passiveTerrainEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noPTD>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.passiveGlobalEffectsD2d && commander.passiveGlobalEffectsD2d.length > 0; else noPGD">
+                <li *ngFor="let effect of commander.passiveGlobalEffectsD2d"
+                    [class.found]="check(effect, passiveGlobalEffects)"
+                    [class.missing]="!check(effect, passiveGlobalEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noPGD>
+                --
+            </ng-template>
+        </td>
+        <td>{{commander.copCost ?? "--"}}</td>
+        <td>
+            <ul *ngIf="commander.passiveUnitEffectsCop && commander.passiveUnitEffectsCop.length > 0; else noPUC">
+                <li *ngFor="let effect of commander.passiveUnitEffectsCop"
+                    [class.found]="check(effect, passiveUnitEffects)"
+                    [class.missing]="!check(effect, passiveUnitEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noPUC>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.activeUnitEffectsCop && commander.activeUnitEffectsCop.length > 0; else noAUC">
+                <li *ngFor="let effect of commander.activeUnitEffectsCop"
+                    [class.found]="check(effect, activeUnitEffects)"
+                    [class.missing]="!check(effect, activeUnitEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noAUC>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.passiveTerrainEffectsCop && commander.passiveTerrainEffectsCop.length > 0; else noPTC">
+                <li *ngFor="let effect of commander.passiveTerrainEffectsCop"
+                    [class.found]="check(effect, passiveTerrainEffects)"
+                    [class.missing]="!check(effect, passiveTerrainEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noPTC>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.activeTerrainEffectsCop && commander.activeTerrainEffectsCop.length > 0; else noATC">
+                <li *ngFor="let effect of commander.activeTerrainEffectsCop"
+                    [class.found]="check(effect, activeTerrainEffects)"
+                    [class.missing]="!check(effect, activeTerrainEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noATC>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.passiveGlobalEffectsCop && commander.passiveGlobalEffectsCop.length > 0; else noPGC">
+                <li *ngFor="let effect of commander.passiveGlobalEffectsCop"
+                    [class.found]="check(effect, passiveGlobalEffects)"
+                    [class.missing]="!check(effect, passiveGlobalEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noPGC>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.activeGlobalEffectsCop && commander.activeGlobalEffectsCop.length > 0; else noAGC">
+                <li *ngFor="let effect of commander.activeGlobalEffectsCop"
+                    [class.found]="check(effect, activeGlobalEffects)"
+                    [class.missing]="!check(effect, activeGlobalEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noAGC>
+                --
+            </ng-template>
+        </td>
+        <td>{{commander.scopCost ?? "--"}}</td>
+        <td>
+            <ul *ngIf="commander.passiveUnitEffectsScop && commander.passiveUnitEffectsScop.length > 0; else noPUS">
+                <li *ngFor="let effect of commander.passiveUnitEffectsScop"
+                    [class.found]="check(effect, passiveUnitEffects)"
+                    [class.missing]="!check(effect, passiveUnitEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noPUS>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.activeUnitEffectsScop && commander.activeUnitEffectsScop.length > 0; else noAUS">
+                <li *ngFor="let effect of commander.activeUnitEffectsScop"
+                    [class.found]="check(effect, activeUnitEffects)"
+                    [class.missing]="!check(effect, activeUnitEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noAUS>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul
+                *ngIf="commander.passiveTerrainEffectsScop && commander.passiveTerrainEffectsScop.length > 0; else noPTS">
+                <li *ngFor="let effect of commander.passiveTerrainEffectsScop"
+                    [class.found]="check(effect, passiveTerrainEffects)"
+                    [class.missing]="!check(effect, passiveTerrainEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noPTS>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.activeTerrainEffectsScop && commander.activeTerrainEffectsScop.length > 0; else noATS">
+                <li *ngFor="let effect of commander.activeTerrainEffectsScop"
+                    [class.found]="check(effect, activeTerrainEffects)"
+                    [class.missing]="!check(effect, activeTerrainEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noATS>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.passiveGlobalEffectsScop && commander.passiveGlobalEffectsScop.length > 0; else noPGS">
+                <li *ngFor="let effect of commander.passiveGlobalEffectsScop"
+                    [class.found]="check(effect, passiveGlobalEffects)"
+                    [class.missing]="!check(effect, passiveGlobalEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noPGS>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="commander.activeGlobalEffectsScop && commander.activeGlobalEffectsScop.length > 0; else noAGS">
+                <li *ngFor="let effect of commander.activeGlobalEffectsScop"
+                    [class.found]="check(effect, activeGlobalEffects)"
+                    [class.missing]="!check(effect, activeGlobalEffects)">
+                    {{effect}}
+                </li>
+            </ul>
+            <ng-template #noAGS>
+                --
+            </ng-template>
+        </td>
+    </tr>
+</table>

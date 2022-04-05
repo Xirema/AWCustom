@@ -1,0 +1,365 @@
+{
+    "commanders": [
+        {
+            "name":"andy",
+
+            "passiveUnitEffectsD2d": ["standard_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop"],
+            "activeUnitEffectsCop": ["andy_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "andy_scop"],
+            "activeUnitEffectsScop": ["andy_scop"]
+        }
+        ,
+        {
+            "name":"hachi",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "hachi_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "hachi_cop"],
+            
+            "scopCost":45000,
+            "passiveUnitEffectsScop": ["standard_cop", "hachi_cop"],
+            "passiveTerrainEffectsScop": ["hachi_scop"]
+        }
+        ,
+        {
+            "name":"jake",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "jake_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "jake_plains_cop", "jake_indirect_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "jake_plains_scop", "jake_indirect_cop", "jake_vehicle_scop"]
+        }
+        ,
+        {
+            "name":"max",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "max_direct_d2d", "max_indirect_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "max_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "max_scop"]
+        }
+        ,
+        {
+            "name":"nell",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "nell_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "nell_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "nell_scop"]
+        }
+        ,
+        {
+            "name":"rachel",
+
+            "passiveUnitEffectsD2d": ["standard_d2d"],
+            "passiveTerrainEffectsD2d": ["rachel_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "rachel_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop"],
+            "activeGlobalEffectsScop": ["rachel_scop"]
+        }
+        ,
+        {
+            "name":"sami",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "sami_infantry_d2d", "sami_direct_d2d", "sami_transport_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "sami_cop"],
+            
+            "scopCost":81000,
+            "passiveUnitEffectsScop": ["standard_cop", "sami_scop"]
+        }
+        ,
+        {
+            "name":"colin",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "colin_d2d"],
+            
+            "copCost":18000,
+            "passiveUnitEffectsCop": ["standard_cop"],
+            "activeGlobalEffectsCop": ["colin_cop"],
+            
+            "scopCost":45000,
+            "passiveUnitEffectsScop": ["standard_cop", "colin_scop"]
+        }
+        ,
+        {
+            "name":"grit",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "grit_indirect_d2d", "grit_direct_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "grit_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "grit_scop"]
+        }
+        ,
+        {
+            "name":"olaf",
+
+            "passiveUnitEffectsD2d": ["standard_d2d"],
+            "passiveGlobalEffectsD2d": ["olaf_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop"],
+            "passiveGlobalEffectsCop": ["olaf_cop"],
+            
+            "scopCost":63000,
+            "passiveUnitEffectsScop": ["standard_cop"],
+            "activeUnitEffectsScop": ["olaf_scop"],
+            "passiveGlobalEffectsScop": ["olaf_cop"]
+        }
+        ,
+        {
+            "name":"sasha",
+
+            "passiveUnitEffectsD2d": ["standard_d2d"],
+            "passiveTerrainEffectsD2d": ["sasha_d2d"],
+            
+            "copCost":18000,
+            "passiveUnitEffectsCop": ["standard_cop"],
+            "activeGlobalEffectsCop": ["sasha_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "sasha_scop"]
+        }
+        ,
+        {
+            "name":"drake",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "drake_naval_d2d", "drake_air_d2d"],
+            "passiveGlobalEffectsD2d": ["drake_d2d"],
+            
+            "copCost":36000,
+            "passiveUnitEffectsCop": ["standard_cop"],
+            "activeUnitEffectsCop": ["drake_cop"],
+            
+            "scopCost":63000,
+            "passiveUnitEffectsScop": ["standard_cop"],
+            "activeUnitEffectsScop": ["drake_scop"],
+            "passiveGlobalEffectsScop": ["drake_scop"]
+        }
+        ,
+        {
+            "name":"eagle",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "eagle_air_d2d", "eagle_naval_d2d"],
+            
+            "copCost":36000,
+            "passiveUnitEffectsCop": ["standard_cop", "eagle_cop"],
+            
+            "scopCost":81000,
+            "passiveUnitEffectsScop": ["standard_cop", "eagle_cop"],
+            "activeUnitEffectsScop": ["eagle_scop"]
+        }
+        ,
+        {
+            "name":"javier",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "javier_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "javier_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "javier_scop"]
+        }
+        ,
+        {
+            "name":"jess",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "jess_vehicle_d2d", "jess_other_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "jess_cop"],
+            "activeUnitEffectsCop":["jess_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "jess_scop"],
+            "activeUnitEffectsScop":["jess_cop"]
+        }
+        ,
+        {
+            "name":"grimm",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "grimm_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "grimm_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "grimm_scop"]
+        }
+        ,
+        {
+            "name":"kanbei",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "kanbei_d2d"],
+            
+            "copCost":36000,
+            "passiveUnitEffectsCop": ["standard_cop", "kanbei_cop"],
+            
+            "scopCost":63000,
+            "passiveUnitEffectsScop": ["standard_cop", "kanbei_scop"]
+        }
+        ,
+        {
+            "name":"sensei",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "sensei_infantry_d2d", "sensei_bcopter_d2d", "sensei_other_d2d", "sensei_transport_d2d"],
+            
+            "copCost":18000,
+            "passiveUnitEffectsCop": ["standard_cop", "sensei_cop"],
+            "activeTerrainEffectsCop": ["sensei_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "sensei_cop"],
+            "activeTerrainEffectsScop": ["sensei_scop"]
+        }
+        ,
+        {
+            "name":"sonja",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "sonja_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "sonja_cop"],
+            "passiveTerrainEffectsCop": ["sonja_cop"],
+            
+            "scopCost":45000,
+            "passiveUnitEffectsScop": ["standard_cop", "sonja_scop"],
+            "passiveTerrainEffectsScop": ["sonja_cop"]
+        }
+        ,
+        {
+            "name":"adder",
+
+            "passiveUnitEffectsD2d": ["standard_d2d"],
+            
+            "copCost":18000,
+            "passiveUnitEffectsCop": ["standard_cop", "adder_cop"],
+            
+            "scopCost":45000,
+            "passiveUnitEffectsScop": ["standard_cop", "adder_scop"]
+        }
+        ,
+        {
+            "name":"flak",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "flak_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "flak_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "flak_scop"]
+        }
+        ,
+        {
+            "name":"hawke",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "hawke_d2d"],
+            
+            "copCost":45000,
+            "passiveUnitEffectsCop": ["standard_cop"],
+            "activeUnitEffectsCop": ["hawke_heal_cop", "hawke_harm_cop"],
+            
+            "scopCost":81000,
+            "passiveUnitEffectsScop": ["standard_cop"],
+            "activeUnitEffectsScop": ["hawke_heal_scop", "hawke_harm_scop"]
+        }
+        ,
+        {
+            "name":"jugger",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "jugger_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "jugger_cop"],
+            
+            "scopCost":63000,
+            "passiveUnitEffectsScop": ["standard_cop", "jugger_scop"]
+        }
+        ,
+        {
+            "name":"kindle",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "kindle_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "kindle_cop"],
+            "activeUnitEffectsCop": ["kindle_cop"],
+            
+            "scopCost":54000,
+            "passiveUnitEffectsScop": ["standard_cop", "kindle_scop"]
+        }
+        ,
+        {
+            "name":"koal",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "koal_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["standard_cop", "koal_cop"],
+            
+            "scopCost":45000,
+            "passiveUnitEffectsScop": ["standard_cop", "koal_scop"]
+        }
+        ,
+        {
+            "name":"lash",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "lash_d2d"],
+            
+            "copCost":36000,
+            "passiveUnitEffectsCop": ["standard_cop", "lash_cop"],
+            
+            "scopCost":63000,
+            "passiveUnitEffectsScop": ["standard_cop", "lash_scop"]
+        }
+        ,
+        {
+            "name":"sturm",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "sturm_d2d"],
+            
+            "copCost":54000,
+            "passiveUnitEffectsCop": ["standard_cop", "sturm_cop"],
+            "activeGlobalEffectsCop": ["sturm_cop"],
+            
+            "scopCost":90000,
+            "passiveUnitEffectsScop": ["standard_cop", "sturm_cop"],
+            "activeGlobalEffectsScop": ["sturm_scop"]
+        }
+        ,
+        {
+            "name":"von_bolt",
+
+            "passiveUnitEffectsD2d": ["standard_d2d", "von_bolt_d2d"],
+            
+            "scopCost":90000,
+            "passiveUnitEffectsScop": ["standard_cop"],
+            "activeGlobalEffectsScop": ["von_bolt_scop"]
+        }
+    ]
+}
