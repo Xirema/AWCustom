@@ -22,3 +22,35 @@ export interface CommanderType {
     passiveGlobalEffectsScop:string[];
     activeGlobalEffectsScop:string[];
 }
+
+export interface PlayerType {
+    name:string;
+    commanderTypeMod:string;
+    permittedPlayerSlots:string[];
+    permittedCommanderTypes:string[];
+    teamName:string;
+}
+
+export class Player {
+    public id:string;
+    public userId:string;
+    public commanderType:string;
+    public playerType:string;
+    public funds:number;
+    public meterCharge:number;
+    constructor(
+        id:string,
+        userId:string,
+        commanderType:string,
+        playerType:string,
+        funds?:number,
+        meterCharge?:number
+    ) {
+        this.id = id;
+        this.userId = userId;
+        this.commanderType = commanderType;
+        this.playerType = playerType;
+        this.funds = funds ?? 0;
+        this.meterCharge = meterCharge ?? 0;
+    }
+}

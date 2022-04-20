@@ -9,7 +9,6 @@
                 "forest":1,
                 "mountain":2,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
@@ -17,7 +16,6 @@
                 "headquarters":1,
                 "shoals":1,
                 "river":2,
-                "pipeline_seam_broken":1,
                 "lab":1,
                 "tower":1
             }
@@ -32,7 +30,6 @@
                 "forest":1,
                 "mountain":2,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
@@ -40,7 +37,6 @@
                 "headquarters":1,
                 "shoals":1,
                 "river":2,
-                "pipeline_seam_broken":1,
                 "lab":1,
                 "tower":1
             }
@@ -55,7 +51,6 @@
                 "forest":2,
                 "mountain":4,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
@@ -63,7 +58,6 @@
                 "headquarters":1,
                 "shoals":1,
                 "river":2,
-                "pipeline_seam_broken":2,
                 "lab":1,
                 "tower":1
             }
@@ -78,7 +72,6 @@
                 "forest":1,
                 "mountain":1,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
@@ -86,7 +79,6 @@
                 "headquarters":1,
                 "shoals":1,
                 "river":1,
-                "pipeline_seam_broken":1,
                 "lab":1,
                 "tower":1
             }
@@ -101,7 +93,6 @@
                 "forest":1,
                 "mountain":1,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
@@ -109,7 +100,6 @@
                 "headquarters":1,
                 "shoals":1,
                 "river":1,
-                "pipeline_seam_broken":1,
                 "lab":1,
                 "tower":1
             }
@@ -124,7 +114,6 @@
                 "forest":1,
                 "mountain":2,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
@@ -132,7 +121,6 @@
                 "headquarters":1,
                 "shoals":1,
                 "river":1,
-                "pipeline_seam_broken":1,
                 "lab":1,
                 "tower":1
             }
@@ -146,14 +134,12 @@
                 "plains":1,
                 "forest":2,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
                 "port":1,
                 "headquarters":1,
                 "shoals":1,
-                "pipeline_seam_broken":1,
                 "lab":1,
                 "tower":1
             }
@@ -167,14 +153,12 @@
                 "plains":2,
                 "forest":3,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
                 "port":1,
                 "headquarters":1,
                 "shoals":1,
-                "pipeline_seam_broken":2,
                 "lab":1,
                 "tower":1
             }
@@ -188,14 +172,12 @@
                 "plains":2,
                 "forest":3,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
                 "port":1,
                 "headquarters":1,
                 "shoals":1,
-                "pipeline_seam_broken":2,
                 "lab":1,
                 "tower":1
             }
@@ -209,14 +191,12 @@
                 "plains":2,
                 "forest":3,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
                 "port":1,
                 "headquarters":1,
                 "shoals":1,
-                "pipeline_seam_broken":1,
                 "lab":1,
                 "tower":1
             }
@@ -230,14 +210,12 @@
                 "plains":3,
                 "forest":4,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
                 "port":1,
                 "headquarters":1,
                 "shoals":1,
-                "pipeline_seam_broken":2,
                 "lab":1,
                 "tower":1
             }
@@ -251,14 +229,12 @@
                 "plains":3,
                 "forest":4,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
                 "port":1,
                 "headquarters":1,
                 "shoals":1,
-                "pipeline_seam_broken":2,
                 "lab":1,
                 "tower":1
             }
@@ -336,7 +312,6 @@
                 "forest":1,
                 "mountain":1,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
@@ -347,7 +322,6 @@
                 "reef":1,
                 "sea":1,
                 "bridge":1,
-                "pipeline_seam_broken":1,
                 "lab":1,
                 "tower":1
             }
@@ -362,7 +336,6 @@
                 "forest":1,
                 "mountain":1,
                 "silo":1,
-                "silo_flat":1,
                 "city":1,
                 "base":1,
                 "airport":1,
@@ -373,7 +346,6 @@
                 "reef":1,
                 "sea":1,
                 "bridge":1,
-                "pipeline_seam_broken":1,
                 "lab":1,
                 "tower":1
             }
@@ -388,7 +360,6 @@
                 "forest":2,
                 "mountain":2,
                 "silo":2,
-                "silo_flat":2,
                 "city":2,
                 "base":2,
                 "airport":2,
@@ -399,7 +370,6 @@
                 "reef":2,
                 "sea":2,
                 "bridge":2,
-                "pipeline_seam_broken":2,
                 "lab":2,
                 "tower":2
             }

@@ -861,3 +861,44 @@
         </td>
     </tr>
 </table>
+<h2>Player Types</h2>
+<table>
+    <tr>
+        <th>name</th>
+        <th>commanderTypeMod</th>
+        <th>teamName</th>
+        <th>permittedPlayerSlots</th>
+        <th>permittedCommanderTypes</th>
+    </tr>
+    <tr *ngFor="let playerType of playerTypes">
+        <td>{{playerType.name}}</td>
+        <td
+        [class.found]="check(playerType.commanderTypeMod, commanderTypes)"
+        [class.missing]="!check(playerType.commanderTypeMod, commanderTypes)">
+            {{playerType.commanderTypeMod}}
+        </td>
+        <td>{{playerType.teamName ?? "--"}}</td>
+        <td>
+            <ul *ngIf="playerType.permittedPlayerSlots && playerType.permittedPlayerSlots.length > 0; else noPlayerSlots">
+                <li *ngFor="let playerSlot of playerType.permittedPlayerSlots">
+                    {{playerSlot}}
+                </li>
+            </ul>
+            <ng-template #noPlayerSlots>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="playerType.permittedCommanderTypes && playerType.permittedCommanderTypes.length > 0; else noCommanderTypes">
+                <li *ngFor="let commanderType of playerType.permittedCommanderTypes"
+                [class.found]="check(commanderType, commanderTypes)"
+                [class.missing]="!check(commanderType, commanderTypes)">
+                    {{commanderType}}
+                </li>
+            </ul>
+            <ng-template #noCommanderTypes>
+                --
+            </ng-template>
+        </td>
+    </tr>
+</table>

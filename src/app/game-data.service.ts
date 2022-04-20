@@ -8,7 +8,7 @@ import {MovementClass} from './GameData/Movement';
 import movementTypes from './GameData/BaseData/Movement.json';
 import {PassiveUnitEffect, ActiveUnitEffect, PassiveTerrainEffect, ActiveTerrainEffect, PassiveGlobalEffect, ActiveGlobalEffect} from './GameData/Effect';
 import effects from './GameData/BaseData/Effect.json';
-import {CommanderType} from './GameData/Commander';
+import {CommanderType, PlayerType} from './GameData/Commander';
 import commanders from './GameData/BaseData/Commander.json'
 
 @Injectable({
@@ -18,7 +18,7 @@ export class GameDataService {
 
   constructor() { }
 
-  public getTerrainTypes():Observable<TerrainType[]> {
+  public getTerrainTypes(modname:string):Observable<TerrainType[]> {
     let terrains:TerrainType[] = terrainTypes.terrains.map(t => ({
       maxCapturePoints:null,
       sameAs:null,
@@ -42,7 +42,7 @@ export class GameDataService {
     });
   }
 
-  public getUnitTypes():Observable<UnitType[]> {
+  public getUnitTypes(modname:string):Observable<UnitType[]> {
     let units:UnitType[] = unitTypes.units.map(u => ({
       fuelPerDay:null,
       fuelPerDayStealth:null,
@@ -66,7 +66,7 @@ export class GameDataService {
     });
   }
 
-  public getWeaponTypes():Observable<WeaponType[]> {
+  public getWeaponTypes(modname:string):Observable<WeaponType[]> {
     let weapons:WeaponType[] = unitTypes.weapons.map(w => ({
       minRange:1,
       selfTarget:false,
@@ -87,7 +87,7 @@ export class GameDataService {
     });
   }
 
-  public getMovementClasses():Observable<MovementClass[]> {
+  public getMovementClasses(modname:string):Observable<MovementClass[]> {
     let movements:MovementClass[] = movementTypes.movementClasses.map(m => ({
       variant:"normal",
       ...m
@@ -102,7 +102,7 @@ export class GameDataService {
     });
   }
 
-  public getPassiveUnitEffects():Observable<PassiveUnitEffect[]> {
+  public getPassiveUnitEffects(modname:string):Observable<PassiveUnitEffect[]> {
     let passiveUnitEffects:PassiveUnitEffect[] = effects.passiveUnitEffects.map(e => ({
       targets:null,
       unitTypeRequired:null,
@@ -146,7 +146,7 @@ export class GameDataService {
     });
   }
 
-  public getActiveUnitEffects():Observable<ActiveUnitEffect[]> {
+  public getActiveUnitEffects(modname:string):Observable<ActiveUnitEffect[]> {
     let activeUnitEffects:ActiveUnitEffect[] = effects.activeUnitEffects.map(e => ({
       targets:null,
       unitTypeRequired:null,
@@ -170,7 +170,7 @@ export class GameDataService {
     });
   }
 
-  public getPassiveTerrainEffects():Observable<PassiveTerrainEffect[]> {
+  public getPassiveTerrainEffects(modname:string):Observable<PassiveTerrainEffect[]> {
     let passiveTerrainEffects:PassiveTerrainEffect[] = effects.passiveTerrainEffects.map(e => ({
       targets:null,
       incomeMod:null,
@@ -190,7 +190,7 @@ export class GameDataService {
     });
   }
 
-  public getActiveTerrainEffects():Observable<ActiveTerrainEffect[]> {
+  public getActiveTerrainEffects(modname:string):Observable<ActiveTerrainEffect[]> {
     let activeTerrainEffects:ActiveTerrainEffect[] = effects.activeTerrainEffects.map(e => ({
       targets:null,
       affects:null,
@@ -206,7 +206,7 @@ export class GameDataService {
     });
   }
 
-  public getPassiveGlobalEffects():Observable<PassiveGlobalEffect[]> {
+  public getPassiveGlobalEffects(modname:string):Observable<PassiveGlobalEffect[]> {
     let passiveGlobalEffects:PassiveGlobalEffect[] = effects.passiveGlobalEffects.map(e => ({
       targets:null,
       variantMod:null,
@@ -225,7 +225,7 @@ export class GameDataService {
     });
   }
 
-  public getActiveGlobalEffects():Observable<ActiveGlobalEffect[]> {
+  public getActiveGlobalEffects(modname:string):Observable<ActiveGlobalEffect[]> {
     let activeGlobalEffects:ActiveGlobalEffect[] = effects.activeGlobalEffects.map(e => ({
       targets:null,
       fundMod:null,
@@ -245,7 +245,7 @@ export class GameDataService {
     });
   }
 
-  public getCommanderTypes():Observable<CommanderType[]> {
+  public getCommanderTypes(modname:string):Observable<CommanderType[]> {
     let commanderTypes:CommanderType[] = commanders.commanders.map(e => ({
       passiveUnitEffectsD2d:null,
       passiveTerrainEffectsD2d:null,
@@ -268,6 +268,23 @@ export class GameDataService {
     }));
     return new Observable<CommanderType[]>(observer => {
       observer.next(commanderTypes);
+      return {
+        unsubscribe() {
+          //Do Nothing
+        }
+      };
+    });
+  }
+
+  public getPlayerTypes(modname:string):Observable<PlayerType[]> {
+    let playerTypes:PlayerType[] = commanders.playerTypes.map(e => ({
+      permittedPlayerSlots:null,
+      permittedCommanderTypes:null,
+      teamName:null,
+      ...e
+    }));
+    return new Observable<PlayerType[]>(observer => {
+      observer.next(playerTypes);
       return {
         unsubscribe() {
           //Do Nothing

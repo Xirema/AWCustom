@@ -36,8 +36,8 @@ export interface WeaponType {
 
 export class Unit {
     public unitType:string;
-    public coordinate:[number, number];
-    public ownerId:string;
+    public coordinate:{x:number; y:number};
+    public playerId:string;
     public damage:number;
     public fuel:number;
     public ammo:number;
@@ -46,12 +46,12 @@ export class Unit {
 
     constructor(
         unitType:UnitType,
-        coordinate:[number,number],
-        ownerId:string
+        coordinate:{x:number; y:number},
+        playerId:string
     ) {
         this.unitType = unitType.name;
         this.coordinate = coordinate;
-        this.ownerId = ownerId;
+        this.playerId = playerId;
         this.damage = 0;
         this.fuel = unitType.maxFuel;
         this.ammo = unitType.maxAmmo;
