@@ -264,6 +264,7 @@ export class GameDataService {
       activeTerrainEffectsScop:null,
       passiveGlobalEffectsScop:null,
       activeGlobalEffectsScop:null,
+      coMeterMultiplier:1,
       ...e
     }));
     return new Observable<CommanderType[]>(observer => {

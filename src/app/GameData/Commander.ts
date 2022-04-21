@@ -21,6 +21,8 @@ export interface CommanderType {
     activeTerrainEffectsScop:string[];
     passiveGlobalEffectsScop:string[];
     activeGlobalEffectsScop:string[];
+
+    coMeterMultiplier:number;
 }
 
 export interface PlayerType {

@@ -673,6 +673,8 @@
         <th>activeTerrainEffectsScop</th>
         <th>passiveGlobalEffectsScop</th>
         <th>activeGlobalEffectsScop</th>
+
+        <th>coMeterMultiplier</th>
     </tr>
     <tr *ngFor="let commander of commanderTypes">
         <td>{{commander.name ?? "--"}}</td>
@@ -859,6 +861,7 @@
                 --
             </ng-template>
         </td>
+        <td>{{commander.coMeterMultiplier ?? "--"}}</td>
     </tr>
 </table>
 <h2>Player Types</h2>

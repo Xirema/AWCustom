@@ -8,6 +8,7 @@ export interface Settings {
     unitLimit:number;
     captureLimit:number;
     dayLimit:number;
-    
+    coMeterSize:number;
+    coMeterMultiplier:number;
 
 }
