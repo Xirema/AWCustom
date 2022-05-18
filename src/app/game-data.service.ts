@@ -9,14 +9,15 @@ import movementTypes from './GameData/BaseData/Movement.json';
 import {PassiveUnitEffect, ActiveUnitEffect, PassiveTerrainEffect, ActiveTerrainEffect, PassiveGlobalEffect, ActiveGlobalEffect} from './GameData/Effect';
 import effects from './GameData/BaseData/Effect.json';
 import {CommanderType, PlayerType} from './GameData/Commander';
-import commanders from './GameData/BaseData/Commander.json'
+import commanders from './GameData/BaseData/Commander.json';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameDataService {
 
-  constructor() { }
+  constructor(private httpClient:HttpClient) { }
 
   public getTerrainTypes(modname:string):Observable<TerrainType[]> {
     let terrains:TerrainType[] = terrainTypes.terrains.map(t => ({
@@ -89,7 +90,7 @@ export class GameDataService {
 
   public getMovementClasses(modname:string):Observable<MovementClass[]> {
     let movements:MovementClass[] = movementTypes.movementClasses.map(m => ({
-      variant:"normal",
+      variantMods:null,
       ...m
     }));
     return new Observable<MovementClass[]>(observer => {
@@ -134,6 +135,11 @@ export class GameDataService {
       firepowerFromOwnedTerrain:null,
       defenseFromOwnedTerrain:null,
       fundsFromDamage:null,
+      visionVariantMods:null,
+      firepowerVariantMods:null,
+      defenseVariantMods:null,
+      coMeterChargeFromDealtDamage:null,
+      coMeterChargeFromReceivedDamage:null,
       ...e
     }));
     return new Observable<PassiveUnitEffect[]>(observer => {
@@ -178,6 +184,8 @@ export class GameDataService {
       buildListMod:null,
       repairMod:null,
       occludesVisionMod:null,
+      visionModBoost:null,
+      classificationRequired:null,
       ...e
     }));
     return new Observable<PassiveTerrainEffect[]>(observer => {
@@ -292,5 +300,19 @@ export class GameDataService {
         }
       };
     });
+  }
+
+  public getHelloWorld():Observable<{name:string}> {
+    return this.httpClient.get<{name:string}>("http://localhost:8167/hello");
+  }
+
+  public getPostTest(name:string):Observable<{name:string}> {
+    return this.httpClient.post<{name:string}>("http://localhost:8167/posttest", {name:name});
+  }
+
+  public postNewMod(cookies:string, modData:string):Observable<string> {
+    let headers = new HttpHeaders;
+    headers = headers.append("cookies", cookies);
+    return this.httpClient.post<string>("http://localhost:8167/modupload",{modData:modData}, {headers:headers});
   }
 }

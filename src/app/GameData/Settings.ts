@@ -1,8 +1,9 @@
 export interface Settings {
+    name:string;
     startingFunds:number;
-    incomeOverride:number;
+    incomeMultiplier:number;
     fogOfWar:boolean;
-    weather:{[key:string]:number};
+    variant:{[key:string]:number};
     coPowers:boolean;
     teams:boolean;
     unitLimit:number;

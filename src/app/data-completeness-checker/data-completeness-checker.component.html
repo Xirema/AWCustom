@@ -188,8 +188,8 @@
 <table>
     <tr>
         <th>name</th>
-        <th>variant</th>
         <th>movementCosts</th>
+        <th>variantMods</th>
     </tr>
     <tr *ngFor="let movementClass of movementClasses">
         <td [class.found]="findMovement(movementClass.name) != null"
@@ -197,15 +197,30 @@
             {{movementClass.name}}
         </td>
         <td>
-            {{movementClass.variant ?? "--"}}
-        </td>
-        <td>
             <ul>
                 <li *ngFor="let pair of entries(movementClass.movementCosts)"
-                    [class.found]="check(pair[0], terrainTypes)" [class.missing]="!check(pair[0], terrainTypes)">
+                    [class.found]="check(pair[0], terrainTypes)" 
+                    [class.missing]="!check(pair[0], terrainTypes)">
                     {{pair[0]}}: {{pair[1]}}
                 </li>
             </ul>
+        </td>
+        <td>
+            <ul *ngIf="movementClass.variantMods; else noVariantMods">
+                <li *ngFor="let pair of entries(movementClass.variantMods)">
+                    {{pair[0]}}:
+                    <ul>
+                        <li *ngFor="let pair2 of entries(pair[1])"
+                        [class.found]="check(pair2[0], terrainTypes)" 
+                        [class.missing]="!check(pair2[0], terrainTypes)">
+                        {{pair2[0]}}: {{pair2[1]}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ng-template #noVariantMods>
+                --
+            </ng-template>
         </td>
     </tr>
 </table>
@@ -244,6 +259,9 @@
         <th>fundsFromDamage</th>
         <th>firepowerFromOwnedTerrain</th>
         <th>defenseFromOwnedTerrain</th>
+        <th>visionVariantMods</th>
+        <th>firepowerVariantMods</th>
+        <th>defenseVariantMods</th>
     </tr>
     <tr *ngFor="let effect of passiveUnitEffects">
         <td [class.found]="checkEffect(effect.name, 'passiveUnit')"
@@ -322,7 +340,8 @@
         <td>
             <ul *ngIf="effect.firepowerFromOwnedTerrain; else noFirepowerFromOwnedTerrain">
                 <li *ngFor="let pair of entries(effect.firepowerFromOwnedTerrain)"
-                    [class.found]="check(pair[0], terrainTypes)" [class.missing]="!check(pair[0], terrainTypes)">
+                    [class.found]="check(pair[0], terrainTypes)" 
+                    [class.missing]="!check(pair[0], terrainTypes)">
                     {{pair[0]}}: {{pair[1]}}
                 </li>
             </ul>
@@ -333,11 +352,42 @@
         <td>
             <ul *ngIf="effect.defenseFromOwnedTerrain; else noDefenseFromOwnedTerrain">
                 <li *ngFor="let pair of entries(effect.defenseFromOwnedTerrain)"
-                    [class.found]="check(pair[0], terrainTypes)" [class.missing]="!check(pair[0], terrainTypes)">
+                    [class.found]="check(pair[0], terrainTypes)" 
+                    [class.missing]="!check(pair[0], terrainTypes)">
                     {{pair[0]}}: {{pair[1]}}
                 </li>
             </ul>
             <ng-template #noDefenseFromOwnedTerrain>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.visionVariantMods; else noVisionVariantMods">
+                <li *ngFor="let pair of entries(effect.visionVariantMods)">
+                    {{pair[0]}}: {{pair[1]}}
+                </li>
+            </ul>
+            <ng-template #noVisionVariantMods>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.firepowerVariantMods; else noFirepowerVariantMods">
+                <li *ngFor="let pair of entries(effect.firepowerVariantMods)">
+                    {{pair[0]}}: {{pair[1]}}
+                </li>
+            </ul>
+            <ng-template #noFirepowerVariantMods>
+                --
+            </ng-template>
+        </td>
+        <td>
+            <ul *ngIf="effect.defenseVariantMods; else noDefenseVariantMods">
+                <li *ngFor="let pair of entries(effect.defenseVariantMods)">
+                    {{pair[0]}}: {{pair[1]}}
+                </li>
+            </ul>
+            <ng-template #noDefenseVariantMods>
                 --
             </ng-template>
         </td>

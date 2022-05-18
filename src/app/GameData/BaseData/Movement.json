@@ -2,7 +2,6 @@
     "movementClasses": [
         {
             "name":"foot",
-            "variant":"normal",
             "movementCosts": {
                 "road":1,
                 "plains":1,
@@ -18,54 +17,18 @@
                 "river":2,
                 "lab":1,
                 "tower":1
-            }
-        }
-        ,
-        {
-            "name":"foot",
-            "variant":"rain",
-            "movementCosts": {
-                "road":1,
-                "plains":1,
-                "forest":1,
-                "mountain":2,
-                "silo":1,
-                "city":1,
-                "base":1,
-                "airport":1,
-                "port":1,
-                "headquarters":1,
-                "shoals":1,
-                "river":2,
-                "lab":1,
-                "tower":1
-            }
-        }
-        ,
-        {
-            "name":"foot",
-            "variant":"snow",
-            "movementCosts": {
-                "road":1,
-                "plains":2,
-                "forest":2,
-                "mountain":4,
-                "silo":1,
-                "city":1,
-                "base":1,
-                "airport":1,
-                "port":1,
-                "headquarters":1,
-                "shoals":1,
-                "river":2,
-                "lab":1,
-                "tower":1
+            },
+            "variantMods":{
+                "snow":{
+                    "plains":1,
+                    "forest":1,
+                    "mountain":2
+                }
             }
         }
         ,
         {
             "name":"boots",
-            "variant":"normal",
             "movementCosts": {
                 "road":1,
                 "plains":1,
@@ -81,54 +44,16 @@
                 "river":1,
                 "lab":1,
                 "tower":1
-            }
-        }
-        ,
-        {
-            "name":"boots",
-            "variant":"rain",
-            "movementCosts": {
-                "road":1,
-                "plains":1,
-                "forest":1,
-                "mountain":1,
-                "silo":1,
-                "city":1,
-                "base":1,
-                "airport":1,
-                "port":1,
-                "headquarters":1,
-                "shoals":1,
-                "river":1,
-                "lab":1,
-                "tower":1
-            }
-        }
-        ,
-        {
-            "name":"boots",
-            "variant":"snow",
-            "movementCosts": {
-                "road":1,
-                "plains":1,
-                "forest":1,
-                "mountain":2,
-                "silo":1,
-                "city":1,
-                "base":1,
-                "airport":1,
-                "port":1,
-                "headquarters":1,
-                "shoals":1,
-                "river":1,
-                "lab":1,
-                "tower":1
+            },
+            "variantMods":{
+                "snow":{
+                    "mountain":1
+                }
             }
         }
         ,
         {
             "name":"treads",
-            "variant":"normal",
             "movementCosts": {
                 "road":1,
                 "plains":1,
@@ -142,12 +67,20 @@
                 "shoals":1,
                 "lab":1,
                 "tower":1
+            },
+            "variantMods":{
+                "rain":{
+                    "plains":1,
+                    "forest":1
+                },
+                "snow":{
+                    "plains":1
+                }
             }
         }
         ,
         {
-            "name":"treads",
-            "variant":"rain",
+            "name":"tires",
             "movementCosts": {
                 "road":1,
                 "plains":2,
@@ -161,151 +94,51 @@
                 "shoals":1,
                 "lab":1,
                 "tower":1
-            }
-        }
-        ,
-        {
-            "name":"treads",
-            "variant":"snow",
-            "movementCosts": {
-                "road":1,
-                "plains":2,
-                "forest":3,
-                "silo":1,
-                "city":1,
-                "base":1,
-                "airport":1,
-                "port":1,
-                "headquarters":1,
-                "shoals":1,
-                "lab":1,
-                "tower":1
-            }
-        }
-        ,
-        {
-            "name":"tires",
-            "variant":"normal",
-            "movementCosts": {
-                "road":1,
-                "plains":2,
-                "forest":3,
-                "silo":1,
-                "city":1,
-                "base":1,
-                "airport":1,
-                "port":1,
-                "headquarters":1,
-                "shoals":1,
-                "lab":1,
-                "tower":1
-            }
-        }
-        ,
-        {
-            "name":"tires",
-            "variant":"rain",
-            "movementCosts": {
-                "road":1,
-                "plains":3,
-                "forest":4,
-                "silo":1,
-                "city":1,
-                "base":1,
-                "airport":1,
-                "port":1,
-                "headquarters":1,
-                "shoals":1,
-                "lab":1,
-                "tower":1
-            }
-        }
-        ,
-        {
-            "name":"tires",
-            "variant":"snow",
-            "movementCosts": {
-                "road":1,
-                "plains":3,
-                "forest":4,
-                "silo":1,
-                "city":1,
-                "base":1,
-                "airport":1,
-                "port":1,
-                "headquarters":1,
-                "shoals":1,
-                "lab":1,
-                "tower":1
+            },
+            "variantMods":{
+                "rain":{
+                    "plains":1,
+                    "forest":1
+                },
+                "snow":{
+                    "plains":1
+                }
             }
         }
         ,
         {
             "name":"lander",
-            "variant":"normal",
             "movementCosts": {
                 "port":1,
                 "shoals":1,
                 "reef":2,
                 "sea":1
-            }
-        }
-        ,
-        {
-            "name":"lander",
-            "variant":"rain",
-            "movementCosts": {
-                "port":1,
-                "shoals":1,
-                "reef":2,
-                "sea":1
-            }
-        }
-        ,
-        {
-            "name":"lander",
-            "variant":"snow",
-            "movementCosts": {
-                "port":2,
-                "shoals":1,
-                "reef":2,
-                "sea":2
+            },
+            "variantMods":{
+                "snow":{
+                    "port":1,
+                    "sea":1
+                }
             }
         }
         ,
         {
             "name":"sea",
-            "variant":"normal",
             "movementCosts": {
                 "port":1,
                 "reef":2,
                 "sea":1
-            }
-        }
-        ,
-        {
-            "name":"sea",
-            "variant":"rain",
-            "movementCosts": {
-                "port":1,
-                "reef":2,
-                "sea":1
-            }
-        }
-        ,
-        {
-            "name":"sea",
-            "variant":"snow",
-            "movementCosts": {
-                "port":2,
-                "reef":2,
-                "sea":2
+            },
+            "variantMods":{
+                "snow":{
+                    "port":1,
+                    "sea":1
+                }
             }
         }
         ,
         {
             "name":"air",
-            "variant":"normal",
             "movementCosts": {
                 "road":1,
                 "plains":1,
@@ -324,80 +157,32 @@
                 "bridge":1,
                 "lab":1,
                 "tower":1
-            }
-        }
-        ,
-        {
-            "name":"air",
-            "variant":"rain",
-            "movementCosts": {
-                "road":1,
-                "plains":1,
-                "forest":1,
-                "mountain":1,
-                "silo":1,
-                "city":1,
-                "base":1,
-                "airport":1,
-                "port":1,
-                "headquarters":1,
-                "shoals":1,
-                "river":1,
-                "reef":1,
-                "sea":1,
-                "bridge":1,
-                "lab":1,
-                "tower":1
-            }
-        }
-        ,
-        {
-            "name":"air",
-            "variant":"snow",
-            "movementCosts": {
-                "road":2,
-                "plains":2,
-                "forest":2,
-                "mountain":2,
-                "silo":2,
-                "city":2,
-                "base":2,
-                "airport":2,
-                "port":2,
-                "headquarters":2,
-                "shoals":2,
-                "river":2,
-                "reef":2,
-                "sea":2,
-                "bridge":2,
-                "lab":2,
-                "tower":2
+            },
+            "variantMods": {
+                "snow":{
+                    "road":1,
+                    "plains":1,
+                    "forest":1,
+                    "mountain":1,
+                    "silo":1,
+                    "city":1,
+                    "base":1,
+                    "airport":1,
+                    "port":1,
+                    "headquarters":1,
+                    "shoals":1,
+                    "river":1,
+                    "reef":1,
+                    "sea":1,
+                    "bridge":1,
+                    "lab":1,
+                    "tower":1
+                }
             }
         }
         ,
         {
             "name":"piperunner",
-            "variant":"normal",
-            "movementCosts": {
-                "base":1,
-                "pipeline":1,
-                "pipeline_seam":1
-            }
-        }
-        ,
-        {
-            "name":"piperunner",
-            "variant":"rain",
-            "movementCosts": {
-                "base":1,
-                "pipeline":1,
-                "pipeline_seam":1
-            }
-        }
-        ,
-        {
-            "name":"piperunner",
-            "variant":"snow",
             "movementCosts": {
                 "base":1,
                 "pipeline":1,

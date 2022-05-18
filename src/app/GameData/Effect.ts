@@ -30,6 +30,11 @@ export interface PassiveUnitEffect {
     fundsFromDamage:number;
     firepowerFromOwnedTerrain:{[k:string]:number};
     defenseFromOwnedTerrain:{[k:string]:number};
+    visionVariantMods:{[k:string]:number};
+    firepowerVariantMods:{[k:string]:number};
+    defenseVariantMods:{[k:string]:number};
+    coMeterChargeFromDealtDamage:number;
+    coMeterChargeFromReceivedDamage:number;
 }
 
 export interface ActiveUnitEffect {
@@ -56,6 +61,8 @@ export interface PassiveTerrainEffect {
     buildListMod:string[];
     repairMod:number;
     occludesVisionMod:boolean;
+    visionModBoost:number;
+    classificationRequired:string[];
 }
 
 export interface ActiveTerrainEffect {

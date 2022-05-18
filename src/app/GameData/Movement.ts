@@ -1,7 +1,7 @@
 export interface MovementClass {
     name:string;
     movementCosts:{[k:string]:number};
-    variant:string;
+    variantMods:{[k:string]:{[k:string]:number}};
     // constructor(
     //     name:string,
     //     movementCosts:any,

@@ -4,15 +4,26 @@
             "name":"standard_d2d",
             "targets":["own"],
             "goodLuckMod":9,
-            "terrainStarsDefense":10,
-            "firepowerFromOwnedTerrain":{"tower":10}
+            "firepowerFromOwnedTerrain":{"tower":10},
+            "visionVariantMods":{"rain":-1},
+            "coMeterChargeFromDealtDamage":50,
+            "coMeterChargeFromReceivedDamage":100
+        }
+        ,
+        {
+            "name":"standard_d2d_terrain_defense",
+            "targets":["own"],
+            "classificationRequired":["!air"],
+            "terrainStarsDefense":10
         }
         ,
         {
             "name":"standard_cop",
             "targets":["own"],
             "firepowerMod":10,
-            "defenseMod":10
+            "defenseMod":10,
+            "coMeterChargeFromDealtDamage":-50,
+            "coMeterChargeFromReceivedDamage":-100
         }
         ,
         {
@@ -631,6 +642,15 @@
     ,
     "passiveTerrainEffects": [
         {
+            "name":"standard_d2d",
+            "targets":["own", "enemy", "ally", "neutral"],
+            "affects":["own"],
+            "terrainRequired":["mountain"],
+            "classificationRequired":["infantry"],
+            "visionModBoost":3
+        }
+        ,
+        {
             "name":"sasha_d2d",
             "targets":["own"],
             "affects":["own"],
@@ -701,11 +721,18 @@
         }
         ,
         {
-            "name":"olaf_d2d",
+            "name":"olaf_d2d_snow",
             "targets":["self"],
             "variantHintMod":{"snow":0},
             "movementClassVariantReplace":"snow",
             "movementClassVariantOverride":"normal"
+        }
+        ,
+        {
+            "name":"olaf_d2d_rain",
+            "targets":["self"],
+            "movementClassVariantReplace":"rain",
+            "movementClassVariantOverride":"snow"
         }
         ,
         {

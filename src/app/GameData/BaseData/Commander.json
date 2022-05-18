@@ -3,7 +3,8 @@
         {
             "name":"baseline",
 
-            "passiveUnitEffectsD2d": ["standard_d2d"],
+            "passiveUnitEffectsD2d": ["standard_d2d", "standard_d2d_terrain_defense"],
+            "passiveTerrainEffectsD2d": ["standard_d2d"],
             "passiveUnitEffectsCop": ["standard_cop"],
             "passiveUnitEffectsScop": ["standard_cop"]
         },
@@ -118,7 +119,7 @@
         {
             "name":"olaf",
 
-            "passiveGlobalEffectsD2d": ["olaf_d2d"],
+            "passiveGlobalEffectsD2d": ["olaf_d2d_snow", "olaf_d2d_rain"],
             
             "copCost":27000,
             "passiveGlobalEffectsCop": ["olaf_cop"],
