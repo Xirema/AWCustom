@@ -63,6 +63,7 @@ export interface PassiveTerrainEffect {
     occludesVisionMod:boolean;
     visionModBoost:number;
     classificationRequired:string[];
+    buildCostMod:number;
 }
 
 export interface ActiveTerrainEffect {

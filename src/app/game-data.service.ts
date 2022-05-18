@@ -186,6 +186,7 @@ export class GameDataService {
       occludesVisionMod:null,
       visionModBoost:null,
       classificationRequired:null,
+      buildCostMod:null,
       ...e
     }));
     return new Observable<PassiveTerrainEffect[]>(observer => {

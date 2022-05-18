@@ -50,14 +50,14 @@
             "name":"jake_d2d",
             "targets":["own"],
             "terrainRequired":["plains"],
-            "firepowerMod":10
+            "firepowerMod":20
         }
         ,
         {
             "name":"jake_plains_cop",
             "targets":["own"],
             "terrainRequired":["plains"],
-            "firepowerMod":10
+            "firepowerMod":20
         }
         ,
         {
@@ -71,7 +71,7 @@
             "name":"jake_plains_scop",
             "targets":["own"],
             "terrainRequired":["plains"],
-            "firepowerMod":30
+            "firepowerMod":40
         }
         ,
         {
@@ -179,7 +179,8 @@
             "name":"colin_d2d",
             "targets":["own"],
             "unitCostMod":-20,
-            "firepowerMod":-10
+            "firepowerMod":-10,
+            "defenseMod":-10
         }
         ,
         {
@@ -297,7 +298,7 @@
         {
             "name":"jess_other_d2d",
             "targets":["own"],
-            "classificationRequired":["!vehicle"],
+            "classificationRequired":["!vehicle", "!infantry"],
             "firepowerMod":-10
         }
         ,
@@ -341,7 +342,7 @@
             "targets":["own"],
             "firepowerMod":30,
             "defenseMod":30,
-            "unitCostMod":20
+            "unitCostMod":50
         }
         ,
         {
@@ -354,8 +355,7 @@
             "name":"kanbei_scop",
             "targets":["own"],
             "firepowerMod":10,
-            "defenseMod":20,
-            "counterfireMod":50
+            "defenseMod":10
         }
         ,
         {
@@ -398,8 +398,14 @@
             "targets":["own"],
             "visionMod":1,
             "hiddenHitPoints":true,
-            "counterfireMod":50,
-            "badLuckMod":9
+            "counterfireMod":50
+        }
+        ,
+        {
+            "name":"sonja_enemy_d2d",
+            "targets":["enemy"],
+            "badLuckMod":9,
+            "terrainStarsFlatMod":-1
         }
         ,
         {
@@ -409,10 +415,22 @@
         }
         ,
         {
+            "name":"sonja_enemy_cop",
+            "targets":["enemy"],
+            "terrainStarsFlatMod":-1
+        }
+        ,
+        {
             "name":"sonja_scop",
             "targets":["own"],
             "visionMod":1,
             "counterFirst":true
+        }
+        ,
+        {
+            "name":"sonja_enemy_scop",
+            "targets":["enemy"],
+            "terrainStarsFlatMod":-2
         }
         ,
         {
