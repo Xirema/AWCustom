@@ -35,7 +35,7 @@
         <td>
             <ul *ngIf="unit.classifications && unit.classifications.length > 0; else noClassifications">
                 <li *ngFor="let classification of unit.classifications"
-                    [class.found]="foundClassifications.get(classification) > 1"
+                    [class.found]="(foundClassifications.get(classification) ?? -1) > 1"
                     [class.suspect]="foundClassifications.get(classification) === 1">
                     {{classification}}
                 </li>

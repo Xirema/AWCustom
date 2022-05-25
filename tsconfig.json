@@ -18,7 +18,6 @@
     "importHelpers": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "strictNullChecks":false,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es6",
     "module": "es2020",
