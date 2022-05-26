@@ -172,6 +172,24 @@ export class DataCompletenessCheckerComponent implements OnInit {
     return CheckResult.Missing;
   }
 
+  public wrap(obj:string, propertyName:string, originatingList:{name:string}[]):string {
+    let check:CheckResult;
+    if(propertyName == "name") {
+      check = this.checkGeneric(obj, originatingList);
+    } else {
+      check = this.checkGeneric(obj, undefined);
+    }
+
+    switch(check) {
+      case CheckResult.Found:
+        return "<div class=\"found\">" + obj + "</div>";
+      case CheckResult.Missing:
+        return "<div class=\"missing\">" + obj + "</div>";
+      default:
+        return obj;
+    }
+  }
+
   public displayValue(obj:any | null | undefined, propertyName:string, originatingList:{name:string}[]):string {
     if(obj == null)
       return "--";
@@ -195,19 +213,36 @@ export class DataCompletenessCheckerComponent implements OnInit {
       return this.wrap(obj, propertyName, originatingList);
     
     if(isNumber(obj))
-      return this.wrap(JSON.stringify(obj), propertyName, originatingList);
+      return JSON.stringify(obj);
 
     if(isBoolean(obj))
-      return this.wrap(JSON.stringify(obj), propertyName, originatingList);
+      return JSON.stringify(obj);
 
     if(isArray(obj)) {
       let ret = "";
       ret += "<ul>";
+      let index = 0;
       for(let o of obj) {
         ret += "<li>";
-        ret += this.displayValue(o, 
+        ret += this.displayValue(o, "" + index, originatingList);
+        ret += "</li>";
       }
+      ret += "</ul>";
+      return ret;
     }
+
+    //Just a regular object
+    let ret = "";
+    ret += "<ul>";
+    let entries = this.entries(obj);
+    for(let pair of entries) {
+      ret += "<li>";
+      ret += pair[0] + ": ";
+      ret += this.displayValue(pair[1], pair[0], originatingList);
+      ret += "</li>";
+    }
+    ret += "</ul>";
+    return ret;
   }
 
 
