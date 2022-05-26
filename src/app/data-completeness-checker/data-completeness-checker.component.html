@@ -1,7 +1,7 @@
 <h2>Units</h2>
 <table>
     <tr>
-        <th>name</th>
+        <!-- <th>name</th>
         <th>cost</th>
         <th>maxFuel</th>
         <th>maxAmmo</th>
@@ -19,10 +19,16 @@
         <th>hitPoints</th>
         <th>captureSpeed</th>
         <th>ignoresVisionOcclusion</th>
-        <th>stealthType</th>
+        <th>stealthType</th> -->
+        <th *ngFor="let propertyName of unitTypesProperties">
+            {{propertyName}}
+        </th>
     </tr>
     <tr *ngFor="let unit of unitTypes">
-        <td>{{unit.name ?? "--"}}</td>
+        <td *ngfor="let propertyName of unitTypesProperties" [innerHtml]="displayValue(unit[propertyName], propertyName, unitTypes)">
+            <!-- {{displayValue(unit[propertyName], propertyName, unitTypes)}} -->
+        </td>
+        <!-- <td>{{unit.name ?? "--"}}</td>
         <td>{{unit.cost ?? "--"}}</td>
         <td>{{unit.maxFuel ?? "--"}}</td>
         <td>{{unit.maxAmmo ?? "--"}}</td>
@@ -73,7 +79,7 @@
         <td>{{unit.hitPoints ?? "--"}}</td>
         <td>{{unit.captureSpeed ?? "--"}}</td>
         <td>{{unit.ignoresVisionOcclusion ?? "--"}}</td>
-        <td>{{unit.stealthType ?? "--"}}</td>
+        <td>{{unit.stealthType ?? "--"}}</td> -->
     </tr>
 </table>
 <h2>Weapons</h2>

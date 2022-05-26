@@ -172,6 +172,44 @@ export class DataCompletenessCheckerComponent implements OnInit {
     return CheckResult.Missing;
   }
 
+  public displayValue(obj:any | null | undefined, propertyName:string, originatingList:{name:string}[]):string {
+    if(obj == null)
+      return "--";
+    let isString = (obj:any): obj is string => {
+      return typeof obj === 'string';
+    };
+
+    let isNumber = (obj:any): obj is number => {
+      return typeof obj === 'number';
+    }
+
+    let isBoolean = (obj:any): obj is boolean => {
+      return typeof obj === 'boolean';
+    }
+
+    let isArray = (obj:any):obj is [] => {
+      return Array.isArray(obj);
+    }
+
+    if(isString(obj)) 
+      return this.wrap(obj, propertyName, originatingList);
+    
+    if(isNumber(obj))
+      return this.wrap(JSON.stringify(obj), propertyName, originatingList);
+
+    if(isBoolean(obj))
+      return this.wrap(JSON.stringify(obj), propertyName, originatingList);
+
+    if(isArray(obj)) {
+      let ret = "";
+      ret += "<ul>";
+      for(let o of obj) {
+        ret += "<li>";
+        ret += this.displayValue(o, 
+      }
+    }
+  }
+
 
   unitTypes:UnitType[] = [];
   unitTypesProperties:string[] = [];

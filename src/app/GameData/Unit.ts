@@ -8,30 +8,30 @@ export interface UnitType {
     movementClass:string;
     classifications:string[];
 
-    fuelPerDay:number;
-    fuelPerDayStealth:number;
-    weapons:string[];
-    supplyRepair:number;
-    transportCapacity:number;
-    transportList:string[];
-    hitPoints:number;
-    captureSpeed:number;
-    ignoresVisionOcclusion:boolean;
-    stealthType:string;
+    fuelPerDay?:number;
+    fuelPerDayStealth?:number;
+    weapons?:string[];
+    supplyRepair?:number;
+    transportCapacity?:number;
+    transportList?:string[];
+    hitPoints?:number;
+    captureSpeed?:number;
+    ignoresVisionOcclusion?:boolean;
+    stealthType?:string;
 }
 
 export interface WeaponType {
     name:string;
     ammoConsumed:number;
-    baseDamage:{[k:string]:number};
+    baseDamage?:{[k:string]:number};
     maxRange:number;
-    minRange:number;
-    selfTarget:boolean;
-    affectedByLuck:boolean;
-    nonLethal:boolean;
-    areaOfEffect:number;
-    targetsStealth:string[];
-    flatDamage:number;
+    minRange?:number;
+    selfTarget?:boolean;
+    affectedByLuck?:boolean;
+    nonLethal?:boolean;
+    areaOfEffect?:number;
+    targetsStealth?:string[];
+    flatDamage?:number;
 }
 
 export class Unit {
