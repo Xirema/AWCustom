@@ -1,0 +1,84 @@
+<table>
+    <tr>
+        <th *ngFor="let propertyName of propertyNames">
+            {{propertyName}}
+        </th>
+    </tr>
+    <tr *ngFor="let object of data">
+        <td *ngFor="let propertyName of propertyNames">
+            <div *ngIf="isEmpty(object[propertyName])">--</div>
+            <div *ngIf="isNumber(object[propertyName]) || isBoolean(object[propertyName])">{{object[propertyName]}}</div>
+            <div *ngIf="isString(object[propertyName])"
+                [class.found]="checkGeneric(object[propertyName], propertyName) === '0'"
+                [class.missing]="checkGeneric(object[propertyName], propertyName) === '1'"
+            >
+                {{object[propertyName]}}
+            </div>
+            <div *ngIf="isCompound(object[propertyName])">
+                <ul>
+                    <li *ngFor="let property of getProperties(object[propertyName])">
+                        <div [class.found]="checkGeneric(property, '') === '0'"
+                            [class.missing]="checkGeneric(property, '') === '1'"
+                        >
+                            {{property}}
+                        </div>
+                        : 
+                        <div *ngIf="isEmpty(object[propertyName][property])">--</div>
+                        <div *ngIf="isNumber(object[propertyName][property]) || isBoolean(object[propertyName][property])">{{object[propertyName][property]}}</div>
+                        <div *ngIf="isString(object[propertyName][property])"
+                            [class.found]="checkGeneric(object[propertyName][property], property) === '0'"
+                            [class.missing]="checkGeneric(object[propertyName][property], property) === '1'"
+                        >
+                            {{object[propertyName][property]}}
+                        </div>
+                        <div *ngIf="isArray(object[propertyName][property])">
+                            <ul>
+                                <li *ngFor="let obj of object[propertyName][property]"
+                                    [class.found]="isString(obj) && checkGeneric(obj, '') === '0'"
+                                    [class.missing]="isString(obj) && checkGeneric(obj, '') === '1'"
+                                >
+                                    {{obj}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div *ngIf="isCompound(object[propertyName][property])">
+                            <ul>
+                                <li *ngFor="let prop of getProperties(object[propertyName][property])">
+                                    <div [class.found]="checkGeneric(prop, '') === '0'"
+                                        [class.missing]="checkGeneric(prop, '') === '1'"
+                                        >
+                                        {{prop}}
+                                    </div>
+                                    :
+                                    <div *ngIf="isString(object[propertyName][property][prop]) || isBoolean(object[propertyName][property][prop]) || isNumber(object[propertyName][property][prop]); else raw">
+                                        {{object[propertyName][property][prop]}}
+                                    </div>
+                                    <ng-template [class.raw]="true" #raw>
+                                        {{stringify(object[propertyName][property][prop])}}
+                                    </ng-template>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="isArray(object[propertyName])">
+                <ul>
+                    <li *ngFor="let obj of object[propertyName]"
+                        [class.found]="isString(obj) && checkGeneric(obj, '') === '0'"
+                        [class.missing]="isString(obj) && checkGeneric(obj, '') === '1'"
+                    >
+                        <div *ngIf="!isArray(obj) && !isCompound(obj); else Compound">
+                            {{obj}}
+                        </div>
+                        <ng-template #Compound>
+                            <div [class.raw]="true">
+                                {{stringify(obj)}}
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+</table>

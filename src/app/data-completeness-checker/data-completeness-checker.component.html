@@ -1,145 +1,25 @@
 <h2>Units</h2>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of unitTypesProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let unit of unitTypes">
-        <td *ngfor="let propertyName of unitTypesProperties" [innerHtml]="displayValue(unit[propertyName], propertyName, unitTypes)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="unitTypes" [refdata]="[unitTypes, weaponTypes, movementClasses, classificationTypes]"></app-data-checker-table>
 <h2>Weapons</h2>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of weaponTypesProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let weapon of weaponTypes">
-        <td *ngfor="let propertyName of weaponTypesProperties" [innerHtml]="displayValue(weapon[propertyName], propertyName, weaponTypes)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="weaponTypes" [refdata]="[unitTypes, weaponTypes]"></app-data-checker-table>
 <h2>Terrains</h2>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of terrainTypesProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let terrain of terrainTypes">
-        <td *ngfor="let propertyName of terrainTypesProperties" [innerHtml]="displayValue(terrain[propertyName], propertyName, terrainTypes)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="terrainTypes" [refdata]="[terrainTypes, unitTypes]"></app-data-checker-table>
 <h2>Movement Classes</h2>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of movementClassesProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let movementClass of movementClasses">
-        <td *ngfor="let propertyName of movementClassesProperties" [innerHtml]="displayValue(movementClass[propertyName], propertyName, movementClasses)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="movementClasses" [refdata]="[movementClasses, terrainTypes, variantTypes]"></app-data-checker-table>
 <h2>Effects</h2>
 <h4>Passive Unit Effects</h4>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of passiveUnitEffectsProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let effect of passiveUnitEffects">
-        <td *ngfor="let propertyName of passiveUnitEffectsProperties" [innerHtml]="displayValue(effect[propertyName], propertyName, passiveUnitEffects)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="passiveUnitEffects" [refdata]="[passiveUnitEffects, unitTypes, terrainTypes, classificationTypes, variantTypes, targetTypes]"></app-data-checker-table>
 <h4>Active Unit Effects</h4>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of activeUnitEffectsProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let effect of activeUnitEffects">
-        <td *ngfor="let propertyName of activeUnitEffectsProperties" [innerHtml]="displayValue(effect[propertyName], propertyName, activeUnitEffects)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="activeUnitEffects" [refdata]="[activeUnitEffects, unitTypes, terrainTypes, classificationTypes, targetTypes]"></app-data-checker-table>
 <h4>Passive Terrain Effects</h4>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of passiveTerrainEffectsProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let effect of passiveTerrainEffects">
-        <td *ngfor="let propertyName of passiveTerrainEffectsProperties" [innerHtml]="displayValue(effect[propertyName], propertyName, passiveTerrainEffects)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="passiveTerrainEffects" [refdata]="[passiveTerrainEffects, terrainTypes, classificationTypes, targetTypes]"></app-data-checker-table>
 <h4>Active Terrain Effects</h4>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of activeTerrainEffectsProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let effect of activeTerrainEffects">
-        <td *ngfor="let propertyName of activeTerrainEffectsProperties" [innerHtml]="displayValue(effect[propertyName], propertyName, activeTerrainEffects)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="activeTerrainEffects" [refdata]="[activeTerrainEffects, unitTypes, terrainTypes, targetTypes]"></app-data-checker-table>
 <h4>Passive Global Effects</h4>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of passiveGlobalEffectsProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let effect of passiveGlobalEffects">
-        <td *ngfor="let propertyName of passiveGlobalEffectsProperties" [innerHtml]="displayValue(effect[propertyName], propertyName, passiveGlobalEffects)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="passiveGlobalEffects" [refdata]="[passiveGlobalEffects, variantTypes, targetTypes]"></app-data-checker-table>
 <h4>Active Global Effects</h4>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of activeGlobalEffectsProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let effect of activeGlobalEffects">
-        <td *ngfor="let propertyName of activeGlobalEffectsProperties" [innerHtml]="displayValue(effect[propertyName], propertyName, activeGlobalEffects)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="activeGlobalEffects" [refdata]="[activeGlobalEffects, targetTypes]"></app-data-checker-table>
 <h2>CommanderTypes</h2>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of commanderTypesProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let commanderType of commanderTypes">
-        <td *ngfor="let propertyName of commanderTypesProperties" [innerHtml]="displayValue(commanderType[propertyName], propertyName, commanderTypes)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="commanderTypes" [refdata]="[commanderTypes, passiveUnitEffects, activeUnitEffects, passiveTerrainEffects, activeTerrainEffects, passiveGlobalEffects, activeGlobalEffects]"></app-data-checker-table>
 <h2>Player Types</h2>
-<table>
-    <tr>
-        <th *ngFor="let propertyName of playerTypesProperties">
-            {{propertyName}}
-        </th>
-    </tr>
-    <tr *ngFor="let playerType of playerTypes">
-        <td *ngfor="let propertyName of playerTypesProperties" [innerHtml]="displayValue(playerType[propertyName], propertyName, playerTypes)">
-        </td>
-    </tr>
-</table>
+<app-data-checker-table [data]="playerTypes" [refdata]="[playerTypes, commanderTypes]"></app-data-checker-table>

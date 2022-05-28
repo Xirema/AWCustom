@@ -9,8 +9,8 @@ import * as React from 'react';
 })
 export class ModUploaderComponent implements OnInit {
   constructor(private gameDataService:GameDataService) { }
-  resultMessage:string = null;
-  errorMessage:string = null;
+  resultMessage:string | null = null;
+  errorMessage:string | null = null;
 
   ngOnInit(): void {
   }
@@ -33,7 +33,9 @@ export class ModUploaderComponent implements OnInit {
         this.errorMessage = JSON.stringify(error);
       }
     }
-    fileReader.readAsText(files.item(0));
+    let item = files.item(0);
+    if(item != null)
+      fileReader.readAsText(item);
   }
 
   getCookie():string {
