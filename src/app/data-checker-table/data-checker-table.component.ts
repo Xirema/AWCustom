@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
 export enum CheckResult {
-  Found, Missing, Noncheckable
+  Found, Missing, Noncheckable, Nonlinkable
 }
 
 @Component({
@@ -9,9 +9,10 @@ export enum CheckResult {
   templateUrl: './data-checker-table.component.html',
   styleUrls: ['./data-checker-table.component.scss']
 })
-export class DataCheckerTableComponent implements OnInit {
+export class DataCheckerTableComponent implements OnInit, OnChanges {
   @Input('data') data:any[] = [];
-  @Input('refdata') refdata:{name:string}[][] = [];
+  @Input('refdata') refdata:{name:string, notLinkable?:boolean}[][] = [];
+  // @Input('name') name:string = '';
 
   propertyNames:string[] = [];
 
@@ -28,10 +29,15 @@ export class DataCheckerTableComponent implements OnInit {
     });
   }
 
-  public getProperties(obj:any):string[] {
-    let ret = Object.entries(obj).map(value => value[0]);
-    // console.log(ret);
-    return ret;
+  ngOnChanges():void {
+    this.propertyNames = this.getAllPropertyNames(this.data);
+    this.propertyNames.sort((a, b) => {
+      if(a === "name") 
+        return -1;
+      if(b === "name")
+        return 1;
+      return a.localeCompare(b);
+    });
   }
   
   public getAllPropertyNames(objs:any[]):string[] {
@@ -44,24 +50,61 @@ export class DataCheckerTableComponent implements OnInit {
     }
     return [...propertyNames];
   }
+}
 
-  public findInList(name:string, list:{name:string}[], listToIgnore?:{name:string}[]):CheckResult {
+@Component({
+  selector: 'app-data-checker-renderer',
+  templateUrl: './data-checker-renderer.component.html',
+  styleUrls: ['./data-checker-table.component.scss']
+})
+export class DataCheckerRendererComponent implements OnInit, OnChanges {
+  @Input('object') object:any;
+  @Input('propertyName') propertyName:string = '';
+  @Input('dataSource') dataSource: {name:string}[] = [];
+  @Input('refdata') refdata:{name:string, notLinkable?:boolean}[][] = [];
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  ngOnChanges():void {
+  }
+
+  public getProperties(obj:any):string[] {
+    let ret = Object.entries(obj).map(value => value[0]);
+    // console.log(ret);
+    return ret;
+  }
+
+  public findInList(name:string, list:{name:string, notLinkable?:boolean}[], listToIgnore?:{name:string, notLinkable?:boolean}[]):CheckResult {
     if(listToIgnore == list)
       return CheckResult.Noncheckable;
-    if(list.find(obj => obj.name == name) != null)
-      return CheckResult.Found;
-    else
+    let ret = list.find(obj => obj.name == name);
+    if(ret != null) {
+      if(ret.notLinkable)
+        return CheckResult.Nonlinkable;
+      else
+        return CheckResult.Found;
+    } else
       return CheckResult.Missing;
   }
 
   public checkGeneric(name:string, propertyName:string):string {
     if(name.startsWith("!"))
       return this.checkGeneric(name.substring(1), propertyName);
+    let foundNonLinkable = false;
     for(let list of this.refdata) {
-      let ret = this.findInList(name, list, propertyName !== 'name' ? undefined : this.data);
+      let ret = this.findInList(name, list, propertyName !== 'name' ? undefined : this.dataSource);
+      if(ret === CheckResult.Nonlinkable) {
+        foundNonLinkable = true;
+        continue;
+      }
       if(ret !== CheckResult.Missing) 
         return JSON.stringify(ret);
     }
+    if(foundNonLinkable) 
+      return JSON.stringify(CheckResult.Nonlinkable);
     return JSON.stringify(CheckResult.Missing);
   }
 

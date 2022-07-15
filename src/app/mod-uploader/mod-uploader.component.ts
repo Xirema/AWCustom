@@ -9,10 +9,12 @@ import * as React from 'react';
 })
 export class ModUploaderComponent implements OnInit {
   constructor(private gameDataService:GameDataService) { }
+  postTest:string = '';
   resultMessage:string | null = null;
   errorMessage:string | null = null;
 
   ngOnInit(): void {
+    // this.gameDataService.getPostTest("PostTest").subscribe({next: result => this.postTest = result.name, error: err => this.errorMessage = JSON.stringify(err)});
   }
 
   handleFileInput(e:any):void {

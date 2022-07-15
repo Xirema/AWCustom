@@ -33,30 +33,3 @@ export interface WeaponType {
     targetsStealth?:string[];
     flatDamage?:number;
 }
-
-export class Unit {
-    public unitType:string;
-    public coordinate:{x:number; y:number};
-    public playerId:string;
-    public damage:number;
-    public fuel:number;
-    public ammo:number;
-    public active:boolean;
-    public transporting:Unit[];
-
-    constructor(
-        unitType:UnitType,
-        coordinate:{x:number; y:number},
-        playerId:string
-    ) {
-        this.unitType = unitType.name;
-        this.coordinate = coordinate;
-        this.playerId = playerId;
-        this.damage = 0;
-        this.fuel = unitType.maxFuel;
-        this.ammo = unitType.maxAmmo;
-        this.active = false;
-        this.transporting = [];
-    }
-
-}

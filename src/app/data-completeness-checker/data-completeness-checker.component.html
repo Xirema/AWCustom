@@ -1,25 +1,56 @@
-<h2>Units</h2>
-<app-data-checker-table [data]="unitTypes" [refdata]="[unitTypes, weaponTypes, movementClasses, classificationTypes]"></app-data-checker-table>
-<h2>Weapons</h2>
-<app-data-checker-table [data]="weaponTypes" [refdata]="[unitTypes, weaponTypes]"></app-data-checker-table>
-<h2>Terrains</h2>
-<app-data-checker-table [data]="terrainTypes" [refdata]="[terrainTypes, unitTypes]"></app-data-checker-table>
-<h2>Movement Classes</h2>
-<app-data-checker-table [data]="movementClasses" [refdata]="[movementClasses, terrainTypes, variantTypes]"></app-data-checker-table>
-<h2>Effects</h2>
-<h4>Passive Unit Effects</h4>
-<app-data-checker-table [data]="passiveUnitEffects" [refdata]="[passiveUnitEffects, unitTypes, terrainTypes, classificationTypes, variantTypes, targetTypes]"></app-data-checker-table>
-<h4>Active Unit Effects</h4>
-<app-data-checker-table [data]="activeUnitEffects" [refdata]="[activeUnitEffects, unitTypes, terrainTypes, classificationTypes, targetTypes]"></app-data-checker-table>
-<h4>Passive Terrain Effects</h4>
-<app-data-checker-table [data]="passiveTerrainEffects" [refdata]="[passiveTerrainEffects, terrainTypes, classificationTypes, targetTypes]"></app-data-checker-table>
-<h4>Active Terrain Effects</h4>
-<app-data-checker-table [data]="activeTerrainEffects" [refdata]="[activeTerrainEffects, unitTypes, terrainTypes, targetTypes]"></app-data-checker-table>
-<h4>Passive Global Effects</h4>
-<app-data-checker-table [data]="passiveGlobalEffects" [refdata]="[passiveGlobalEffects, variantTypes, targetTypes]"></app-data-checker-table>
-<h4>Active Global Effects</h4>
-<app-data-checker-table [data]="activeGlobalEffects" [refdata]="[activeGlobalEffects, targetTypes]"></app-data-checker-table>
-<h2>CommanderTypes</h2>
-<app-data-checker-table [data]="commanderTypes" [refdata]="[commanderTypes, passiveUnitEffects, activeUnitEffects, passiveTerrainEffects, activeTerrainEffects, passiveGlobalEffects, activeGlobalEffects]"></app-data-checker-table>
-<h2>Player Types</h2>
-<app-data-checker-table [data]="playerTypes" [refdata]="[playerTypes, commanderTypes]"></app-data-checker-table>
+
+<table>
+    <tr>
+        <td>
+            <label for="modName">Mod Name</label>
+        </td>
+        <td>
+            <input type="text" id="modName" (keyup.enter)="submit()">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="modVersion">Mod Version</label>
+        </td>
+        <td>
+            <input type="text" id="modVersion" (keyup.enter)="submit()">
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <button type="submit" (click)="submit()">Submit</button>
+        </td>
+    </tr>
+</table>
+
+<div *ngIf="modName">
+    <h1>Mod: {{modName}} ({{modVersion}})</h1>
+    <h2>Units</h2>
+    <app-data-checker-table [data]="unitTypes" [refdata]="[unitTypes, weaponTypes, movementClasses, classificationTypes]"></app-data-checker-table>
+    <h2>Weapons</h2>
+    <app-data-checker-table [data]="weaponTypes" [refdata]="[unitTypes, weaponTypes]"></app-data-checker-table>
+    <h2>Terrains</h2>
+    <app-data-checker-table [data]="terrainTypes" [refdata]="[terrainTypes, unitTypes]"></app-data-checker-table>
+    <h2>Movement Classes</h2>
+    <app-data-checker-table [data]="movementClasses" [refdata]="[movementClasses, terrainTypes, variantTypes]"></app-data-checker-table>
+    <h2>Effects</h2>
+    <h4>Passive Unit Effects</h4>
+    <app-data-checker-table [data]="passiveUnitEffects" [refdata]="[passiveUnitEffects, unitTypes, terrainTypes, classificationTypes, variantTypes, targetTypes]"></app-data-checker-table>
+    <h4>Active Unit Effects</h4>
+    <app-data-checker-table [data]="activeUnitEffects" [refdata]="[activeUnitEffects, unitTypes, terrainTypes, classificationTypes, targetTypes]"></app-data-checker-table>
+    <h4>Passive Terrain Effects</h4>
+    <app-data-checker-table [data]="passiveTerrainEffects" [refdata]="[passiveTerrainEffects, unitTypes, terrainTypes, classificationTypes, targetTypes]"></app-data-checker-table>
+    <h4>Active Terrain Effects</h4>
+    <app-data-checker-table [data]="activeTerrainEffects" [refdata]="[activeTerrainEffects, unitTypes, terrainTypes, targetTypes]"></app-data-checker-table>
+    <h4>Passive Global Effects</h4>
+    <app-data-checker-table [data]="passiveGlobalEffects" [refdata]="[passiveGlobalEffects, variantTypes, targetTypes]"></app-data-checker-table>
+    <h4>Active Global Effects</h4>
+    <app-data-checker-table [data]="activeGlobalEffects" [refdata]="[activeGlobalEffects, targetTypes, missileTargetTypes]"></app-data-checker-table>
+    <h2>CommanderTypes</h2>
+    <app-data-checker-table [data]="commanderTypes" [refdata]="[commanderTypes, passiveUnitEffects, activeUnitEffects, passiveTerrainEffects, activeTerrainEffects, passiveGlobalEffects, activeGlobalEffects]"></app-data-checker-table>
+    <h2>Player Types</h2>
+    <app-data-checker-table [data]="playerTypes" [refdata]="[playerTypes, commanderTypes]"></app-data-checker-table>
+    <h2>Settings</h2>
+    <app-data-checker-table [data]="settings" [refdata]="[settings, playerTypes, commanderTypes, variantTypes]"></app-data-checker-table>
+</div>

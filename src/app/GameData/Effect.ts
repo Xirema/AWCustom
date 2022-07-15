@@ -1,6 +1,6 @@
 export interface PassiveUnitEffect {
     name:string;
-    targets?:string[];//"own"/"self", "friend", "enemy", "neutral"
+    targets?:string[];
     unitTypeRequired?:string[];
     classificationRequired?:string[];
     terrainRequired?:string[];
@@ -19,7 +19,6 @@ export interface PassiveUnitEffect {
     terrainStarsFlatMod?:number;
     terrainStarsDefense?:number;
     terrainStarsFirepower?:number;
-    flatMovement?:string[];
     counterfireMod?:number;
     counterFirst?:boolean;
     captureRateMod?:number;
@@ -56,13 +55,13 @@ export interface PassiveTerrainEffect {
     targets?:string[];
     affects?:string[];
     terrainRequired?:string[];
+    classificationRequired?:string[];
     incomeMod?:number;
     incomeFlatMod?:number;
     buildListMod?:string[];
     repairMod?:number;
     occludesVisionMod?:boolean;
     visionModBoost?:number;
-    classificationRequired?:string[];
     buildCostMod?:number;
 }
 
@@ -71,11 +70,9 @@ export interface ActiveTerrainEffect {
     targets?:string[];
     affects?:string[];
     terrainRequired?:string[];
-    unitSummoned?:{
-        name:string;
-        initialDamage:number;
-        active:boolean;
-    };
+    unitSummonedName?:string;
+    unitSummonedInitialDamage?:number;
+    unitSummonedActive?:boolean;
 }
 
 export interface PassiveGlobalEffect {
@@ -94,11 +91,9 @@ export interface ActiveGlobalEffect {
     fundFlatMod?:number;
     powerBarMod?:number;
     powerBarPerFunds?:number;
-    missileLaunch?:{
-        count:number;
-        targetMethod:string[];
-        damage:number;
-        range:number;
-        stunDuration?:number;
-    }[];
+    missileCount?:number;
+    missileTargetMethod?:string[];
+    missileDamage?:number;
+    missileAreaOfEffect?:number;
+    missileStunDuration?:number;
 }

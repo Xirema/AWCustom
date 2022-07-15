@@ -1,7 +1,7 @@
 export interface MapType {
     name:string;
 
-    playerSlots:string[];
+    playerSlots?:string[];
 
     initialTerrains:{
         terrainName:string;
@@ -9,18 +9,18 @@ export interface MapType {
             x:number;
             y:number;
         };
-        orientation:number;
-        playerSlot:string;
-        terrainMods:{[key:string]:any};
+        orientation?:number;
+        playerSlot?:string;
+        terrainMods?:{[key:string]:any};
     }[];
 
-    initialUnits:{
+    initialUnits?:{
         unitName:string;
         coordinates:{
             x:number;
             y:number;
         };
-        playerSlot:string;
-        unitMods:{[key:string]:any};
+        playerSlot?:string;
+        unitMods?:{[key:string]:any};
     }[];
 }

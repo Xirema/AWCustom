@@ -1,7 +1,7 @@
 {
     "modMetaData":{
         "name":"BaseGame",
-        "version":0.99
+        "version":"0.93"
     }
     ,
     "units": [
@@ -13,7 +13,7 @@
             "visionRange":2,
             "movementRange":3,
             "movementClass":"foot",
-            "classifications":["infantry", "land"],
+            "classifications":["footsoldier", "land"],
             "weapons":["machine_gun_infantry"],
             "captureSpeed":10
         }
@@ -26,7 +26,7 @@
             "visionRange":2,
             "movementRange":2,
             "movementClass":"boots",
-            "classifications":["infantry", "land"],
+            "classifications":["footsoldier", "land"],
             "weapons":["bazooka", "machine_gun_mech"],
             "captureSpeed":10
         }
@@ -173,7 +173,7 @@
             "visionRange":2,
             "movementRange":6,
             "movementClass":"air",
-            "classifications":["copter", "air", "non_combat", "transport", "transport_infantry"],
+            "classifications":["copter", "airborne", "non_combat", "transport", "transport_infantry"],
             "transportCapacity":1,
             "transportList":["infantry", "mech"],
             "fuelPerDay":2,
@@ -188,7 +188,7 @@
             "visionRange":3,
             "movementRange":6,
             "movementClass":"air",
-            "classifications":["copter", "air", "direct"],
+            "classifications":["copter", "airborne", "direct"],
             "weapons":["air_to_surface_missiles", "machine_gun_copter"],
             "fuelPerDay":2,
             "ignoresVisionOcclusion":true
@@ -202,7 +202,7 @@
             "visionRange":2,
             "movementRange":9,
             "movementClass":"air",
-            "classifications":["plane", "air", "direct"],
+            "classifications":["plane", "airborne", "direct"],
             "weapons":["air_to_air_missiles"],
             "fuelPerDay":5,
             "ignoresVisionOcclusion":true
@@ -216,7 +216,7 @@
             "visionRange":2,
             "movementRange":7,
             "movementClass":"air",
-            "classifications":["plane", "air", "direct"],
+            "classifications":["plane", "airborne", "direct"],
             "weapons":["bombs"],
             "fuelPerDay":5,
             "ignoresVisionOcclusion":true
@@ -230,12 +230,12 @@
             "visionRange":4,
             "movementRange":6,
             "movementClass":"air",
-            "classifications":["plane", "air", "direct", "stealth"],
+            "classifications":["plane", "airborne", "direct", "stealthy"],
             "weapons":["omni_missiles"],
             "fuelPerDay":5,
             "fuelPerDayStealth":8,
             "ignoresVisionOcclusion":true,
-            "stealthType":"air"
+            "stealthType":"airborne"
         }
         ,
         {
@@ -246,7 +246,7 @@
             "visionRange":1,
             "movementRange":9,
             "movementClass":"air",
-            "classifications":["plane", "air", "self_destruct"],
+            "classifications":["plane", "airborne", "self_destruct"],
             "weapons":["explode"],
             "fuelPerDay":5,
             "ignoresVisionOcclusion":true
@@ -319,7 +319,7 @@
             "visionRange":5,
             "movementRange":5,
             "movementClass":"sea",
-            "classifications":["naval", "direct", "stealth"],
+            "classifications":["naval", "direct", "stealthy"],
             "weapons":["torpedoes"],
             "fuelPerDay":1,
             "fuelPerDayStealth":5,
@@ -779,7 +779,7 @@
                 "transport_copter":100
             },
             "maxRange":1,
-            "targetsStealth":["air"]
+            "targetsStealth":["airborne"]
         }
         ,
         {
@@ -840,7 +840,7 @@
                 "tank":75
             },
             "maxRange":1,
-            "targetsStealth":["air"]
+            "targetsStealth":["airborne"]
         }
         ,
         {
@@ -853,7 +853,7 @@
             "affectedByLuck":false,
             "nonLethal":true,
             "areaOfEffect":3,
-            "targetsStealth":["naval", "air"],
+            "targetsStealth":["naval", "airborne"],
             "flatDamage":5
         }
         ,
@@ -1014,7 +1014,7 @@
             "stars":3,
             "maxCapturePoints":20,
             "income":1000,
-            "repair":2,
+            "repair":20,
             "repairList":[
                 "infantry", "mech", "recon", "apc", "tank", "anti_air", 
                 "medium_tank", "neo_tank", "artillery", "rocket", "missile", 
@@ -1027,7 +1027,7 @@
             "stars":3,
             "maxCapturePoints":20,
             "income":1000,
-            "repair":2,
+            "repair":20,
             "sameAs":"city",
             "buildList":[
                 "infantry", "mech", "recon", "apc", "tank", "anti_air", 
@@ -1046,7 +1046,7 @@
             "stars":3,
             "maxCapturePoints":20,
             "income":1000,
-            "repair":2,
+            "repair":20,
             "sameAs":"city",
             "buildList": [
                 "battle_copter", "transport_copter", "fighter", "bomber", 
@@ -1063,7 +1063,7 @@
             "stars":3,
             "maxCapturePoints":20,
             "income":1000,
-            "repair":2,
+            "repair":20,
             "buildList":[
                 "black_boat", "lander", "cruiser", "battleship", "submarine"
             ],
@@ -1076,7 +1076,7 @@
             "name":"headquarters",
             "income":1000,
             "stars":4,
-            "repair":2,
+            "repair":20,
             "maxCapturePoints":20,
             "repairList":[
                 "infantry", "mech", "recon", "apc", "tank", "anti_air", 
@@ -1371,8 +1371,16 @@
         {
             "name":"standard_d2d_terrain_defense",
             "targets":["own"],
-            "classificationRequired":["!air"],
+            "classificationRequired":["!airborne"],
             "terrainStarsMod":100
+        }
+        ,
+        {
+            "name":"standard_d2d_infantry_mountain_vision",
+            "targets":["own"],
+            "classificationRequired":["footsoldier"],
+            "terrainRequired":["mountain"],
+            "visionMod":3
         }
         ,
         {
@@ -1496,7 +1504,7 @@
         {
             "name":"sami_infantry_d2d",
             "targets":["own"],
-            "classificationRequired":["infantry"],
+            "classificationRequired":["footsoldier"],
             "firepowerMod":30,
             "captureRateMod":50
         }
@@ -1518,7 +1526,7 @@
         {
             "name":"sami_cop",
             "targets":["own"],
-            "classificationRequired":["infantry"],
+            "classificationRequired":["footsoldier"],
             "firepowerMod":20,
             "movementMod":1
         }
@@ -1526,7 +1534,7 @@
         {
             "name":"sami_scop",
             "targets":["own"],
-            "classificationRequired":["infantry"],
+            "classificationRequired":["footsoldier"],
             "firepowerMod":40,
             "movementMod":2,
             "captureRateMod":1000000000
@@ -1593,14 +1601,14 @@
         {
             "name":"drake_air_d2d",
             "targets":["own"],
-            "classificationRequired":["air"],
+            "classificationRequired":["airborne"],
             "firepowerMod":-20
         }
         ,
         {
             "name":"eagle_air_d2d",
             "targets":["own"],
-            "classificationRequired":["air"],
+            "classificationRequired":["airborne"],
             "firepowerMod":15,
             "defenseMod":10,
             "fuelUseMod":-2
@@ -1616,7 +1624,7 @@
         {
             "name":"eagle_cop",
             "targets":["own"],
-            "classificationRequired":["air"],
+            "classificationRequired":["airborne"],
             "firepowerMod":5,
             "defenseMod":10
         }
@@ -1718,7 +1726,7 @@
         {
             "name":"sensei_infantry_d2d",
             "targets":["own"],
-            "classificationRequired":["infantry"],
+            "classificationRequired":["footsoldier"],
             "firepowerMod":40
         }
         ,
@@ -1732,7 +1740,7 @@
         {
             "name":"sensei_other_d2d",
             "targets":["own"],
-            "classificationRequired":["!copter", "!infantry", "!air"],
+            "classificationRequired":["!copter", "!footsoldier", "!airborne"],
             "firepowerMod":-10
         }
         ,
@@ -1884,15 +1892,9 @@
         }
         ,
         {
-            "name":"lash_cop",
-            "targets":["own"],
-            "flatMovement":["normal", "rain"]
-        }
-        ,
-        {
             "name":"lash_scop",
             "targets":["own"],
-            "classificationRequired":["!air"],
+            "classificationRequired":["!airborne"],
             "terrainStarsMod":100
         }
         ,
@@ -1900,8 +1902,7 @@
             "name":"sturm_d2d",
             "targets":["own"],
             "firepowerMod":20,
-            "defenseMod":20,
-            "flatMovement":["normal", "rain"]
+            "defenseMod":20
         }
         ,
         {
@@ -1957,7 +1958,7 @@
         {
             "name":"eagle_scop",
             "targets":["own"],
-            "classificationRequired":["!infantry"],
+            "classificationRequired":["!footsoldier"],
             "makeActive":true
         }
         , 
@@ -2001,15 +2002,6 @@
     ,
     "passiveTerrainEffects": [
         {
-            "name":"standard_d2d",
-            "targets":["own", "enemy", "ally", "neutral"],
-            "affects":["own"],
-            "terrainRequired":["mountain"],
-            "classificationRequired":["infantry"],
-            "visionModBoost":3
-        }
-        ,
-        {
             "name":"sasha_d2d",
             "targets":["own"],
             "affects":["own"],
@@ -2034,7 +2026,7 @@
             "targets":["own"],
             "affects":["own"],
             "terrainRequired":["city", "base", "airport", "port", "headquarters"],
-            "repairMod":1
+            "repairMod":10
         }
         ,
         {
@@ -2051,22 +2043,18 @@
             "name":"sensei_cop",
             "targets":["own"],
             "terrainRequired":["city"],
-            "unitSummoned": {
-                "name":"infantry",
-                "initialDamage":10,
-                "active":true
-            }
+            "unitSummonedName":"infantry",
+            "unitSummonedInitialDamage":10,
+            "unitSummonedActive":true
         }
         ,
         {
             "name":"sensei_scop",
             "targets":["own"],
             "terrainRequired":["city"],
-            "unitSummoned": {
-                "name":"mech",
-                "initialDamage":10,
-                "active":true
-            }
+            "unitSummonedName":"mech",
+            "unitSummonedInitialDamage":10,
+            "unitSummonedActive":true
         }
     ]
     ,
@@ -2103,34 +2091,40 @@
             "name":"drake_scop",
             "variantMod":"rain"
         }
+        ,
+        {
+            "name":"lash_cop_normal_flat",
+            "movementClassVariantReplace":"normal",
+            "movementClassVariantOverride":"flat"
+        }
+        ,
+        {
+            "name":"lash_cop_rain_flat",
+            "movementClassVariantReplace":"rain",
+            "movementClassVariantOverride":"flat"
+        }
+        ,
+        {
+            "name":"sturm_d2d_normal_flat",
+            "movementClassVariantReplace":"normal",
+            "movementClassVariantOverride":"flat"
+        }
+        ,
+        {
+            "name":"sturm_d2d_rain_flat",
+            "movementClassVariantReplace":"rain",
+            "movementClassVariantOverride":"flat"
+        }
     ]
     ,
     "activeGlobalEffects": [
         {
             "name":"rachel_scop",
             "targets":["enemy"],
-            "missileLaunch":[
-                {
-                    "count":1,
-                    "targetMethod":["value"],
-                    "damage":3,
-                    "range":2
-                }
-                ,
-                {
-                    "count":1,
-                    "targetMethod":["hp"],
-                    "damage":3,
-                    "range":2
-                }
-                ,
-                {
-                    "count":1,
-                    "targetMethod":["infantry"],
-                    "damage":3,
-                    "range":2
-                }
-            ]
+            "missileCount":3,
+            "missileTargetMethod":["value", "hp", "infantry"],
+            "missileDamage":30,
+            "missileAreaOfEffect":2
         }
         ,
         {
@@ -2148,41 +2142,29 @@
         {
             "name":"sturm_cop",
             "targets":["enemy"],
-            "missileLaunch":[
-                {
-                    "count":1,
-                    "targetMethod":["value", "count", "hp"],
-                    "damage":4,
-                    "range":2
-                }
-            ]
+            "missileCount":1,
+            "missileTargetMethod":["value", "count", "hp"],
+            "missileDamage":40,
+            "missileAreaOfEffect":2
         }
         ,
         {
             "name":"sturm_scop",
             "targets":["enemy"],
-            "missileLaunch":[
-                {
-                    "count":1,
-                    "targetMethod":["value", "count", "hp"],
-                    "damage":8,
-                    "range":2
-                }
-            ]
+            "missileCount":1,
+            "missileTargetMethod":["value", "count", "hp"],
+            "missileDamage":80,
+            "missileAreaOfEffect":2
         }
         ,
         {
             "name":"von_bolt_scop",
             "targets":["enemy"],
-            "missileLaunch":[
-                {
-                    "count":1,
-                    "targetMethod":["value"],
-                    "damage":3,
-                    "range":2,
-                    "stunDuration":1
-                }
-            ]
+            "missileCount":1,
+            "missileTargetMethod":["value"],
+            "missileDamage":30,
+            "missileAreaOfEffect":2,
+            "missileStunDuration":1
         }
     ]
     ,
@@ -2190,8 +2172,7 @@
         {
             "name":"baseline",
 
-            "passiveUnitEffectsD2d": ["standard_d2d", "standard_d2d_terrain_defense"],
-            "passiveTerrainEffectsD2d": ["standard_d2d"],
+            "passiveUnitEffectsD2d": ["standard_d2d", "standard_d2d_terrain_defense", "standard_d2d_infantry_mountain_vision"],
             "passiveUnitEffectsCop": ["standard_cop"],
             "passiveUnitEffectsScop": ["standard_cop"]
         },
@@ -2510,16 +2491,18 @@
             "passiveUnitEffectsD2d": ["lash_d2d"],
             
             "copCost":36000,
-            "passiveUnitEffectsCop": ["lash_cop"],
+            "passiveGlobalEffectsCop": ["lash_cop_normal_flat", "lash_cop_rain_flat"],
             
             "scopCost":63000,
-            "passiveUnitEffectsScop": ["lash_scop"]
+            "passiveUnitEffectsScop": ["lash_scop"],
+            "passiveGlobalEffectsScop": ["lash_cop_normal_flat", "lash_cop_rain_flat"]
         }
         ,
         {
             "name":"sturm",
 
             "passiveUnitEffectsD2d": ["sturm_d2d"],
+            "passiveGlobalEffectsD2d": ["sturm_d2d_normal_flat", "sturm_d2d_rain_flat"],
             
             "copCost":54000,
             "passiveUnitEffectsCop": ["sturm_cop"],

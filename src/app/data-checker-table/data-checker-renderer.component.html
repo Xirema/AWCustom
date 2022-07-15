@@ -1,0 +1,44 @@
+<div *ngIf="isEmpty(object)">
+    --
+</div>
+<div *ngIf="isBoolean(object) || isNumber(object)">
+    {{object}}
+</div>
+<div *ngIf="isString(object)">
+    <a *ngIf="propertyName === 'name'; else NotName" [id]="object">
+        {{object}}
+    </a>
+    <ng-template #NotName>
+        <a 
+            *ngIf="checkGeneric(object, propertyName) === '0'; else NotFound" 
+            [href]="'#' + object"
+            [class.found]="true"
+            target="_self">
+            {{object}}
+        </a>
+        <ng-template #NotFound>
+            <div 
+                [class.found]="checkGeneric(object, propertyName) === '0' || checkGeneric(object, propertyName) === '3'"
+                [class.missing]="checkGeneric(object, propertyName) === '1'">
+                {{object}}
+            </div>
+        </ng-template>
+    </ng-template>
+</div>
+<div *ngIf="isArray(object)">
+    <ul>
+        <li *ngFor="let obj of object; let i = index">
+            <app-data-checker-renderer [object]="obj" [propertyName]="'' + i" [dataSource]="[]" [refdata]="refdata">
+
+            </app-data-checker-renderer>
+        </li>
+    </ul>
+</div>
+<div *ngIf="isCompound(object)">
+    <ul>
+        <li *ngFor="let propertyName of getProperties(object)">
+            <app-data-checker-renderer [object]="propertyName" propertyName="'property'" [dataSource]="[]" [refdata]="refdata"></app-data-checker-renderer>:
+            <app-data-checker-renderer [object]="object[propertyName]" propertyName="propertyName" [dataSource]="[]" [refdata]="refdata"></app-data-checker-renderer>
+        </li>
+    </ul>
+</div>

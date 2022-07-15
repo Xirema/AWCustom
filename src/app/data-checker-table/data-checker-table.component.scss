@@ -19,8 +19,11 @@ ul, ol {
 div {
 	display: inline;
 }
+a .found {
+	color: rgb(0, 192, 192);
+}
 .found {
-	color: darkgreen;
+	color: rgb(0, 192, 192);
 }
 .suspect {
 	color: darkgoldenrod;

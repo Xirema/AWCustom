@@ -6,6 +6,7 @@ import {MovementClass} from './GameData/Movement';
 import {PassiveUnitEffect, ActiveUnitEffect, PassiveTerrainEffect, ActiveTerrainEffect, PassiveGlobalEffect, ActiveGlobalEffect} from './GameData/Effect';
 import {CommanderType, PlayerType} from './GameData/Commander';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Settings} from './GameData/Settings';
 import baseData from './Gamedata/BaseData/mod.json';
 
 @Injectable({
@@ -15,180 +16,116 @@ export class GameDataService {
 
   constructor(private httpClient:HttpClient) { }
 
-  public getTerrainTypes(modname:string):Observable<TerrainType[]> {
-    let terrains:TerrainType[] = baseData.terrains.map(t => ({
-      occludesVision:false,
-      ...t
-    }));
-    return new Observable<TerrainType[]>(observer => {
-      observer.next(terrains);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getTerrainTypes(modName:string, version?:string):Observable<TerrainType[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<TerrainType[]>("http://localhost:8167/data/getTerrains", body);
   }
 
-  public getUnitTypes(modname:string):Observable<UnitType[]> {
-    let units:UnitType[] = baseData.units.map(u => ({
-      hitPoints:100,
-      ignoresVisionOcclusion:false,
-      ...u
-    }));
-    return new Observable<UnitType[]>(observer => {
-      observer.next(units);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getUnitTypes(modName:string, version?:string):Observable<UnitType[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<UnitType[]>("http://localhost:8167/data/getUnits", body);
   }
 
-  public getWeaponTypes(modname:string):Observable<WeaponType[]> {
-    let weapons:WeaponType[] = (baseData.weapons as WeaponType[]).map(w => ({
-      minRange:1,
-      selfTarget:false,
-      affectedByLuck:true,
-      nonLethal:false,
-      areaOfEffect:0,
-      ...w
-    }));
-    return new Observable<WeaponType[]>(observer => {
-      observer.next(weapons);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getWeaponTypes(modName:string, version?:string):Observable<WeaponType[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<WeaponType[]>("http://localhost:8167/data/getWeapons", body);
   }
 
-  public getMovementClasses(modname:string):Observable<MovementClass[]> {
-    let movements:MovementClass[] = (baseData.movementClasses as unknown as MovementClass[]).map(m => ({
-      ...m
-    }));
-    return new Observable<MovementClass[]>(observer => {
-      observer.next(movements);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getMovementClasses(modName:string, version?:string):Observable<MovementClass[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<MovementClass[]>("http://localhost:8167/data/getMovements", body);
   }
 
-  public getPassiveUnitEffects(modname:string):Observable<PassiveUnitEffect[]> {
-    let passiveUnitEffects:PassiveUnitEffect[] = (baseData.passiveUnitEffects as PassiveUnitEffect[]).map(e => ({
-      ...e
-    }));
-    return new Observable<PassiveUnitEffect[]>(observer => {
-      observer.next(passiveUnitEffects);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getPassiveUnitEffects(modName:string, version?:string):Observable<PassiveUnitEffect[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<PassiveUnitEffect[]>("http://localhost:8167/data/getPUEs", body);
   }
 
-  public getActiveUnitEffects(modname:string):Observable<ActiveUnitEffect[]> {
-    let activeUnitEffects:ActiveUnitEffect[] = baseData.activeUnitEffects.map(e => ({
-      ...e
-    }));
-    return new Observable<ActiveUnitEffect[]>(observer => {
-      observer.next(activeUnitEffects);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getActiveUnitEffects(modName:string, version?:string):Observable<ActiveUnitEffect[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<ActiveUnitEffect[]>("http://localhost:8167/data/getAUEs", body);
   }
 
-  public getPassiveTerrainEffects(modname:string):Observable<PassiveTerrainEffect[]> {
-    let passiveTerrainEffects:PassiveTerrainEffect[] = baseData.passiveTerrainEffects.map(e => ({
-      ...e
-    }));
-    return new Observable<PassiveTerrainEffect[]>(observer => {
-      observer.next(passiveTerrainEffects);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getPassiveTerrainEffects(modName:string, version?:string):Observable<PassiveTerrainEffect[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<PassiveTerrainEffect[]>("http://localhost:8167/data/getPTEs", body);
   }
 
-  public getActiveTerrainEffects(modname:string):Observable<ActiveTerrainEffect[]> {
-    let activeTerrainEffects:ActiveTerrainEffect[] = baseData.activeTerrainEffects.map(e => ({
-      ...e
-    }));
-    return new Observable<ActiveTerrainEffect[]>(observer => {
-      observer.next(activeTerrainEffects);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getActiveTerrainEffects(modName:string, version?:string):Observable<ActiveTerrainEffect[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<ActiveTerrainEffect[]>("http://localhost:8167/data/getATEs", body);
   }
 
-  public getPassiveGlobalEffects(modname:string):Observable<PassiveGlobalEffect[]> {
-    let passiveGlobalEffects:PassiveGlobalEffect[] = (baseData.passiveGlobalEffects as PassiveGlobalEffect[]).map(e => ({
-      ...e
-    }));
-    return new Observable<PassiveGlobalEffect[]>(observer => {
-      observer.next(passiveGlobalEffects);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getPassiveGlobalEffects(modName:string, version?:string):Observable<PassiveGlobalEffect[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<PassiveGlobalEffect[]>("http://localhost:8167/data/getPGEs", body);
   }
 
-  public getActiveGlobalEffects(modname:string):Observable<ActiveGlobalEffect[]> {
-    let activeGlobalEffects:ActiveGlobalEffect[] = baseData.activeGlobalEffects.map(e => ({
-      ...e
-    }));
-    return new Observable<ActiveGlobalEffect[]>(observer => {
-      observer.next(activeGlobalEffects);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getActiveGlobalEffects(modName:string, version?:string):Observable<ActiveGlobalEffect[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<ActiveGlobalEffect[]>("http://localhost:8167/data/getAGEs", body);
   }
 
-  public getCommanderTypes(modname:string):Observable<CommanderType[]> {
-    let commanderTypes:CommanderType[] = baseData.commanders.map(e => ({
-      ...e
-    }));
-    return new Observable<CommanderType[]>(observer => {
-      observer.next(commanderTypes);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getCommanderTypes(modName:string, version?:string):Observable<CommanderType[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<CommanderType[]>("http://localhost:8167/data/getCommanders", body);
   }
 
-  public getPlayerTypes(modname:string):Observable<PlayerType[]> {
-    let playerTypes:PlayerType[] = baseData.playerTypes.map(e => ({
-      ...e
-    }));
-    return new Observable<PlayerType[]>(observer => {
-      observer.next(playerTypes);
-      return {
-        unsubscribe() {
-          //Do Nothing
-        }
-      };
-    });
+  public getPlayerTypes(modName:string, version?:string):Observable<PlayerType[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<PlayerType[]>("http://localhost:8167/data/getPlayers", body);
+  }
+
+  public getSettings(modName:string, version?:string):Observable<Settings[]> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<Settings[]>("http://localhost:8167/data/getSettings", body);
+  }
+
+  public getModData(modName:string, version?:string):Observable<{modName:string, modId:number, modVersion:string, expired:string | null}> {
+    let body:any = {};
+    body.modName = modName;
+    if(version)
+      body.modVersion = version;
+    return this.httpClient.post<{modName:string, modId:number, modVersion:string, expired:string | null}>("http://localhost:8167/data/getModData", body);
   }
 
   public getHelloWorld():Observable<{name:string}> {
@@ -202,6 +139,6 @@ export class GameDataService {
   public postNewMod(cookies:string, modData:string):Observable<string> {
     let headers = new HttpHeaders;
     headers = headers.append("cookies", cookies);
-    return this.httpClient.post<string>("http://localhost:8167/modupload",{modData:modData}, {headers:headers});
+    return this.httpClient.post("http://localhost:8167/data/uploadMod", modData, {headers:headers, responseType: 'text'});
   }
 }
