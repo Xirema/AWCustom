@@ -78,7 +78,12 @@
               "browserTarget": "AWCustom:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options":{
+            "sslKey":"ssl/key.pem",
+            "sslCert":"ssl/cert.pem",
+            "ssl":true
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

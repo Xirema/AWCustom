@@ -8,6 +8,7 @@ import {CommanderType, PlayerType} from './GameData/Commander';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Settings} from './GameData/Settings';
 import baseData from './Gamedata/BaseData/mod.json';
+import { ImageResource, TextResource } from './GameData/Resource';
 
 @Injectable({
   providedIn: 'root'
@@ -16,129 +17,73 @@ export class GameDataService {
 
   constructor(private httpClient:HttpClient) { }
 
-  public getTerrainTypes(modName:string, version?:string):Observable<TerrainType[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<TerrainType[]>("http://localhost:8167/data/getTerrains", body);
+  public getTerrainTypes(modId:string):Observable<TerrainType[]> {
+    return this.httpClient.post<TerrainType[]>("https://localhost:8167/data/getTerrains", {modId:modId});
   }
 
-  public getUnitTypes(modName:string, version?:string):Observable<UnitType[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<UnitType[]>("http://localhost:8167/data/getUnits", body);
+  public getUnitTypes(modId:string):Observable<UnitType[]> {
+    return this.httpClient.post<UnitType[]>("https://localhost:8167/data/getUnits", {modId:modId});
   }
 
-  public getWeaponTypes(modName:string, version?:string):Observable<WeaponType[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<WeaponType[]>("http://localhost:8167/data/getWeapons", body);
+  public getWeaponTypes(modId:string):Observable<WeaponType[]> {
+    return this.httpClient.post<WeaponType[]>("https://localhost:8167/data/getWeapons", {modId:modId});
   }
 
-  public getMovementClasses(modName:string, version?:string):Observable<MovementClass[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<MovementClass[]>("http://localhost:8167/data/getMovements", body);
+  public getMovementClasses(modId:string):Observable<MovementClass[]> {
+    return this.httpClient.post<MovementClass[]>("https://localhost:8167/data/getMovements", {modId:modId});
   }
 
-  public getPassiveUnitEffects(modName:string, version?:string):Observable<PassiveUnitEffect[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<PassiveUnitEffect[]>("http://localhost:8167/data/getPUEs", body);
+  public getPassiveUnitEffects(modId:string):Observable<PassiveUnitEffect[]> {
+    return this.httpClient.post<PassiveUnitEffect[]>("https://localhost:8167/data/getPUEs", {modId:modId});
   }
 
-  public getActiveUnitEffects(modName:string, version?:string):Observable<ActiveUnitEffect[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<ActiveUnitEffect[]>("http://localhost:8167/data/getAUEs", body);
+  public getActiveUnitEffects(modId:string):Observable<ActiveUnitEffect[]> {
+    return this.httpClient.post<ActiveUnitEffect[]>("https://localhost:8167/data/getAUEs", {modId:modId});
   }
 
-  public getPassiveTerrainEffects(modName:string, version?:string):Observable<PassiveTerrainEffect[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<PassiveTerrainEffect[]>("http://localhost:8167/data/getPTEs", body);
+  public getPassiveTerrainEffects(modId:string):Observable<PassiveTerrainEffect[]> {
+    return this.httpClient.post<PassiveTerrainEffect[]>("https://localhost:8167/data/getPTEs", {modId:modId});
   }
 
-  public getActiveTerrainEffects(modName:string, version?:string):Observable<ActiveTerrainEffect[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<ActiveTerrainEffect[]>("http://localhost:8167/data/getATEs", body);
+  public getActiveTerrainEffects(modId:string):Observable<ActiveTerrainEffect[]> {
+    return this.httpClient.post<ActiveTerrainEffect[]>("https://localhost:8167/data/getATEs", {modId:modId});
   }
 
-  public getPassiveGlobalEffects(modName:string, version?:string):Observable<PassiveGlobalEffect[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<PassiveGlobalEffect[]>("http://localhost:8167/data/getPGEs", body);
+  public getPassiveGlobalEffects(modId:string):Observable<PassiveGlobalEffect[]> {
+    return this.httpClient.post<PassiveGlobalEffect[]>("https://localhost:8167/data/getPGEs", {modId:modId});
   }
 
-  public getActiveGlobalEffects(modName:string, version?:string):Observable<ActiveGlobalEffect[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<ActiveGlobalEffect[]>("http://localhost:8167/data/getAGEs", body);
+  public getActiveGlobalEffects(modId:string):Observable<ActiveGlobalEffect[]> {
+    return this.httpClient.post<ActiveGlobalEffect[]>("https://localhost:8167/data/getAGEs", {modId:modId});
   }
 
-  public getCommanderTypes(modName:string, version?:string):Observable<CommanderType[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<CommanderType[]>("http://localhost:8167/data/getCommanders", body);
+  public getCommanderTypes(modId:string):Observable<CommanderType[]> {
+    return this.httpClient.post<CommanderType[]>("https://localhost:8167/data/getCommanders", {modId:modId});
   }
 
-  public getPlayerTypes(modName:string, version?:string):Observable<PlayerType[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<PlayerType[]>("http://localhost:8167/data/getPlayers", body);
+  public getPlayerTypes(modId:string):Observable<PlayerType[]> {
+    return this.httpClient.post<PlayerType[]>("https://localhost:8167/data/getPlayers", {modId:modId});
   }
 
-  public getSettings(modName:string, version?:string):Observable<Settings[]> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<Settings[]>("http://localhost:8167/data/getSettings", body);
+  public getSettings(modId:string):Observable<Settings[]> {
+    return this.httpClient.post<Settings[]>("https://localhost:8167/data/getSettings", {modId:modId});
   }
 
-  public getModData(modName:string, version?:string):Observable<{modName:string, modId:number, modVersion:string, expired:string | null}> {
-    let body:any = {};
-    body.modName = modName;
-    if(version)
-      body.modVersion = version;
-    return this.httpClient.post<{modName:string, modId:number, modVersion:string, expired:string | null}>("http://localhost:8167/data/getModData", body);
+  public getModData(req:{modId:string} | {modName:string, modVersion?:string}):Observable<{modName:string, modId:string, modVersion:string, expired:string | null}> {
+    return this.httpClient.post<{modName:string, modId:string, modVersion:string, expired:string | null}>("https://localhost:8167/data/getModData", req);
   }
 
-  public getHelloWorld():Observable<{name:string}> {
-    return this.httpClient.get<{name:string}>("http://localhost:8167/hello");
+  public getTextResources(modId:string):Observable<TextResource[]> {
+    return this.httpClient.post<TextResource[]>("https://localhost:8167/data/getTextResources", {modId:modId});
   }
 
-  public getPostTest(name:string):Observable<{name:string}> {
-    return this.httpClient.post<{name:string}>("http://localhost:8167/posttest", {name:name});
+  public getImageResources(modId:string):Observable<ImageResource[]> {
+      return this.httpClient.post<ImageResource[]>("https://localhost:8167/data/getImageResources", {modId:modId});
   }
 
   public postNewMod(cookies:string, modData:string):Observable<string> {
     let headers = new HttpHeaders;
     headers = headers.append("cookies", cookies);
-    return this.httpClient.post("http://localhost:8167/data/uploadMod", modData, {headers:headers, responseType: 'text'});
+    return this.httpClient.post("https://localhost:8167/data/uploadMod", modData, {headers:headers, responseType: 'text'});
   }
 }

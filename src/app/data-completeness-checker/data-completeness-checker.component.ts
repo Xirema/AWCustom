@@ -6,6 +6,7 @@ import {UnitType, WeaponType} from '../GameData/Unit';
 import {TerrainType} from '../GameData/Terrain';
 import {MovementClass} from '../GameData/Movement';
 import {Settings} from '../GameData/Settings';
+import { ImageResource, TextResource } from '../GameData/Resource';
 
 @Component({
   selector: 'app-data-completeness-checker',
@@ -18,13 +19,13 @@ export class DataCompletenessCheckerComponent implements OnInit {
     private gameDataService:GameDataService
   ) {}
 
-  async getModData():Promise<{modName:string, modId:number, modVersion:string, expired:string | null} | undefined> {
-    return new Promise<{modName:string, modId:number, modVersion:string, expired:string | null} | undefined>((resolve, reject) => {
+  async getModData():Promise<{modName:string, modId:string, modVersion:string, expired:string | null} | undefined> {
+    return new Promise<{modName:string, modId:string, modVersion:string, expired:string | null} | undefined>((resolve, reject) => {
       if(!this.modName) {
         resolve(undefined);
         return;
       }
-      this.gameDataService.getModData(this.modName, this.modVersion).subscribe({next: ret => {
+      this.gameDataService.getModData({modName:this.modName, modVersion:this.modVersion}).subscribe({next: ret => {
         resolve(ret);
       }, error: err => {
         resolve(undefined);
@@ -45,6 +46,7 @@ export class DataCompletenessCheckerComponent implements OnInit {
       this.modVersion = undefined;
 
     let modData = await this.getModData();
+    console.log('modData', modData);
     if(!modData) {
       this.modVersion = 'null';
       return;
@@ -54,7 +56,7 @@ export class DataCompletenessCheckerComponent implements OnInit {
 
     if(!this.modName)
       return;
-    this.gameDataService.getUnitTypes(this.modName, this.modVersion).subscribe({next: list => {
+    this.gameDataService.getUnitTypes(modData.modId).subscribe({next: list => {
       //console.log("Returned Data:", list);
       this.unitTypes = list;
       // this.allDatas.push(list);
@@ -65,53 +67,34 @@ export class DataCompletenessCheckerComponent implements OnInit {
       }));
 
     }});
-    this.gameDataService.getTerrainTypes(this.modName, this.modVersion).subscribe({next: list => {
-      this.terrainTypes = list;
-      // this.allDatas.push(list);
-    }});
-    this.gameDataService.getWeaponTypes(this.modName, this.modVersion).subscribe({next: list => {
-      this.weaponTypes = list;
-      // this.allDatas.push(list);
-    }});
-    this.gameDataService.getCommanderTypes(this.modName, this.modVersion).subscribe({next: list => {
-      this.commanderTypes = list;
-      // this.allDatas.push(list);
-    }});
-    this.gameDataService.getMovementClasses(this.modName, this.modVersion).subscribe({next: list => {
-      this.movementClasses = list;
-      // this.allDatas.push(list);
-    }});
+    this.gameDataService.getTerrainTypes(modData.modId).subscribe({next: list => this.terrainTypes = list});
+    this.gameDataService.getWeaponTypes(modData.modId).subscribe({next: list => this.weaponTypes = list});
+    this.gameDataService.getCommanderTypes(modData.modId).subscribe({next: list => this.commanderTypes = list});
+    this.gameDataService.getMovementClasses(modData.modId).subscribe({next: list => this.movementClasses = list});
 
-    this.gameDataService.getPassiveUnitEffects(this.modName, this.modVersion).subscribe({next: list => {
-      this.passiveUnitEffects = list;
-      // this.allDatas.push(list);
+    this.gameDataService.getPassiveUnitEffects(modData.modId).subscribe({next: list => this.passiveUnitEffects = list});
+    this.gameDataService.getPassiveTerrainEffects(modData.modId).subscribe({next: list => this.passiveTerrainEffects = list});
+    this.gameDataService.getPassiveGlobalEffects(modData.modId).subscribe({next: list => this.passiveGlobalEffects = list});
+    this.gameDataService.getActiveUnitEffects(modData.modId).subscribe({next: list => this.activeUnitEffects = list});
+    this.gameDataService.getActiveTerrainEffects(modData.modId).subscribe({next: list => this.activeTerrainEffects = list});
+    this.gameDataService.getActiveGlobalEffects(modData.modId).subscribe({next: list => this.activeGlobalEffects = list});
+    this.gameDataService.getPlayerTypes(modData.modId).subscribe({next: list => this.playerTypes = list});
+    this.gameDataService.getSettings(modData.modId).subscribe({next: list => this.settings = list});
+    this.gameDataService.getTextResources(modData.modId).subscribe({next: list=> {
+      this.unitTextResources = list.filter(i => i.type === 'unit');
+      this.weaponTextResources = list.filter(i => i.type === 'weapon');
+      this.terrainTextResources = list.filter(i => i.type === 'terrain');
+      this.moveTextResources = list.filter(i => i.type === 'move');
+      this.commanderTextResources = list.filter(i => i.type === 'commander');
+      this.playerTextResources = list.filter(i => i.type === 'player');
+      this.settingTextResources = list.filter(i => i.type === 'setting');
     }});
-    this.gameDataService.getPassiveTerrainEffects(this.modName, this.modVersion).subscribe({next: list => {
-      this.passiveTerrainEffects = list;
-      // this.allDatas.push(list);
-    }});
-    this.gameDataService.getPassiveGlobalEffects(this.modName, this.modVersion).subscribe({next: list => {
-      this.passiveGlobalEffects = list;
-      // this.allDatas.push(list);
-    }});
-    this.gameDataService.getActiveUnitEffects(this.modName, this.modVersion).subscribe({next: list => {
-      this.activeUnitEffects = list; 
-      // this.allDatas.push(list);
-    }});
-    this.gameDataService.getActiveTerrainEffects(this.modName, this.modVersion).subscribe({next: list => {
-      this.activeTerrainEffects = list;
-      // this.allDatas.push(list);
-    }});
-    this.gameDataService.getActiveGlobalEffects(this.modName, this.modVersion).subscribe({next: list => {
-      this.activeGlobalEffects = list;
-      // this.allDatas.push(list);
-    }});
-    this.gameDataService.getPlayerTypes(this.modName, this.modVersion).subscribe({next: list => {
-      this.playerTypes = list;
-      // this.allDatas.push(list);
-    }});
-    this.gameDataService.getSettings(this.modName, this.modVersion).subscribe({next: list => {
-      this.settings = list;
+    this.gameDataService.getImageResources(modData.modId).subscribe({next: list => {
+      this.unitImageResources = list.filter(i => i.type === 'unit');
+      this.terrainImageResources = list.filter(i => i.type === 'terrain');
+      this.commanderImageResources = list.filter(i => i.type === 'commander');
+      this.playerImageResources = list.filter(i => i.type === 'player');
+      this.settingImageResources = list.filter(i => i.type === 'setting');
     }});
   }
 
@@ -135,11 +118,26 @@ export class DataCompletenessCheckerComponent implements OnInit {
   activeTerrainEffects:EffectData.ActiveTerrainEffect[] = [];
   activeGlobalEffects:EffectData.ActiveGlobalEffect[] = [];
 
+  // textResources:TextResource[] = [];
+  unitTextResources:TextResource[] = [];
+  weaponTextResources:TextResource[] = [];
+  terrainTextResources:TextResource[] = [];
+  moveTextResources:TextResource[] = [];
+  commanderTextResources:TextResource[] = [];
+  playerTextResources:TextResource[] = [];
+  settingTextResources:TextResource[] = [];
+
+  unitImageResources:ImageResource[] = [];
+  terrainImageResources:ImageResource[] = [];
+  commanderImageResources:ImageResource[] = [];
+  playerImageResources:ImageResource[] = [];
+  settingImageResources:ImageResource[] = [];
+
   settings:Settings[] = [];
 
   variantTypes = [{name:'normal', notLinkable:true}, {name:'rain', notLinkable:true}, {name:'snow', notLinkable:true}, {name:'flat', notLinkable:true}];
   targetTypes = [{name:'own', notLinkable:true}, {name:'self', notLinkable:true}, {name:'ally', notLinkable:true}, {name:'neutral', notLinkable:true}, {name:'enemy', notLinkable:true}];
-  missileTargetTypes = ['hp', 'value', 'infantry', 'count'].map(s => {return {name:s, notLinkable:true}});
+  missileTargetTypes = ['hp', 'value', 'infantry', 'count', 'manual'].map(s => {return {name:s, notLinkable:true}});
 
   //allDatas:{name:string}[][] = [];
 

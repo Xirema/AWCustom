@@ -3,7 +3,7 @@
     <label for="file">Choose File</label>
     <input type="file"
            id="file"
-           (change)="handleFileInput($event)">
+           (change)="handleFileInput($event)" #file>
 </div>
 <h2 class="error" *ngIf="errorMessage != null">{{errorMessage}}</h2>
 <h2 class="notice" *ngIf="resultMessage != null">{{resultMessage}}</h2>

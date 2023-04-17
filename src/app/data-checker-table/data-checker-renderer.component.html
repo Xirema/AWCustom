@@ -5,15 +5,29 @@
     {{object}}
 </div>
 <div *ngIf="isString(object)">
-    <a *ngIf="propertyName === 'name'; else NotName" [id]="object">
-        {{object}}
-    </a>
+    <div *ngIf="propertyName === 'name'; else NotName">
+        {{getTextResource(object)?.longName ?? ''}} {{(getTextResource(object)?.shortName) ? ('(' + getTextResource(object)?.shortName + ')') : ''}}
+        <br><div [class.raw]="true">{{object}}</div>
+        <br>{{getTextResource(object)?.description ?? ''}}
+        <div 
+            *ngFor="let imageString of getAllSmallImageStrings(object)">
+            <img
+                *ngIf="imageString !== ''" 
+                [src]="imageString">
+        </div>
+        <div 
+            *ngFor="let imageString of getAllLargeImageStrings(object)">
+            <br>
+            <img
+                *ngIf="imageString !== ''" 
+                [src]="imageString">
+        </div>
+    </div>
     <ng-template #NotName>
         <a 
             *ngIf="checkGeneric(object, propertyName) === '0'; else NotFound" 
-            [href]="'#' + object"
-            [class.found]="true"
-            target="_self">
+            [href]="'dataChecker#' + object"
+            [class.found]="true">
             {{object}}
         </a>
         <ng-template #NotFound>
@@ -37,8 +51,8 @@
 <div *ngIf="isCompound(object)">
     <ul>
         <li *ngFor="let propertyName of getProperties(object)">
-            <app-data-checker-renderer [object]="propertyName" propertyName="'property'" [dataSource]="[]" [refdata]="refdata"></app-data-checker-renderer>:
-            <app-data-checker-renderer [object]="object[propertyName]" propertyName="propertyName" [dataSource]="[]" [refdata]="refdata"></app-data-checker-renderer>
+            <app-data-checker-renderer [object]="propertyName" [propertyName]="'property'" [dataSource]="[]" [refdata]="refdata"></app-data-checker-renderer>:
+            <app-data-checker-renderer [object]="object[propertyName]" [propertyName]="propertyName" [dataSource]="[]" [refdata]="refdata"></app-data-checker-renderer>
         </li>
     </ul>
 </div>

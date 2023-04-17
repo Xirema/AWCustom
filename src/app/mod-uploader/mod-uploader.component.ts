@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {GameDataService} from '../game-data.service';
-import * as React from 'react';
 
 @Component({
   selector: 'app-mod-uploader',
@@ -29,7 +28,7 @@ export class ModUploaderComponent implements OnInit {
       try {
         this.gameDataService.postNewMod(this.getCookie(), fileData).subscribe({
           next: result => this.resultMessage = result, 
-          error: error => this.errorMessage = JSON.stringify(error)
+          error: error => this.errorMessage = error.error
         });
       } catch (error) {
         this.errorMessage = JSON.stringify(error);

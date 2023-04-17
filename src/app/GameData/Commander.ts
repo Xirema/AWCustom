@@ -23,6 +23,7 @@ export interface CommanderType {
     activeGlobalEffectsScop?:string[];
 
     coMeterMultiplier?:number;
+    playable?:boolean;
 }
 
 export interface PlayerType {

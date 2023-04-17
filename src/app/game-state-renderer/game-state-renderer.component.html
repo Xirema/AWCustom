@@ -1,0 +1,58 @@
+PQTest: {{pqTestResults}}<br>
+Cursor: &lt;{{cursorLocation?.x ?? ''}},{{cursorLocation?.y ?? ''}}&gt;
+<span *ngIf="selectedLocation != null">Selected: &lt;{{selectedLocation.x}},{{selectedLocation.y}}&gt;</span>
+
+<div class="mapContainer" [style]="mapContainerStyle">
+    <div class="map" [style]="mapStyle">
+        <unit-renderer 
+            *ngFor="let unitState of unitStates" 
+            [unitState]="unitState" 
+            [imageResources]="imageResources" 
+            [playerStates]="playerStates" 
+            [gameStateRenderer]="this"
+            [isSelected]="unitState === selectedUnit"
+            >
+        </unit-renderer>
+        <terrain-renderer 
+            *ngFor="let terrainState of terrainStates" 
+            [terrainState]="terrainState" 
+            [imageResources]="imageResources" 
+            [playerStates]="playerStates" 
+            [gameStateRenderer]="this"
+            >
+        </terrain-renderer>
+        <span *ngIf="movementChain != null">
+            <interface-renderer 
+                *ngFor="let interfaceState of movementChain" 
+                [interfaceState]="interfaceState" 
+                [imageResources]="imageResources" 
+                [textResources]="textResources" 
+                [gameStateRenderer]="this"
+                [layerOffset]="1"
+                >
+            </interface-renderer>
+        </span>
+        <span *ngIf="movementRange != null">
+            <interface-renderer 
+                *ngFor="let interfaceState of movementRange" 
+                [interfaceState]="interfaceState" 
+                [imageResources]="imageResources" 
+                [textResources]="textResources" 
+                [gameStateRenderer]="this"
+                [layerOffset]="0"
+                >
+            </interface-renderer>
+        </span>
+        <hover-panel-renderer 
+            [imageResources]="imageResources" 
+            [textResources]="textResources"
+            [terrainState]="hoveredTerrain"
+            [unitState]="hoveredUnit"
+            [unitData]="unitData"
+            [terrainData]="terrainData"
+            [playerStates]="playerStates"
+            [gameStateRenderer]="this"
+            >
+        </hover-panel-renderer>
+    </div>
+</div>

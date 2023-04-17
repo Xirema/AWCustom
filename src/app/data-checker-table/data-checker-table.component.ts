@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { ImageResource, TextResource } from '../GameData/Resource';
 
 export enum CheckResult {
   Found, Missing, Noncheckable, Nonlinkable
@@ -12,7 +13,9 @@ export enum CheckResult {
 export class DataCheckerTableComponent implements OnInit, OnChanges {
   @Input('data') data:any[] = [];
   @Input('refdata') refdata:{name:string, notLinkable?:boolean}[][] = [];
-  // @Input('name') name:string = '';
+  @Input('name') name:string = '';
+  @Input('textResources') textResources?:TextResource[];
+  @Input('imageResources') imageResources?:ImageResource[];
 
   propertyNames:string[] = [];
 
@@ -62,6 +65,9 @@ export class DataCheckerRendererComponent implements OnInit, OnChanges {
   @Input('propertyName') propertyName:string = '';
   @Input('dataSource') dataSource: {name:string}[] = [];
   @Input('refdata') refdata:{name:string, notLinkable?:boolean}[][] = [];
+  @Input('textResources') textResources?:TextResource[];
+  @Input('imageResources') imageResources?:ImageResource[];
+  // @Input('rowName') rowName:string = '';
 
   constructor() { }
 
@@ -139,5 +145,33 @@ export class DataCheckerRendererComponent implements OnInit, OnChanges {
 
   public stringify(obj:any):string {
     return JSON.stringify(obj);
+  }
+
+  public getTextResource(name:string):TextResource | undefined {
+    return this.textResources?.find(o => o.key === name);
+  }
+
+  public getImageResource(name:string):ImageResource | undefined {
+    return this.imageResources?.find(o => o.key === name);
+  }
+
+  public getAllImageResources(name:string):ImageResource[] {
+    return this.imageResources?.filter(o => o.key === name) ?? [];
+  }
+
+  public getAllSmallImageStrings(name:string):string[] {
+    return this.getAllImageResources(name).map(r => {
+      if(r.smallImage === '')
+        return '';
+      return `data:image/png;base64,${r.smallImage}`;
+    });
+  }
+
+  public getAllLargeImageStrings(name:string):string[] {
+    return this.getAllImageResources(name).map(r => {
+      if(r.largeImage === '')
+        return '';
+      return `data:image/png;base64,${r.largeImage}`;
+    });
   }
 }

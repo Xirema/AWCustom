@@ -8,6 +8,7 @@ import { ModUploaderComponent } from './mod-uploader/mod-uploader.component';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { DataCheckerTableComponent, DataCheckerRendererComponent } from './data-checker-table/data-checker-table.component';
 import { AppRoutingModule } from './app-routing.module';
+import { GameStateRendererComponent, HoverPanelRendererComponent, TerrainRendererComponent, UnitRendererComponent, InterfaceRendererComponent } from './game-state-renderer/game-state-renderer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,12 @@ import { AppRoutingModule } from './app-routing.module';
     ModUploaderComponent,
     TestComponentComponent,
     DataCheckerTableComponent,
-    DataCheckerRendererComponent
+    DataCheckerRendererComponent,
+    GameStateRendererComponent,
+    UnitRendererComponent,
+    TerrainRendererComponent,
+    HoverPanelRendererComponent,
+    InterfaceRendererComponent
   ],
   imports: [
     BrowserModule,

@@ -11,4 +11,12 @@ export interface TerrainType {
     hitPoints?:number;
     destroyed?:string;
     damagedLike?:string;
+    activateList?:string[];
+    activateActiveUnitEffects?:string[];
+    activateActiveTerrainEffects?:string[];
+    activateActiveGlobalEffects?:string[];
+    activationMax?:number;
+    activationChange?:string;
+    loseIfCaptured?:boolean;
+    loseIfAllCaptured?:boolean;
 }

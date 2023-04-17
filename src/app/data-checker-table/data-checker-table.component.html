@@ -1,16 +1,23 @@
+<h2 [id]="name">{{name}}</h2>
+<a href="dataChecker#start" [class.small]="true">(Back to Top)</a>
 <table>
     <tr>
         <th *ngFor="let propertyName of propertyNames">
             {{propertyName}}
         </th>
     </tr>
-    <tr *ngFor="let object of data">
-        <td *ngFor="let propertyName of propertyNames">
+    <tr *ngFor="let object of data" [id]="object.name">
+        <td 
+        *ngFor="let propertyName of propertyNames"
+        [title]="object.name + '/' + propertyName">
             <app-data-checker-renderer 
                 [object]="object[propertyName]" 
                 [propertyName]="propertyName" 
                 [dataSource]="data" 
-                [refdata]="refdata">
+                [refdata]="refdata"
+                [textResources]="textResources"
+                [imageResources]="imageResources"
+                >
             </app-data-checker-renderer>
         </td>
     </tr>
