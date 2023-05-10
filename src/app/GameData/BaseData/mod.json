@@ -1,7 +1,7 @@
 {
     "modMetaData":{
         "name":"BaseGame",
-        "version":"0.976"
+        "version":"0.977"
     }
     ,
     "units": [
@@ -15,7 +15,8 @@
             "movementClass":"foot",
             "classifications":["footsoldier", "land"],
             "weapons":["machine_gun_infantry"],
-            "captureSpeed":10
+            "captureSpeed":10,
+            "stationaryFire":false
         }
         ,
         {
@@ -28,7 +29,8 @@
             "movementClass":"boots",
             "classifications":["footsoldier", "land"],
             "weapons":["bazooka", "machine_gun_mech"],
-            "captureSpeed":10
+            "captureSpeed":10,
+            "stationaryFire":false
         }
         ,
         {
@@ -40,7 +42,8 @@
             "movementRange":8,
             "movementClass":"tires",
             "classifications":["vehicle", "land", "direct"],
-            "weapons":["machine_gun_recon"]
+            "weapons":["machine_gun_recon"],
+            "stationaryFire":false
         }
         ,
         {
@@ -66,7 +69,8 @@
             "movementRange":6,
             "movementClass":"treads",
             "classifications":["vehicle", "land", "direct"],
-            "weapons":["light_cannon", "machine_gun_tank"]
+            "weapons":["light_cannon", "machine_gun_tank"],
+            "stationaryFire":false
         }
         ,
         {
@@ -78,7 +82,8 @@
             "movementRange":6,
             "movementClass":"treads",
             "classifications":["vehicle", "land", "direct"],
-            "weapons":["vulcan_cannon"]
+            "weapons":["vulcan_cannon"],
+            "stationaryFire":false
         }
         ,
         {
@@ -90,7 +95,8 @@
             "movementRange":5,
             "movementClass":"treads",
             "classifications":["vehicle", "land", "indirect"],
-            "weapons":["cannon"]
+            "weapons":["cannon"],
+            "stationaryFire":true
         }
         ,
         {
@@ -102,7 +108,8 @@
             "movementRange":5,
             "movementClass":"treads",
             "classifications":["vehicle", "land", "direct"],
-            "weapons":["medium_cannon", "machine_gun_md_tank"]
+            "weapons":["medium_cannon", "machine_gun_md_tank"],
+            "stationaryFire":false
         }
         ,
         {
@@ -114,7 +121,8 @@
             "movementRange":6,
             "movementClass":"treads",
             "classifications":["vehicle", "land", "direct"],
-            "weapons":["neo_cannon", "machine_gun_neo_tank"]
+            "weapons":["neo_cannon", "machine_gun_neo_tank"],
+            "stationaryFire":false
         }
         ,
         {
@@ -126,7 +134,8 @@
             "movementRange":5,
             "movementClass":"tires",
             "classifications":["vehicle", "land", "indirect"],
-            "weapons":["rockets"]
+            "weapons":["rockets"],
+            "stationaryFire":true
         }
         ,
         {
@@ -138,7 +147,8 @@
             "movementRange":4,
             "movementClass":"tires",
             "classifications":["vehicle", "land", "indirect"],
-            "weapons":["anti_air_missiles"]
+            "weapons":["anti_air_missiles"],
+            "stationaryFire":true
         }
         ,
         {
@@ -150,7 +160,8 @@
             "movementRange":4,
             "movementClass":"treads",
             "classifications":["vehicle", "land", "direct"],
-            "weapons":["mega_cannon", "machine_gun_mega_tank"]
+            "weapons":["mega_cannon", "machine_gun_mega_tank"],
+            "stationaryFire":false
         }
         ,
         {
@@ -162,7 +173,8 @@
             "movementRange":9,
             "movementClass":"pipemover",
             "classifications":["vehicle", "land", "indirect"],
-            "weapons":["pipe_cannon"]
+            "weapons":["pipe_cannon"],
+            "stationaryFire":true
         }
         ,
         {
@@ -191,7 +203,8 @@
             "classifications":["copter", "airborne", "direct"],
             "weapons":["air_to_surface_missiles", "machine_gun_copter"],
             "fuelPerDay":2,
-            "ignoresVisionOcclusion":true
+            "ignoresVisionOcclusion":true,
+            "stationaryFire":false
         }
         ,
         {
@@ -205,7 +218,8 @@
             "classifications":["plane", "airborne", "direct"],
             "weapons":["air_to_air_missiles"],
             "fuelPerDay":5,
-            "ignoresVisionOcclusion":true
+            "ignoresVisionOcclusion":true,
+            "stationaryFire":false
         }
         ,
         {
@@ -219,7 +233,8 @@
             "classifications":["plane", "airborne", "direct"],
             "weapons":["bombs"],
             "fuelPerDay":5,
-            "ignoresVisionOcclusion":true
+            "ignoresVisionOcclusion":true,
+            "stationaryFire":false
         }
         ,
         {
@@ -235,7 +250,8 @@
             "fuelPerDay":5,
             "fuelPerDayStealth":8,
             "ignoresVisionOcclusion":true,
-            "stealthType":"airborne"
+            "stealthType":"airborne",
+            "stationaryFire":false
         }
         ,
         {
@@ -249,7 +265,8 @@
             "classifications":["plane", "airborne", "self_destruct"],
             "weapons":["explode"],
             "fuelPerDay":5,
-            "ignoresVisionOcclusion":true
+            "ignoresVisionOcclusion":true,
+            "stationaryFire":false
         }
         ,
         {
@@ -295,7 +312,8 @@
             "transportCapacity":2,
             "transportList":["battle_copter", "transport_copter"],
             "weapons":["anti_sub_missiles", "anti_air_gun"],
-            "fuelPerDay":1
+            "fuelPerDay":1,
+            "stationaryFire":false
         }
         ,
         {
@@ -308,7 +326,8 @@
             "movementClass":"sea",
             "classifications":["naval", "indirect"],
             "weapons":["naval_cannon"],
-            "fuelPerDay":1
+            "fuelPerDay":1,
+            "stationaryFire":true
         }
         ,
         {
@@ -323,7 +342,8 @@
             "weapons":["torpedoes"],
             "fuelPerDay":1,
             "fuelPerDayStealth":5,
-            "stealthType":"naval"
+            "stealthType":"naval",
+            "stationaryFire":false
         }
         ,
         {
@@ -336,7 +356,8 @@
             "movementClass":"sea",
             "classifications":["naval", "indirect"],
             "weapons":["anti_air_missiles_carrier"],
-            "fuelPerDay":1
+            "fuelPerDay":1,
+            "stationaryFire":true
         }
     ]
     ,
@@ -2100,24 +2121,28 @@
         ,
         {
             "name":"lash_cop_normal_flat",
+            "targets":["self"],
             "movementClassVariantReplace":"normal",
             "movementClassVariantOverride":"flat"
         }
         ,
         {
             "name":"lash_cop_rain_flat",
+            "targets":["self"],
             "movementClassVariantReplace":"rain",
             "movementClassVariantOverride":"flat"
         }
         ,
         {
             "name":"sturm_d2d_normal_flat",
+            "targets":["self"],
             "movementClassVariantReplace":"normal",
             "movementClassVariantOverride":"flat"
         }
         ,
         {
             "name":"sturm_d2d_rain_flat",
+            "targets":["self"],
             "movementClassVariantReplace":"rain",
             "movementClassVariantOverride":"flat"
         }
@@ -4270,19 +4295,66 @@
     ,
     "imageResources":[
         {
-            "key":"plains",
-            "type":"terrain",
-            "smallImage":"iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TpSoVBzuIiGSoThZERRxLFYtgobQVWnUwufQLmjQkKS6OgmvBwY/FqoOLs64OroIg+AHi6OSk6CIl/i8ptIjx4Lgf7+497t4BQqPCVLNrElA1y0jFY2I2tyoGXhHAKPwQ0CsxU0+kFzPwHF/38PH1LsKzvM/9OfqVvMkAn0gcZbphEW8Qz25aOud94hArSQrxOfGEQRckfuS67PIb56LDAs8MGZnUPHGIWCx2sNzBrGSoxDPEYUXVKF/Iuqxw3uKsVmqsdU/+wmBeW0lzneYI4lhCAkmIkFFDGRVYiNCqkWIiRfsxD/+w40+SSyZXGYwcC6hCheT4wf/gd7dmYXrKTQrGgO4X2/4YAwK7QLNu29/Htt08AfzPwJXW9lcbwNwn6fW2Fj4CBraBi+u2Ju8BlzvA0JMuGZIj+WkKhQLwfkbflAMGb4G+Nbe31j5OH4AMdbV8AxwcAuNFyl73eHdPZ2//nmn19wMPIXJ/CIVbwwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+YHHgMHK++Uf10AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAM0lEQVQoz2Nk6JBlIAUwMZAIWKB0xWPCajtkybGBZA2MWDwNdx628KC9k0Y1kBtx1LUBAAJdBg8xBiIlAAAAAElFTkSuQmCC",
-            "largeImage":""
-        }
-        ,
+            "key": "mountain",
+            "type": "terrain",
+            "largeImage": "",
+            "smallImage": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABcklEQVQoz43OTUtUcRQH4Gf+XnUc58VJ07GSoMxeGCIqDCpoMa3a91GiD9PXaFfgMhAqKhHRoqIYtbRx5k4zdhu9LVwE5duzPb/fOSfzLNVih7htOG9rU6epNCE/bGNNiJTHxC1J18iEZFuUUiAlk9dju+3MOQ+lUIEnW5lswcmiN/PuzIo+NgxkrS4LfR5XU2f9I+kqjthouzprl5B0ZIeMn3etal83J31dsbWqx3eisdPipumS7v55t6TvL2TQT47wM1YpWfnhwd7f+xmlte7dS/WWkCvoMJg/KGyu1rewZHzC9A3TRdE4MbmBv+P/OzOXvHju+n1vvwifYpuxxQWHKNTC5XsC1SlRviDZcaV64Po9/f02G3bKomZDqSxfC3P6DjlSXzY65QShWFZwtFMzer+tpcKvxOtXRxcqtVAuatSFbx/cfhSOcUOFaEDY3XVMSS0M5mSepobo8blprGSQJkVarMy7O6vN0qLJi5rr8Ae8KXla41l8gQAAAABJRU5ErkJggg=="
+        },
         {
-            "key":"mountain",
-            "type":"terrain",
-            "smallImage":"iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TpSoVBzuIiGSoThZERRxLFYtgobQVWnUwufQLmjQkKS6OgmvBwY/FqoOLs64OroIg+AHi6OSk6CIl/i8ptIjx4Lgf7+497t4BQqPCVLNrElA1y0jFY2I2tyoGXhHAKPwQ0CsxU0+kFzPwHF/38PH1LsKzvM/9OfqVvMkAn0gcZbphEW8Qz25aOud94hArSQrxOfGEQRckfuS67PIb56LDAs8MGZnUPHGIWCx2sNzBrGSoxDPEYUXVKF/Iuqxw3uKsVmqsdU/+wmBeW0lzneYI4lhCAkmIkFFDGRVYiNCqkWIiRfsxD/+w40+SSyZXGYwcC6hCheT4wf/gd7dmYXrKTQrGgO4X2/4YAwK7QLNu29/Htt08AfzPwJXW9lcbwNwn6fW2Fj4CBraBi+u2Ju8BlzvA0JMuGZIj+WkKhQLwfkbflAMGb4G+Nbe31j5OH4AMdbV8AxwcAuNFyl73eHdPZ2//nmn19wMPIXJ/CIVbwwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+YHHgUoLRBmnrcAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAANUlEQVQoz2Nc0MlAEmBiIBGwQKj4sv8ElS7sYiTHBnKdBLEOzXnIguTbMKqBlhGHmWaoZgMAaKAJp8wymlEAAAAASUVORK5CYII=",
-            "largeImage":""
-        }
-        ,
+            "key": "plains",
+            "type": "terrain",
+            "largeImage": "",
+            "smallImage": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAACT0lEQVQozy3PS3KjRgAG4J9+0LwFyGXJjlPSpGYWWc82x8w2Z8glcoZUeZNK4inbWAiCgIZu+jGbfDf4gj/8ecL0trXLAsZQJmHTa2MQRdjl5Da5Y5YNdhoGFAV2LCUXXDZsgpNjkdwnWXvTP1XVtqHIyQmnfSZGP8U0PNS8ZFmv5+B3n45uvid3H671HjlNWimfkvp17axF3yPLUJckQdLp6RBW7KWbnQO9u3oPKSEhpcSL74YBnx+TXao3b7RxWzA5BwlJvtafyhLOe2PAOaIIPxzY5/Th6ZEsWAoUbQvBKKXoe9Sog99WxIKs2qUhV24rSLZiFRAGRlpFCJYFQmAccSp3nR1IIuhtcpRitdsDOTTztMPun3aWVnFK5hlK4USfzmX5vgyUgi3aeo87WvXo/5qbOhX/ztc0hXOIaWySuSDZN3zTGnEM70EIAedodC8ljmmuoYuUWovLBRw8JqLfphAhgL6HUgh+7RHHGAbkOdYVx0oYGA7eyTUIQAiEAAdnYHvse/TkvgyDANbCGCQJVq8AGJhjUsQxKpF8wZcK1YLlDW+Tn9motFIQAmmK52eczwgCSwhEaCnoZZY8/fDwNWoLywPOapH+R2bBifXul5/3E6YQ4fPr6Pfz/xM+nMKHd7zfRl/kAYsQ5dx+3FZrUVR6Nqpk5Y+PskSpoD6d0waNgw8RWqv05smHvV7G9VzUZYm/r6NgtEHz2tgR44SpQ7eu+PP6zsCiCNaCOYdTXr/MnVK42wcRogQJOVwNTNuiqrYsYlqbBUsRhR7+O31iReXBEDCuAAAAAElFTkSuQmCC",
+            "orientation":0
+        },
+        {
+            "key": "plains",
+            "type": "terrain",
+            "largeImage": "",
+            "smallImage": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAACGElEQVQozwXB2VJbBQAA0HO37AkkgUAhVTqtOOq4oH5E/9FX9d1f8MEnLTM6oxaYklBmgoGkkD33ZvGc4IcnF7/57rXbS1Gs/cIB71JJTrYUhNK5MJYvSedqRWG+7PvXhvfqx6r78KYrjDUZPUgS3XOblZDOG9OV4KetGiM652oH2kfGax9HzrvqxzZrlbzeraSg3BCF4jJXHYuRkzOzJ5f/qjT8PrbJ1GL5WJO0bXBrtdAuiWckBVFsPhEXHH5iN/LPwPFnAlb80bdeabbluRyKJ09eHLq6UaxIlx57HlJ7H3nGgId7uy05tuxRbYgXIzepSlPAJnPSNieiO5crerqzt6/E5Xvb5/78VfDjVrYwGai1zB6FsXJdOlMpmWdWqaSg/87BK1Fg/Ci8u1AtKNXNx8JIseb9X3IlCaN7YaQaqe45CkzHTneFy5nrt5YT6dxew07k2y8tp7YcHZk9yqjW9bC1JvziG3HOYctOy9Xfauwz/WCyUqZ1aLE2Gui9NbjR2wjLzEfu+l4mzj7XTQ2p7avGxhTYjzxvSucOT/UuBL9sPWaaiful8YNKXZToXzs6NR97VnX7QbVuvbGY2qzECyZDGip509CoL1sq1ozuVZq6fS9bNqxCw4IgEq55daBzbrlV3HF84utPPf2nuKMRypddD/UzEblEKxT8vJWt1GN57jLtRJ80Eyc65746E4FO325LlvkftJPnz3v5tzUAAAAASUVORK5CYII=",
+            "orientation":1
+        },
+        {
+            "key": "plains",
+            "type": "terrain",
+            "largeImage": "",
+            "smallImage": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAACGElEQVQozwXB2W4bBQAAwPEednzHR5ybtlACokJqKD/Rb+QVeOcXkHgrDaJCpQlK4qSSWztO4tve9cFM5qeB8z+8eu3jhSB0/KVdLhNxVrqQCSRTQSRXlMxU84Jc0Y+v3ffUDlVa8LYtiDQY9sSx67+sVwKu/zReyvyyUWHI1Zlqy9Gh0cqT0Nm12pH1SimncyvOK9aFgajIf9dmQ89OTQcu3ivWvRlZLVUiuUiT5Fj/Vjp3VBBNiXPCutlYtGXvxHbofd/hdzKseNO1Wmocy3F+LxoPPNt30ZYvSeYeO+4SzSf26XPXs92SZUOTcl00G7pJlJsyrJaeHpkR0p7J5g06mjsKXNzYfOHv32V+3kjnxn2VlsmjMFSsS6ZKBbPUMhFv6V7afS7MGD0IPp0rbylsm42EoXzV7TvZgphhTxAqh8pNBxmToZOaYDFx+a/FRDLVrNsO/fC9xQQOD0wfpZRrOmBF8OJUlLXXUt118Y8yLSYPRksFWnvmK8O+zgd3NzprQYnZ0Keu57FXL7QTfSo7KpExeXZCxw3J1P6JzgeZ3zYeU81Yd2HUU6oLY91LB9+YjhyUfXxQrlmtzcfWS9Gccd+moZQzCQ260rlC1bCn1NDu+qplzTJwn5cJBCu+3tN+a7GRrzp66uW3Bp/lqxqBXNHVvW4qJBvbDWV+3UiXapEtOqnj2GeSVBS7OvPyVACuu7Zb0tT//Urm6GsLK+EAAAAASUVORK5CYII=",
+            "orientation":2
+        },
+        {
+            "key": "plains",
+            "type": "terrain",
+            "largeImage": "",
+            "smallImage": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAACB0lEQVQozyXBPW8bBQAA0Hfn850/4tiJ7VRpiCEKJVLoUED0t7DBCD+IHQkxsDOA2GDrUFEUFYGgUqOU2m4cO6l9ts++OwbeC74eavUUuTjW4uraYmq373HHiOHWTmR8bZtp9dRiYfuedCaOVVmyXnj0QLvj13/NSKfWlIX6rndiN2NhSNIUUmXLR+8aU3A7slgKKtYrXx3YLJW8fyBcLR3XxMwyLS4LJS1aXY267doXNZRf9s2ZECZ1z69E9GPTwiC0XmpxOnBG3PDNCsF3vLmVEPxQ+usfAt1j+1U3G/OJuGE+8eDEgnStnViBiLDG2akil1TVuBt7+cxg18GJycZy7W5kzSHzmS6Vh59Jc58MzGgwWzk4lcQiRq9kS/ePXf6p15PXLAm+LewHXo5NLr33sfRWZ0/MioImV68dHrpdiut2iILAMJU05bl6KNjTpuT1WNK0iTQ6RmOruekrYST4rfRsqyxUY+lb3Zb/3WWyVNI0G2rfs81kKYHK2ed6XacVG3YSGW1++dH1pQ8+VK+436Yiia0z2ULwUyng7zcaHTtVa5o0uHiheyyM5BtHsWFpcSOMhFueXtjrO68quXoup0X/xHajzA1iK7IFnLWFF3/49KGIJ0MJj871+X2qzA0a8tyLt3LSO/nWNcH3pXTlqCZln0sSaswKvdCcI35+4vyxgCr/AR8Z2vy5zTwpAAAAAElFTkSuQmCC",
+            "orientation":3
+        },
+        {
+            "key": "plains",
+            "type": "terrain",
+            "largeImage": "",
+            "smallImage": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAACDklEQVQozy3Hu25bZQAA4O8/dmyfODF1nDS3Vm1TRC8SAgkWpvIWvAMLj8SAEGKAlYUFqVIZWiG1tBSQcmsjp7FdO74cH9s5/ln4ti/8Fl0wLeyW9JnkqjXdM+m6RS4f++LAIdnQdsOLP4Sfon9fSkr27hv33GxZMIrKwbBv0ifKx8pVotsPlK9Y23BrV2Cn5R0paTBdWm+63ZQT6GZurspIBn3DC4enypxOpfz51D75RGTKgl5uJTXl9EzyoOnantqa4/fevtSfuJrrsSxcHKuwybinHiyYZcIvUXtq3HN57t7nGrSY02VMyj5HXPatN1UIjyOMKDPi+NC9AznjhXxsWbi2KSGbGXXcuaF0/yvLLZ2+3kSs+LBlQJnNknmqserVE9NMY0u6rtuVNK7bolwx7Bh1tAtVTo60rwza2m/c+UxpRS2RJEIifB/lE2ldiWxmNrZSk4/tbQsMC8vCRsWg8PdjDx9JllGtrogmU5fnuic+rksbIitslFQrBoW05MtH1khWg022gtXUN7fi9l1H1FM56OSK6GHJX08NOD4Vvlv6IHjzztfbkUD8dhr2U5GMOXVG4PzQJweS+fT//yAQfxWaqWfPVcii8xPPfvf2tfdtIdgj/BwFaiS05yZ9cenGrgrtTFJyver5C+stEs0d4cdoydk/dj7yKR3KvB7ab8DFzE7VjP7cbsUV/wHa++zoyo227wAAAABJRU5ErkJggg==",
+            "orientation":4
+        },
+        {
+            "key": "plains",
+            "type": "terrain",
+            "largeImage": "",
+            "smallImage": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAACA0lEQVQozwXBSW5bBQAA0Pe/Y7uOUw/xEBvjFJSWRCoCpO44AeIiXIUbsGDFBgGHQJUQLIqEoKhqJEeqHKdO8PjteIyHz3vBj7HRrUpdmjqvp57n3LBlvXKQdhxYcsyAq3+EKY5KsKPLXcsfLSesV/KPnATetoynRjyndCqMZo5T9vT68PkLh3kdupc29CjUHKQl+D1yVBSGoUksD9pt7zrqVWXOvhBwRpiQTFlx14LEZ18R2CShWZPNG4xFS82MGe/6jgoGHc/ynjYcET77UjIld+hhJclg5JOib0ryhFQqQooNrXsBf3cEP8cyrEgxnKtlfR0Qx4LgZWzCguF7hbps6JBw2HPPeOQ+Vsta8O1rguD7scuBx7z9TaMhFyoREfwUm88Vs64unV34kCHtvmrF3X9qJ2ZboxulpnhvtxHO5+LYv698fGE48WYJpYrFXnSrTPLA+UeG12ZD+73gl9j0XhDKZGUZreXShpFCQZoZaXo9m5XKqQzhA/PIB1mPSZNM2zF6L8Ngbrez57zq7FSadluYotzU3+pG5jwhQ+JAp+9RViZhz83WX38aTbx4Ilysjbs2a4WCB94MVfn0XBiq0u2YRvZbw2uprDuCHzaWU8Vjk8hiqli3iFQqykQUWTFmsdTIePmr4Lu+07IxRSbcXrl4qjtVywm47tmsNE+tCcH/rizahlpF+WAAAAAASUVORK5CYII=",
+            "orientation":5
+        },
+        {
+            "key": "plains",
+            "type": "terrain",
+            "largeImage": "",
+            "smallImage": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAACDklEQVQozwXByW4bBQAA0GfPeGbiLbHjxlm6LyFFQa0qBBxA4jeReocP4AYSh15QVVooFUvcNi1J6jiN4zV24m14L/NTqs+cwVChqNs26lmuKxacHsuGKjWDvsnYSt3kQjalxDLlopSLoau3hbGjt26sS0r6XXHBVt3rp64lMt+diRLNPdlAZUtSciXUJ6E/dzfwvKm2YTi0WlQgOxlJlqzd8XDXbGIpNOXdKym5wJvU5xsOG7pNMz6S+T416Lm7bMyQg4bte04GlkomlxYz7QObO1AkR+Zx31pJ80xSlg+l5Klyzhk5ssTst7QPrd8T5ktGxEXFUESP13+4/gDmMzdCe3Othls7KnXrZNeIqUbe/uu/lrNDXz5Q5gqjriMWc9s7nv0s4OWBzOM+nL5Xver6iqOh9oFy3bgnLpiM1G7qnyhUFHIqZH5ITeZWAhHNC9XEycB8YmvVlDwvXnm0q82gY6Ui2+uIAgsOBuLEObdLiqvOCdg/FSXafNgTJapkyxUlfntiOjYaytEloPPRLa7VhLG/n9jcNps6TmUvJ1489+k3ei3jvpSQLQpVHYaUaqI8VMo6H2RP3ggiNTbvK1QkTOkQBX75VZ4gVFy1/7t1wki4WHi069mfvv3MPPQu1T22uSHh4VcWDNru35SncSnOy/yYWmLG+57aspgeZfo0nvr6C0P++cvGJ3ot+B9k39J0oFaRzQAAAABJRU5ErkJggg==",
+            "orientation":6
+        },
+        {
+            "key": "target",
+            "type": "interface",
+            "largeImage": "",
+            "smallImage": "R0lGODlhEAAQAIABAKcAAP8UACH/C05FVFNDQVBFMi4wAwEAAAAh+QQIGQD/ACwAAAAAEAAQAAACK0Rgqcdx69BbNE2FZ3y8wm5sFSMhpnamHUg6bJSVLBaXEkmBn+1avGerGQoAIfkECBkA/wAsAAAAABAAEAAAAi2MgWiRCqcYfKtRZvFLWvMZecc0iuDlpFtaNS1HfXHooRms1vZnzjH4CuVwqwIAIfkECBkA/wAsAAAAABAAEAAAAisMYqnHcOvQWzRNhWd8vMJubBUjIaZ2ph1IOmyUlSwWlxJJgZ/tWrxnqxkKACH5BAgZAP8ALAAAAAAQABAAAAIthINokBqnGHyrUWbxS1rzGXnHNIrg5aRbWjUtR31x6KEZrNb2Z84x+ArlcKsCADs="
+        },
         {
             "key": "anti_air",
             "type": "unit",
@@ -7147,7 +7219,7 @@
             "key": "movement-indicator",
             "type": "interface",
             "largeImage": "",
-            "smallImage": "R0lGODlhEAAQAKEBABxw7UGOz0GOz0GOzyH/C05FVFNDQVBFMi4wAwEAAAAh+QQJEQACACwAAAAAEAAQAAACI4wfoLvI715DSdKo7mHa2CtNXghgnymCKcV1J9qOIbxWUFcAACH5BAkRAAMALAAAAAAQABAAAAIjRI4Iy6kMzYsr0eaus3gH6B2Ud1XTeEabFoJtt6oxK5YcjRQAIfkECREAAwAsAAAAABAAEAAAAiOEEal6uNvMS7HBKhl2N06dfdYXVOLWmaCaHmTpkuM5t/XGFQAh+QQJEQADACwAAAAAEAAQAAACI4QPobvI715DSdKo7mHa2CtNXhhgnymCKcV1J9qOIbxWUFcAACH5BAkRAAMALAAAAAAQABAAAAIjDI4Yy6kMzYsr0eaus3gD6B2Ud1XTeEabFoJtt6oxK5YcjRQAIfkECREAAwAsAAAAABAAEAAAAiOMA6l6uNvMS7HBKhl2N06dfdYHVOLWmaCaHmTpkuM5t/XGFQA7"
+            "smallImage": "R0lGODlhEAAQAKEBABxw7UGOz0GOz0GOzyH/C05FVFNDQVBFMi4wAwEAAAAh+QQJDAACACwAAAAAEAAQAAACIoQfqXm42syDcbIoH85rg+mBmxVgpGmhYnOOmtvBlDpXVgEAIfkECQwAAwAsAAAAABAAEAAAAiKEb6GrmLwcgNHRZq98bE/oUSG4XYFkolomsqTala+LwUsBACH5BAkMAAMALAAAAAAQABAAAAIjTICJxqfZ2gORzWou1nWu6FGg15Ejd0LbgzlKi0qmHLssUwAAIfkECQwAAwAsAAAAABAAEAAAAiKMA6l5t9vMU9G9Ki+eGOk6MVEIgKHJjef2qRD7ohTcZmkBACH5BAkMAAMALAAAAAAQABAAAAIijA+pebjazINxsigfzmuH6YGbBWCkaaFic46a28GUOldWAQAh+QQJDAADACwAAAAAEAAQAAACIoxvoKuYvFyA0dFmr3xsT+hRIbhdgGSiWiaypNqVr4vBSwEAIfkECQwAAwAsAAAAABAAEAAAAiMEgonGp9naC5HNai7Wda7oUaDXkSN3QtuDOUqLSqYcuyxTAAAh+QQJDAADACwAAAAAEAAQAAACIoQRqXm328xT0b0qL54Y6ToxURiAocmN5/apEPuiFNxmaQEAOw=="
         }
     ]
 }

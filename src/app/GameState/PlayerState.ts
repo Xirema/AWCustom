@@ -8,6 +8,7 @@ export interface PlayerState {
     alive:boolean;
     totalPowerUses:number;
     unitFacing:number;
+    playerType:string;
     team?:string;
     powerActive?:string;
     powerActiveDay?:number;

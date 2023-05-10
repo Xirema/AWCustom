@@ -18,6 +18,7 @@ export interface UnitType {
     captureSpeed?:number;
     ignoresVisionOcclusion?:boolean;
     stealthType?:string;
+    stationaryFire?:boolean;
 }
 
 export interface WeaponType {
