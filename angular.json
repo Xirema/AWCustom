@@ -82,7 +82,8 @@
           "options":{
             "sslKey":"ssl/key.pem",
             "sslCert":"ssl/cert.pem",
-            "ssl":true
+            "ssl":true,
+	    "disableHostCheck":true
           }
         },
         "extract-i18n": {
@@ -111,5 +112,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

@@ -7,7 +7,6 @@ import {PassiveUnitEffect, ActiveUnitEffect, PassiveTerrainEffect, ActiveTerrain
 import {CommanderType, PlayerType} from './GameData/Commander';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Settings} from './GameData/Settings';
-import baseData from './Gamedata/BaseData/mod.json';
 import { ImageResource, TextResource } from './GameData/Resource';
 
 @Injectable({
