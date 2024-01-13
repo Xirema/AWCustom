@@ -1148,7 +1148,8 @@
             "stars":0,
             "sameAs":"pipeline",
             "hitPoints":99,
-            "destroyed":"pipeline_seam_broken",
+            "destroyed":"plains",
+            "destroyedOrientation":null,
             "damagedLike":"neo_tank"
         }
         ,

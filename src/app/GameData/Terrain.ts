@@ -10,6 +10,7 @@ export interface TerrainType {
     occludesVision?:boolean;
     hitPoints?:number;
     destroyed?:string;
+    destroyedOrientation?:number;
     damagedLike?:string;
     activateList?:string[];
     activateActiveUnitEffects?:string[];
