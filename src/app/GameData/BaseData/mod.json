@@ -1149,7 +1149,6 @@
             "sameAs":"pipeline",
             "hitPoints":99,
             "destroyed":"plains",
-            "destroyedOrientation":null,
             "damagedLike":"neo_tank"
         }
         ,
