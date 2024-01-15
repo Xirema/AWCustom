@@ -27,7 +27,9 @@ export class DataCompletenessCheckerComponent implements OnInit {
       }
       this.gameDataService.getModData({modName:this.modName, modVersion:this.modVersion}).subscribe({next: ret => {
         resolve(ret);
+        this.errorText = undefined;
       }, error: err => {
+        this.errorText = JSON.stringify(err);
         resolve(undefined);
       }})
     });
@@ -145,4 +147,5 @@ export class DataCompletenessCheckerComponent implements OnInit {
 
   modName:string | null = null;
   modVersion:string | undefined = undefined;
+  errorText:string | undefined;
 }

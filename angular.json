@@ -82,8 +82,9 @@
           "options":{
             "sslKey":"ssl/key.pem",
             "sslCert":"ssl/cert.pem",
-            "ssl":true,
-	    "disableHostCheck":true
+            "ssl":false,
+	          "disableHostCheck":true,
+            "proxyConfig": "proxy.config.json"
           }
         },
         "extract-i18n": {

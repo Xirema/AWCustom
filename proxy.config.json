@@ -1,0 +1,11 @@
+{
+    "/data/*": {
+        "target": "http://localhost:8167",
+        "secure": true
+    }
+    ,
+    "/state/*": {
+        "target": "http://localhost:8167",
+        "secure": true
+    }
+}

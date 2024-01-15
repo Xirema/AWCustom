@@ -24,6 +24,10 @@
     </tr>
 </table>
 
+<div *ngIf="errorText">
+    <h1 style="color:red">{{errorText}}</h1>
+</div>
+
 <div *ngIf="modName">
     <h1 id="start">Mod: {{modName}} ({{modVersion}})</h1>
     <h3>
