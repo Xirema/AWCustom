@@ -128,7 +128,7 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
     //context?:CanvasRenderingContext2D;
     mapStyle:string = '';
     mapContainerStyle:string = '';
-    scalingFactor = 2;
+    scalingFactor = 1;
     public mapDim:{width:number, height:number} = {width:0, height:0};
     public mapCoords:{minx:number, maxx:number, miny:number, maxy:number} = {minx:0, miny:0, maxx:0, maxy:0};
     gameLoaded = false;

@@ -1,11 +1,19 @@
 {
     "/data/*": {
         "target": "http://localhost:8167",
-        "secure": true
+        "secure": true,
+        "logLevel": "debug"
     }
     ,
     "/state/*": {
         "target": "http://localhost:8167",
-        "secure": true
+        "secure": true,
+        "logLevel": "debug"
+    }
+    ,
+    "/resource/*": {
+        "target": "http://localhost:8167",
+        "secure": true,
+        "logLevel": "debug"
     }
 }

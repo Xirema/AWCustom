@@ -48,7 +48,6 @@ export class DataCompletenessCheckerComponent implements OnInit {
       this.modVersion = undefined;
 
     let modData = await this.getModData();
-    console.log('modData', modData);
     if(!modData) {
       this.modVersion = 'null';
       return;
