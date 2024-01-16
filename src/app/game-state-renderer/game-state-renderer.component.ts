@@ -844,14 +844,6 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
         }
         throw new Error('Unable to determine variant for unit');
     }
-
-    public isUnitState(state:UnitState | TerrainState): state is UnitState {
-        return state['ammo'] !== undefined;
-    }
-
-    public isTerrainState(state:UnitState | TerrainState): state is TerrainState {
-        return !this.isUnitState(state);
-    }
 }
 
 @Component({
