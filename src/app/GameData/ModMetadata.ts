@@ -9,6 +9,11 @@ import { TextResource, ImageResource } from './Resource';
 export interface ModMetadata {
     name:string;
     version:string;
+    defaultResourcePacks:{
+        name:string;
+        order?:number;
+        version?:string;
+    }[];
 }
 
 export interface ModData {
