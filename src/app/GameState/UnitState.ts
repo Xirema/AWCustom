@@ -10,6 +10,6 @@ export interface UnitState {
     transporting?:string[];
     owner?:string;
     hitPoints?:number;
-    realHitPoints?:number;
     stealthed?:boolean;
+    currentLuck?:number;
 }

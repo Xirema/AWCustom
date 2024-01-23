@@ -23,7 +23,9 @@ export interface PassiveUnitEffect {
     counterFirst?:boolean;
     captureRateMod?:number;
     unitCostMod?:number;
-    hiddenHitPoints?:boolean;
+    hiddenHitPoints?:string[];
+    luckPointsVisible?:string[];
+    hpPartVisible?:string[];
     firepowerFromFunds?:number;
     defenseFromFunds?:number;
     fundsFromDamage?:number;
@@ -48,6 +50,7 @@ export interface ActiveUnitEffect {
     halveFuel?:boolean;
     makeActive?:boolean;
     stunDuration?:number;
+    coChargeFactor?:number;
 }
 
 export interface PassiveTerrainEffect {
@@ -82,6 +85,7 @@ export interface PassiveGlobalEffect {
     variantHintMod?:{[k:string]:number};
     movementClassVariantReplace?:string;
     movementClassVariantOverride?:string;
+    minimumVisionMod?:number;
 }
 
 export interface ActiveGlobalEffect {
@@ -96,4 +100,5 @@ export interface ActiveGlobalEffect {
     missileDamage?:number;
     missileAreaOfEffect?:number;
     missileStunDuration?:number;
+    coChargeFactor?:number;
 }

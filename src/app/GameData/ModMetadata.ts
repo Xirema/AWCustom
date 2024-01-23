@@ -5,18 +5,16 @@ import { PassiveUnitEffect, ActiveUnitEffect, PassiveTerrainEffect, ActiveTerrai
 import { Settings } from './Settings';
 import { TerrainType } from './Terrain';
 import { TextResource, ImageResource } from './Resource';
+import { DefaultResourcePack } from './DefaultResourcePack';
 
 export interface ModMetadata {
     name:string;
     version:string;
-    defaultResourcePacks:{
-        name:string;
-        order?:number;
-        version?:string;
-    }[];
+    defaultResourcePacks?:DefaultResourcePack[];
 }
 
 export interface ModData {
+    protocol?:string;
     modMetadata:ModMetadata;
     units:UnitType[];
     weapons:WeaponType[];
@@ -31,6 +29,4 @@ export interface ModData {
     passiveGlobalEffects:PassiveGlobalEffect[];
     activeGlobalEffects:ActiveGlobalEffect[];
     defaultSettings:Settings[];
-    textResources:TextResource[];
-    imageResources:ImageResource[];
 }

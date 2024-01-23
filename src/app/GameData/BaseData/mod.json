@@ -1,7 +1,13 @@
 {
-    "modMetaData":{
+    "protocol":"AWC000001",
+    "modMetadata":{
         "name":"BaseGame",
-        "version":"0.977"
+        "version":"0.978",
+        "defaultResourcePacks":[
+            {
+                "name":"BaseGame"
+            }
+        ]
     }
     ,
     "units": [
@@ -1174,7 +1180,7 @@
         }
     ]
     ,
-    "movementClasses": [
+    "movements": [
         {
             "name":"foot",
             "movementCosts": {
@@ -1789,7 +1795,7 @@
             "name":"sonja_d2d",
             "targets":["own"],
             "visionMod":1,
-            "hiddenHitPoints":true,
+            "hiddenHitPoints":["enemy"],
             "counterfireMod":50,
             "badLuckMod":10
         }
@@ -2087,6 +2093,12 @@
     ,
     "passiveGlobalEffects": [
         {
+            "name":"standard_d2d",
+            "targets":["self"],
+            "minimumVisionMod":1
+        }
+        ,
+        {
             "name":"drake_d2d",
             "targets":["self"],
             "variantHintMod":{"rain":7},
@@ -2212,6 +2224,7 @@
             "name":"baseline",
 
             "passiveUnitEffectsD2d": ["standard_d2d", "standard_d2d_terrain_defense", "standard_d2d_infantry_mountain_vision"],
+            "passiveGlobalEffectsD2d": ["standard_d2d"],
             "passiveUnitEffectsCop": ["standard_cop"],
             "passiveUnitEffectsScop": ["standard_cop"],
             "playable":false
@@ -2562,7 +2575,7 @@
             "activeGlobalEffectsScop": ["von_bolt_scop"]
         }
     ],
-    "playerTypes": [
+    "players": [
         {
             "name":"normal",
             "commanderTypeMod":"baseline"

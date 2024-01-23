@@ -26,7 +26,7 @@
     <ng-template #NotName>
         <a 
             *ngIf="checkGeneric(object, propertyName) === '0'; else NotFound" 
-            [href]="'dataChecker#' + object"
+            [href]="'modChecker#' + object"
             [class.found]="true">
             {{object}}
         </a>
