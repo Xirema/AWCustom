@@ -1978,14 +1978,14 @@
             "name":"drake_cop",
             "targets":["enemy"],
             "hitPointMod":-10,
-            "halveFuel":true
+            "multiplyFuel":50
         }
         ,
         {
             "name":"drake_scop",
             "targets":["enemy"],
             "hitPointMod":-20,
-            "halveFuel":true
+            "multiplyFuel":50
         }
         , 
         {
@@ -1998,7 +1998,8 @@
         {
             "name":"jess_cop",
             "targets":["own"],
-            "resupply":true
+            "setFuel":100,
+            "setAmmo":100
         }
         ,
         {

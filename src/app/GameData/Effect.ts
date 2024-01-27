@@ -46,8 +46,12 @@ export interface ActiveUnitEffect {
     terrainRequired?:string[];
     hitPointMod?:number;
     roundHitPoints?:number;
-    resupply?:boolean;
-    halveFuel?:boolean;
+    setFuel?:number;
+    setAmmo?:number;
+    addFuel?:number;
+    addAmmo?:number;
+    multiplyFuel?:number;
+    multiplyAmmo?:number;
     makeActive?:boolean;
     stunDuration?:number;
     coChargeFactor?:number;

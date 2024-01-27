@@ -1,3 +1,16 @@
+export interface PackMetadata {
+    name:string;
+    version:string;
+    created?:string;
+    packId?:string;
+}
+
+export interface ResourcePack {
+    packMetadata:PackMetadata;
+    textResources:TextResource[];
+    imageResources:ImageResource[];
+}
+
 export interface TextResource {
     key:string;
     type:string;//unit, weapon, terrain, move, commander, player, setting, interface

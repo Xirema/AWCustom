@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { ImageResource, TextResource } from '../GameData/Resource';
+import { ImageResource, TextResource } from '../GameResource/Resource';
 
 export enum CheckResult {
   Found, Missing, Noncheckable, Nonlinkable

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {GameDataService} from '../game-data.service';
+import {GameDataService} from '../services/game-data.service';
 import {CommanderType, PlayerType} from '../GameData/Commander';
 import * as EffectData from '../GameData/Effect';
 import {UnitType, WeaponType} from '../GameData/Unit';
 import {TerrainType} from '../GameData/Terrain';
 import {MovementClass} from '../GameData/Movement';
 import {Settings} from '../GameData/Settings';
-import { ImageResource, TextResource } from '../GameData/Resource';
+import { ImageResource, TextResource } from '../GameResource/Resource';
 
 @Component({
   selector: 'app-data-completeness-checker',
@@ -81,22 +81,22 @@ export class DataCompletenessCheckerComponent implements OnInit {
     this.gameDataService.getActiveGlobalEffects(modData.modId).subscribe({next: list => this.activeGlobalEffects = list});
     this.gameDataService.getPlayerTypes(modData.modId).subscribe({next: list => this.playerTypes = list});
     this.gameDataService.getSettings(modData.modId).subscribe({next: list => this.settings = list});
-    this.gameDataService.getTextResources(modData.modId).subscribe({next: list=> {
-      this.unitTextResources = list.filter(i => i.type === 'unit');
-      this.weaponTextResources = list.filter(i => i.type === 'weapon');
-      this.terrainTextResources = list.filter(i => i.type === 'terrain');
-      this.moveTextResources = list.filter(i => i.type === 'move');
-      this.commanderTextResources = list.filter(i => i.type === 'commander');
-      this.playerTextResources = list.filter(i => i.type === 'player');
-      this.settingTextResources = list.filter(i => i.type === 'setting');
-    }});
-    this.gameDataService.getImageResources(modData.modId).subscribe({next: list => {
-      this.unitImageResources = list.filter(i => i.type === 'unit');
-      this.terrainImageResources = list.filter(i => i.type === 'terrain');
-      this.commanderImageResources = list.filter(i => i.type === 'commander');
-      this.playerImageResources = list.filter(i => i.type === 'player');
-      this.settingImageResources = list.filter(i => i.type === 'setting');
-    }});
+    // this.gameDataService.getTextResources(modData.modId).subscribe({next: list=> {
+    //   this.unitTextResources = list.filter(i => i.type === 'unit');
+    //   this.weaponTextResources = list.filter(i => i.type === 'weapon');
+    //   this.terrainTextResources = list.filter(i => i.type === 'terrain');
+    //   this.moveTextResources = list.filter(i => i.type === 'move');
+    //   this.commanderTextResources = list.filter(i => i.type === 'commander');
+    //   this.playerTextResources = list.filter(i => i.type === 'player');
+    //   this.settingTextResources = list.filter(i => i.type === 'setting');
+    // }});
+    // this.gameDataService.getImageResources(modData.modId).subscribe({next: list => {
+    //   this.unitImageResources = list.filter(i => i.type === 'unit');
+    //   this.terrainImageResources = list.filter(i => i.type === 'terrain');
+    //   this.commanderImageResources = list.filter(i => i.type === 'commander');
+    //   this.playerImageResources = list.filter(i => i.type === 'player');
+    //   this.settingImageResources = list.filter(i => i.type === 'setting');
+    // }});
   }
 
   ngOnInit(): void {
@@ -120,19 +120,19 @@ export class DataCompletenessCheckerComponent implements OnInit {
   activeGlobalEffects:EffectData.ActiveGlobalEffect[] = [];
 
   // textResources:TextResource[] = [];
-  unitTextResources:TextResource[] = [];
-  weaponTextResources:TextResource[] = [];
-  terrainTextResources:TextResource[] = [];
-  moveTextResources:TextResource[] = [];
-  commanderTextResources:TextResource[] = [];
-  playerTextResources:TextResource[] = [];
-  settingTextResources:TextResource[] = [];
+  // unitTextResources:TextResource[] = [];
+  // weaponTextResources:TextResource[] = [];
+  // terrainTextResources:TextResource[] = [];
+  // moveTextResources:TextResource[] = [];
+  // commanderTextResources:TextResource[] = [];
+  // playerTextResources:TextResource[] = [];
+  // settingTextResources:TextResource[] = [];
 
-  unitImageResources:ImageResource[] = [];
-  terrainImageResources:ImageResource[] = [];
-  commanderImageResources:ImageResource[] = [];
-  playerImageResources:ImageResource[] = [];
-  settingImageResources:ImageResource[] = [];
+  // unitImageResources:ImageResource[] = [];
+  // terrainImageResources:ImageResource[] = [];
+  // commanderImageResources:ImageResource[] = [];
+  // playerImageResources:ImageResource[] = [];
+  // settingImageResources:ImageResource[] = [];
 
   settings:Settings[] = [];
 

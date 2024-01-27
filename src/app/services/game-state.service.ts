@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { GameState } from "./GameState/GameState";
-import { UnitState } from "./GameState/UnitState";
-import { TerrainState } from "./GameState/TerrainState";
-import { PlayerState } from "./GameState/PlayerState";
-import { SettingsState } from "./GameState/SettingsState";
+import { GameState } from "../GameState/GameState";
+import { UnitState } from "../GameState/UnitState";
+import { TerrainState } from "../GameState/TerrainState";
+import { PlayerState } from "../GameState/PlayerState";
+import { SettingsState } from "../GameState/SettingsState";
 
 @Injectable({
     providedIn: 'root'

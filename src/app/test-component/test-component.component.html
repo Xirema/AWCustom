@@ -1,6 +1,6 @@
 <table>
-    <tr>
-        <td [innerHtml]="generateText()">
-        </td>
+    <tr *ngFor="let row of generatedText">
+        <td>{{row.id}}</td>
+        <td>{{row.message}}</td>
     </tr>
 </table>

@@ -1,0 +1,11 @@
+<ul>
+    <li *ngFor="let imageResource of imageResources">
+        {{imageResource.key}} - {{imageResource.type}} - {{imageResource.armyColor ?? ''}} - <img [src]="'data:image/png;base64,' + imageResource.smallImage">
+    </li>
+</ul>
+<br>
+<ul>
+    <li *ngFor="let textResource of textResources">
+        {{textResource.key}} - {{textResource.type}} - {{textResource.shortName}} - {{textResource.longName}} - {{textResource.description}}<br>
+    </li>
+</ul>

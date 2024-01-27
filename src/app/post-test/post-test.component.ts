@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { PostTestService } from '../post-test.service';
+import { PostTestService } from '../services/post-test.service';
 @Component({
     selector: 'app-post-test',
     template: '<h1>{{postTestString}}</h1>',

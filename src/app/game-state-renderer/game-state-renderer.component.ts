@@ -1,10 +1,10 @@
 import { preserveWhitespacesDefault } from '@angular/compiler';
 import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { GameDataService } from '../game-data.service';
-import { GameStateService } from '../game-state.service';
+import { GameDataService } from '../services/game-data.service';
+import { GameStateService } from '../services/game-state.service';
 import { MovementClass } from '../GameData/Movement';
-import { ImageResource, TextResource } from '../GameData/Resource';
+import { ImageResource, TextResource } from '../GameResource/Resource';
 import { TerrainType } from '../GameData/Terrain';
 import { UnitType, WeaponType } from '../GameData/Unit';
 import { GameState } from '../GameState/GameState';
@@ -168,8 +168,8 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
 
         this.settings = await settingsFuture;
         let modId = this.settings.modId;
-        let imagesFuture = firstValueFrom(this.gameDataService.getImageResources(modId));
-        let textsFuture = firstValueFrom(this.gameDataService.getTextResources(modId));
+        // let imagesFuture = firstValueFrom(this.gameDataService.getImageResources(modId));
+        // let textsFuture = firstValueFrom(this.gameDataService.getTextResources(modId));
         let unitTypesFuture = firstValueFrom(this.gameDataService.getUnitTypes(modId));
         let terrainTypesFuture = firstValueFrom(this.gameDataService.getTerrainTypes(modId));
         let movementTypesFuture = firstValueFrom(this.gameDataService.getMovementClasses(modId));
@@ -189,8 +189,8 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
         let terrainSetup = this.getTerrainStats();
         this.players = toMapWithMapper(await playersFuture, p => p.id, stringHash);
 
-        this.images = toMapWithMapper(await imagesFuture, i => imageResourceIdentity(i), imageResourceHasher, imageResourceEqual);
-        this.texts = await textsFuture;
+        // this.images = toMapWithMapper(await imagesFuture, i => imageResourceIdentity(i), imageResourceHasher, imageResourceEqual);
+        // this.texts = await textsFuture;
 
         this.unitTypes = toMapWithMapper(await unitTypesFuture, u => u.name, stringHash);
         this.terrainTypes = toMapWithMapper(await terrainTypesFuture, t => t.name, stringHash);

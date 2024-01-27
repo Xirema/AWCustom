@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {TerrainType} from './GameData/Terrain';
-import {UnitType, WeaponType} from './GameData/Unit';
-import {MovementClass} from './GameData/Movement';
-import {PassiveUnitEffect, ActiveUnitEffect, PassiveTerrainEffect, ActiveTerrainEffect, PassiveGlobalEffect, ActiveGlobalEffect} from './GameData/Effect';
-import {CommanderType, PlayerType} from './GameData/Commander';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Settings} from './GameData/Settings';
-import { ImageResource, TextResource } from './GameData/Resource';
+import {TerrainType} from '../GameData/Terrain';
+import {UnitType, WeaponType} from '../GameData/Unit';
+import {MovementClass} from '../GameData/Movement';
+import {PassiveUnitEffect, ActiveUnitEffect, PassiveTerrainEffect, ActiveTerrainEffect, PassiveGlobalEffect, ActiveGlobalEffect} from '../GameData/Effect';
+import {CommanderType, PlayerType} from '../GameData/Commander';
+import {Settings} from '../GameData/Settings';
 
 @Injectable({
   providedIn: 'root'
@@ -82,13 +81,13 @@ export class GameDataService {
     return ret;
   }
 
-  public getTextResources(modId:string):Observable<TextResource[]> {
-    return this.httpClient.get<TextResource[]>("data/getTextResources", {headers:{modId:modId}});
-  }
+  // public getTextResources(modId:string):Observable<TextResource[]> {
+  //   return this.httpClient.get<TextResource[]>("data/getTextResources", {headers:{modId:modId}});
+  // }
 
-  public getImageResources(modId:string):Observable<ImageResource[]> {
-      return this.httpClient.get<ImageResource[]>("data/getImageResources", {headers:{modId:modId}});
-  }
+  // public getImageResources(modId:string):Observable<ImageResource[]> {
+  //     return this.httpClient.get<ImageResource[]>("data/getImageResources", {headers:{modId:modId}});
+  // }
 
   public postNewMod(cookies:string, modData:string):Observable<string> {
     let headers = new HttpHeaders;

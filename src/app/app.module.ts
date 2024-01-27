@@ -9,6 +9,8 @@ import { TestComponentComponent } from './test-component/test-component.componen
 import { DataCheckerTableComponent, DataCheckerRendererComponent } from './data-checker-table/data-checker-table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GameStateRendererComponent, HoverPanelRendererComponent, TerrainRendererComponent, UnitRendererComponent, InterfaceRendererComponent } from './game-state-renderer/game-state-renderer.component';
+import { PackUploaderComponent } from './mod-uploader/pack-uploader.component';
+import { ResourceCheckerComponent } from './resource-checker/resource-checker.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { GameStateRendererComponent, HoverPanelRendererComponent, TerrainRendere
     UnitRendererComponent,
     TerrainRendererComponent,
     HoverPanelRendererComponent,
-    InterfaceRendererComponent
+    InterfaceRendererComponent,
+    PackUploaderComponent,
+    ResourceCheckerComponent
   ],
   imports: [
     BrowserModule,
