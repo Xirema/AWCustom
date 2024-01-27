@@ -60,4 +60,12 @@ export class GameResourceService{
         headers = headers.append("cookies", cookies);
         return this.httpClient.post('resource/uploadPack', pack, {headers:headers, responseType:'text'});
     }
+
+    public listPacks(includeOldPacks?:boolean):Observable<PackMetadata[]> {
+        let headers = new HttpHeaders();
+        if(includeOldPacks) {
+            headers = headers.append('include-old-packs', 'true');
+        }
+        return this.httpClient.get<PackMetadata[]>('resource/listPacks', {headers:headers});
+    }
 }

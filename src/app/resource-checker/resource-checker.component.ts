@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { GameResourceService } from "../services/game-resource.service";
-import { ImageResource, TextResource } from "../GameResource/Resource";
+import { ImageResource, PackMetadata, ResourcePack, TextResource } from "../GameResource/Resource";
 import { firstValueFrom } from "rxjs";
 
 @Component({
@@ -10,14 +10,21 @@ import { firstValueFrom } from "rxjs";
 })
 export class ResourceCheckerComponent implements OnInit {
     constructor(private resourceService:GameResourceService) {}
-    packName = 'default';
+    metadatas:PackMetadata[] = [];
+    packs:ResourcePack[] = [];
     textResources:TextResource[] = [];
     imageResources:ImageResource[] = [];
+    selectedPacks = [];
 
     async ngOnInit(): Promise<void> {
-        let packMetadata = await firstValueFrom(this.resourceService.getPackMetadata({name:this.packName}));
-        let pack = await firstValueFrom(this.resourceService.getResourcePack(packMetadata.packId ?? ''));
-        this.textResources = pack.textResources;
-        this.imageResources = pack.imageResources;
+        this.metadatas = await firstValueFrom(this.resourceService.listPacks());
+    }
+
+    async update(): Promise<void> {
+        let packs = [];
+        for(let id of this.selectedPacks) {
+            packs.push(await firstValueFrom(this.resourceService.getResourcePack(id)));
+        }
+        this.packs = packs;
     }
 }

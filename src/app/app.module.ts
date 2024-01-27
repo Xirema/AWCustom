@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { GameStateRendererComponent, HoverPanelRendererComponent, TerrainRendererComponent, UnitRendererComponent, InterfaceRendererComponent } from './game-state-renderer/game-state-renderer.component';
 import { PackUploaderComponent } from './mod-uploader/pack-uploader.component';
 import { ResourceCheckerComponent } from './resource-checker/resource-checker.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,9 +32,13 @@ import { ResourceCheckerComponent } from './resource-checker/resource-checker.co
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

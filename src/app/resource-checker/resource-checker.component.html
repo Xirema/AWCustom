@@ -1,11 +1,18 @@
-<ul>
-    <li *ngFor="let imageResource of imageResources">
-        {{imageResource.key}} - {{imageResource.type}} - {{imageResource.armyColor ?? ''}} - <img [src]="'data:image/png;base64,' + imageResource.smallImage">
-    </li>
-</ul>
-<br>
-<ul>
-    <li *ngFor="let textResource of textResources">
-        {{textResource.key}} - {{textResource.type}} - {{textResource.shortName}} - {{textResource.longName}} - {{textResource.description}}<br>
-    </li>
-</ul>
+<select multiple [(ngModel)]="selectedPacks" (change)="update()">
+    <option *ngFor="let metadata of metadatas" [value]="metadata.packId">{{metadata.name}} ({{metadata.version}})</option>
+</select>
+
+<div *ngFor="let pack of packs">
+    <h1>{{pack.packMetadata.name}} - ({{pack.packMetadata.version}})</h1>
+    <ul>
+        <li *ngFor="let imageResource of pack.imageResources">
+            {{imageResource.key}} - {{imageResource.type}} - {{imageResource.armyColor ?? ''}} - <img [src]="'data:image/png;base64,' + imageResource.smallImage">
+        </li>
+    </ul>
+    <br>
+    <ul>
+        <li *ngFor="let textResource of pack.textResources">
+            {{textResource.key}} - {{textResource.type}} - {{textResource.shortName}} - {{textResource.longName}} - {{textResource.description}}<br>
+        </li>
+    </ul>
+</div>
