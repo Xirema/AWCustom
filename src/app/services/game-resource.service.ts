@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {Observable, firstValueFrom, from} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { ResourcePack, PackMetadata } from '../GameResource/Resource';
-import { HashMap } from '../util/hash-map';
-import { stringHash } from '../util/hash-function';
 import { IDBService } from './idb.service';
 
 @Injectable({
