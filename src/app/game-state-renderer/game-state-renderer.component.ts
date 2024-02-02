@@ -168,8 +168,6 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
 
         this.settings = await settingsFuture;
         let modId = this.settings.modId;
-        // let imagesFuture = firstValueFrom(this.gameDataService.getImageResources(modId));
-        // let textsFuture = firstValueFrom(this.gameDataService.getTextResources(modId));
         let unitTypesFuture = firstValueFrom(this.gameDataService.getUnitTypes(modId));
         let terrainTypesFuture = firstValueFrom(this.gameDataService.getTerrainTypes(modId));
         let movementTypesFuture = firstValueFrom(this.gameDataService.getMovementClasses(modId));

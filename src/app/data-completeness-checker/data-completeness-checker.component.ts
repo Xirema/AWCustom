@@ -7,6 +7,7 @@ import {TerrainType} from '../GameData/Terrain';
 import {MovementClass} from '../GameData/Movement';
 import {Settings} from '../GameData/Settings';
 import { ImageResource, TextResource } from '../GameResource/Resource';
+import { ModMetadata } from '../GameData/ModMetadata';
 
 @Component({
   selector: 'app-data-completeness-checker',
@@ -19,18 +20,18 @@ export class DataCompletenessCheckerComponent implements OnInit {
     private gameDataService:GameDataService
   ) {}
 
-  async getModData():Promise<{modName:string, modId:string, modVersion:string, expired:string | null} | undefined> {
-    return new Promise<{modName:string, modId:string, modVersion:string, expired:string | null} | undefined>((resolve, reject) => {
+  async getModData():Promise<ModMetadata> {
+    return new Promise<ModMetadata>((resolve, reject) => {
       if(!this.modName) {
-        resolve(undefined);
+        reject('No Mod Found');
         return;
       }
-      this.gameDataService.getModData({modName:this.modName, modVersion:this.modVersion}).subscribe({next: ret => {
+      this.gameDataService.getModData({name:this.modName, version:this.modVersion}).subscribe({next: ret => {
         resolve(ret);
         this.errorText = undefined;
       }, error: err => {
         this.errorText = JSON.stringify(err);
-        resolve(undefined);
+        reject(err);
       }})
     });
   }
@@ -48,12 +49,13 @@ export class DataCompletenessCheckerComponent implements OnInit {
       this.modVersion = undefined;
 
     let modData = await this.getModData();
-    if(!modData) {
+    console.log('modData', modData);
+    if(!modData || !modData.modId) {
       this.modVersion = 'null';
       return;
     }
-    this.modName = modData.modName;
-    this.modVersion = modData.modVersion;
+    this.modName = modData.name;
+    this.modVersion = modData.version;
 
     if(!this.modName)
       return;

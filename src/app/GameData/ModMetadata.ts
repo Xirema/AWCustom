@@ -10,6 +10,8 @@ import { DefaultResourcePack } from './DefaultResourcePack';
 export interface ModMetadata {
     name:string;
     version:string;
+    modId?:string;
+    expired?:boolean;
     defaultResourcePacks?:DefaultResourcePack[];
 }
 

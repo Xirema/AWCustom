@@ -7,6 +7,7 @@ import {MovementClass} from '../GameData/Movement';
 import {PassiveUnitEffect, ActiveUnitEffect, PassiveTerrainEffect, ActiveTerrainEffect, PassiveGlobalEffect, ActiveGlobalEffect} from '../GameData/Effect';
 import {CommanderType, PlayerType} from '../GameData/Commander';
 import {Settings} from '../GameData/Settings';
+import { ModMetadata } from '../GameData/ModMetadata';
 
 @Injectable({
   providedIn: 'root'
@@ -67,18 +68,17 @@ export class GameDataService {
     return this.httpClient.get<Settings[]>("data/getSettings", {headers:{modId:modId}});
   }
 
-  public getModData(req:{modId:string} | {modName:string, modVersion?:string}):Observable<{modName:string, modId:string, modVersion:string, expired:string | null}> {
+  public getModData(req:{modId:string} | {name:string, version?:string}):Observable<ModMetadata> {
     let headers = new HttpHeaders;
     if("modId" in req) {
       headers = headers.append("modId", req.modId);
     } else {
-      headers = headers.append("modName", req.modName);
-      if(req.modVersion) {
-        headers = headers.append("modVersion", req.modVersion);
+      headers = headers.append("name", req.name);
+      if(req.version) {
+        headers = headers.append("version", req.version);
       }
     }
-    let ret = this.httpClient.get<{modName:string, modId:string, modVersion:string, expired:string | null}>("data/getModData", {headers:headers, responseType:"json"});
-    return ret;
+    return this.httpClient.get<ModMetadata>("data/getModData", {headers:headers, responseType:"json"});
   }
 
   // public getTextResources(modId:string):Observable<TextResource[]> {
