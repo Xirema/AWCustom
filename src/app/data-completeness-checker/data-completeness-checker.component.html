@@ -28,8 +28,12 @@
     <h1 style="color:red">{{errorText}}</h1>
 </div>
 
-<div *ngIf="modName">
-    <h1 id="start">Mod: {{modName}} ({{modVersion}})</h1>
+<div *ngIf="loaded === 'loading'">
+    <h1 style="color:darkgreen">Loading...</h1>
+</div>
+
+<div *ngIf="loaded === 'loaded'">
+    <h1 id="start">Mod: {{modMetadata.modId ?? ''}} - {{modMetadata.name}} ({{modMetadata.version}})</h1>
     <h3>
         <ul>
             <li *ngFor="let name of ['Units', 'Weapons', 'Terrains', 'Movement Classes', 'Passive Unit Effects', 'Active Unit Effects', 'Passive Terrain Effects', 'Active Terrain Effects', 'Passive Global Effects', 'Active Global Effects', 'Commanders', 'Players', 'Default Settings']">

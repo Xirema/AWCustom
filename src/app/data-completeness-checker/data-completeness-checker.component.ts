@@ -8,6 +8,7 @@ import {MovementClass} from '../GameData/Movement';
 import {Settings} from '../GameData/Settings';
 import { ImageResource, TextResource } from '../GameResource/Resource';
 import { ModMetadata } from '../GameData/ModMetadata';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-data-completeness-checker',
@@ -20,92 +21,87 @@ export class DataCompletenessCheckerComponent implements OnInit {
     private gameDataService:GameDataService
   ) {}
 
-  async getModData():Promise<ModMetadata> {
-    return new Promise<ModMetadata>((resolve, reject) => {
-      if(!this.modName) {
-        reject('No Mod Found');
+  public async submit():Promise<void> {
+    this.loaded = 'loading';
+    try {
+      let modNameElement = document.getElementById("modName") as HTMLInputElement;
+      let modVersionElement = document.getElementById("modVersion") as HTMLInputElement;
+      let modName:string | undefined;
+      let modVersion:string | undefined;
+      if(modNameElement.value && modNameElement.value !== '')
+        modName = modNameElement.value;
+      else
+        modName = undefined;
+      if(modVersionElement.value)
+        modVersion = modVersionElement.value;
+      else
+        modVersion = undefined;
+
+      if(!modName) {
         return;
       }
-      this.gameDataService.getModData({name:this.modName, version:this.modVersion}).subscribe({next: ret => {
-        resolve(ret);
-        this.errorText = undefined;
-      }, error: err => {
-        this.errorText = JSON.stringify(err);
-        reject(err);
-      }})
-    });
-  }
+      this.modMetadata = await firstValueFrom(this.gameDataService.getModData({name:modName, version:modVersion}));
 
-  public async submit():Promise<void> {
-    let modNameElement = document.getElementById("modName") as HTMLInputElement;
-    let modVersionElement = document.getElementById("modVersion") as HTMLInputElement;
-    if(modNameElement.value && modNameElement.value !== '')
-      this.modName = modNameElement.value;
-    else
-      this.modName = null;
-    if(modVersionElement.value && modVersionElement.value !== '')
-      this.modVersion = modVersionElement.value ?? undefined;
-    else
-      this.modVersion = undefined;
+      console.log('modData', this.modMetadata);
+      if(!this.modMetadata.modId) {
+        return;
+      }
+      let modId = this.modMetadata.modId;
+      let unitTypes = firstValueFrom(this.gameDataService.getUnitTypes(modId));
+      let classifications = unitTypes.then(unitTypes => {
+        let foundClassifications = new Map<string, number>();
+        let classificationTypes:{name:string, notLinkable?:boolean}[] = [];
+        unitTypes.forEach(unitType => {
+          unitType.classifications?.forEach(classification => {
+            let count = foundClassifications.get(classification) ?? 0;
+            foundClassifications.set(classification, count+1);
+          });
+        });
+        classificationTypes = [...foundClassifications].map(v => v[0]).map(s => {return {name:s, notLinkable:true}});
+        return {foundClassifications:foundClassifications, classificationTypes:classificationTypes};
+      });
+      let terrainTypes = firstValueFrom(this.gameDataService.getTerrainTypes(modId));
+      let weaponTypes = firstValueFrom(this.gameDataService.getWeaponTypes(modId));
+      let commanderTypes = firstValueFrom(this.gameDataService.getCommanderTypes(modId));
+      let movementClasses = firstValueFrom(this.gameDataService.getMovementClasses(modId));
 
-    let modData = await this.getModData();
-    console.log('modData', modData);
-    if(!modData || !modData.modId) {
-      this.modVersion = 'null';
-      return;
+      let passiveUnitEffects = firstValueFrom(this.gameDataService.getPassiveUnitEffects(modId));
+      let passiveTerrainEffects = firstValueFrom(this.gameDataService.getPassiveTerrainEffects(modId));
+      let passiveGlobalEffects = firstValueFrom(this.gameDataService.getPassiveGlobalEffects(modId));
+      let activeUnitEffects = firstValueFrom(this.gameDataService.getActiveUnitEffects(modId));
+      let activeTerrainEffects = firstValueFrom(this.gameDataService.getActiveTerrainEffects(modId));
+      let activeGlobalEffects = firstValueFrom(this.gameDataService.getActiveGlobalEffects(modId));
+      let playerTypes = firstValueFrom(this.gameDataService.getPlayerTypes(modId));
+      let settings = firstValueFrom(this.gameDataService.getSettings(modId));
+
+      this.unitTypes = await unitTypes;
+      this.weaponTypes = await weaponTypes;
+      this.terrainTypes = await terrainTypes;
+      this.commanderTypes = await commanderTypes;
+      this.movementClasses = await movementClasses;
+      this.passiveUnitEffects = await passiveUnitEffects;
+      this.passiveTerrainEffects = await passiveTerrainEffects;
+      this.passiveGlobalEffects = await passiveGlobalEffects;
+      this.activeUnitEffects = await activeUnitEffects;
+      this.activeTerrainEffects = await activeTerrainEffects;
+      this.activeGlobalEffects = await activeGlobalEffects;
+      this.playerTypes = await playerTypes;
+      this.settings = await settings;
+      let ret = await classifications;
+      this.foundClassifications = ret.foundClassifications;
+      this.classificationTypes = ret.classificationTypes;
+      this.loaded = 'loaded';
+    } catch (err) {
+      this.errorText = JSON.stringify(err);
+      this.loaded = 'failed';
     }
-    this.modName = modData.name;
-    this.modVersion = modData.version;
-
-    if(!this.modName)
-      return;
-    this.gameDataService.getUnitTypes(modData.modId).subscribe({next: list => {
-      //console.log("Returned Data:", list);
-      this.unitTypes = list;
-      // this.allDatas.push(list);
-      this.unitTypes.forEach(unitType => unitType.classifications?.forEach(classification => {
-        let count = this.foundClassifications.get(classification) ?? 0;
-        this.foundClassifications.set(classification, count + 1);
-        this.classificationTypes = [...this.foundClassifications].map(v => v[0]).map(s => {return {name:s, notLinkable:true}});
-      }));
-
-    }});
-    this.gameDataService.getTerrainTypes(modData.modId).subscribe({next: list => this.terrainTypes = list});
-    this.gameDataService.getWeaponTypes(modData.modId).subscribe({next: list => this.weaponTypes = list});
-    this.gameDataService.getCommanderTypes(modData.modId).subscribe({next: list => this.commanderTypes = list});
-    this.gameDataService.getMovementClasses(modData.modId).subscribe({next: list => this.movementClasses = list});
-
-    this.gameDataService.getPassiveUnitEffects(modData.modId).subscribe({next: list => this.passiveUnitEffects = list});
-    this.gameDataService.getPassiveTerrainEffects(modData.modId).subscribe({next: list => this.passiveTerrainEffects = list});
-    this.gameDataService.getPassiveGlobalEffects(modData.modId).subscribe({next: list => this.passiveGlobalEffects = list});
-    this.gameDataService.getActiveUnitEffects(modData.modId).subscribe({next: list => this.activeUnitEffects = list});
-    this.gameDataService.getActiveTerrainEffects(modData.modId).subscribe({next: list => this.activeTerrainEffects = list});
-    this.gameDataService.getActiveGlobalEffects(modData.modId).subscribe({next: list => this.activeGlobalEffects = list});
-    this.gameDataService.getPlayerTypes(modData.modId).subscribe({next: list => this.playerTypes = list});
-    this.gameDataService.getSettings(modData.modId).subscribe({next: list => this.settings = list});
-    // this.gameDataService.getTextResources(modData.modId).subscribe({next: list=> {
-    //   this.unitTextResources = list.filter(i => i.type === 'unit');
-    //   this.weaponTextResources = list.filter(i => i.type === 'weapon');
-    //   this.terrainTextResources = list.filter(i => i.type === 'terrain');
-    //   this.moveTextResources = list.filter(i => i.type === 'move');
-    //   this.commanderTextResources = list.filter(i => i.type === 'commander');
-    //   this.playerTextResources = list.filter(i => i.type === 'player');
-    //   this.settingTextResources = list.filter(i => i.type === 'setting');
-    // }});
-    // this.gameDataService.getImageResources(modData.modId).subscribe({next: list => {
-    //   this.unitImageResources = list.filter(i => i.type === 'unit');
-    //   this.terrainImageResources = list.filter(i => i.type === 'terrain');
-    //   this.commanderImageResources = list.filter(i => i.type === 'commander');
-    //   this.playerImageResources = list.filter(i => i.type === 'player');
-    //   this.settingImageResources = list.filter(i => i.type === 'setting');
-    // }});
   }
 
   ngOnInit(): void {
 
   }
 
-
+  modMetadata:ModMetadata = {name:'', version:''};
   unitTypes:UnitType[] = [];
   weaponTypes:WeaponType[] = [];
   commanderTypes:CommanderType[] = [];
@@ -146,7 +142,6 @@ export class DataCompletenessCheckerComponent implements OnInit {
 
   foundClassifications:Map<string, number> = new Map<string, number>();
 
-  modName:string | null = null;
-  modVersion:string | undefined = undefined;
   errorText:string | undefined;
+  loaded:'loading' | 'loaded' | 'failed' | 'unloaded' = 'unloaded';
 }
