@@ -83,7 +83,8 @@
             "sslKey":"ssl/key.pem",
             "sslCert":"ssl/cert.pem",
             "ssl":false,
-            "proxyConfig": "proxy.config.json"
+            "proxyConfig": "proxy.config.json",
+            "disableHostCheck":true
           }
         },
         "extract-i18n": {
