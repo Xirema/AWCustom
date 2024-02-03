@@ -33,7 +33,7 @@
 </div>
 
 <div *ngIf="loaded === 'loaded'">
-    <h1 id="start">Mod: {{modMetadata.modId ?? ''}} - {{modMetadata.name}} ({{modMetadata.version}})</h1>
+    <h1 id="start">Mod: {{modMetadata.modId ?? ''}} - {{modMetadata.name}} ({{modMetadata.version}})<span *ngIf="modMetadata.expired"> (Exp: {{modMetadata.expired}})</span></h1>
     <h3>
         <ul>
             <li *ngFor="let name of ['Units', 'Weapons', 'Terrains', 'Movement Classes', 'Passive Unit Effects', 'Active Unit Effects', 'Passive Terrain Effects', 'Active Terrain Effects', 'Passive Global Effects', 'Active Global Effects', 'Commanders', 'Players', 'Default Settings']">

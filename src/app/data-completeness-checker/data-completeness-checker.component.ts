@@ -23,6 +23,7 @@ export class DataCompletenessCheckerComponent implements OnInit {
 
   public async submit():Promise<void> {
     this.loaded = 'loading';
+    this.errorText = undefined;
     try {
       let modNameElement = document.getElementById("modName") as HTMLInputElement;
       let modVersionElement = document.getElementById("modVersion") as HTMLInputElement;
@@ -91,8 +92,8 @@ export class DataCompletenessCheckerComponent implements OnInit {
       this.foundClassifications = ret.foundClassifications;
       this.classificationTypes = ret.classificationTypes;
       this.loaded = 'loaded';
-    } catch (err) {
-      this.errorText = JSON.stringify(err);
+    } catch (err:any) {
+      this.errorText = err.error;
       this.loaded = 'failed';
     }
   }

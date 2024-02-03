@@ -11,7 +11,7 @@ export interface ModMetadata {
     name:string;
     version:string;
     modId?:string;
-    expired?:boolean;
+    expired?:string;
     defaultResourcePacks?:DefaultResourcePack[];
 }
 
