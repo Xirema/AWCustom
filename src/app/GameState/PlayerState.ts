@@ -1,0 +1,18 @@
+export interface PlayerState {
+    id:string;
+    user:string;
+    commanderName:string;
+    funds:number;
+    powerCharge:number;
+    armyColor:string;
+    alive:boolean;
+    totalPowerUses:number;
+    unitFacing:number;
+    playerType:string;
+    team?:string;
+    powerActive?:string;
+    powerActiveDay?:number;
+    bannedUnits?:string[];
+    incomeMultiplier?:number;
+    coMeterMultiplier?:number;
+}

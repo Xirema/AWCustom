@@ -1,0 +1,58 @@
+<div *ngIf="isEmpty(object)">
+    --
+</div>
+<div *ngIf="isBoolean(object) || isNumber(object)">
+    {{object}}
+</div>
+<div *ngIf="isString(object)">
+    <div *ngIf="propertyName === 'name'; else NotName">
+        {{getTextResource(object)?.longName ?? ''}} {{(getTextResource(object)?.shortName) ? ('(' + getTextResource(object)?.shortName + ')') : ''}}
+        <br><div [class.raw]="true">{{object}}</div>
+        <br>{{getTextResource(object)?.description ?? ''}}
+        <div 
+            *ngFor="let imageString of getAllSmallImageStrings(object)">
+            <img
+                *ngIf="imageString !== ''" 
+                [src]="imageString">
+        </div>
+        <div 
+            *ngFor="let imageString of getAllLargeImageStrings(object)">
+            <br>
+            <img
+                *ngIf="imageString !== ''" 
+                [src]="imageString">
+        </div>
+    </div>
+    <ng-template #NotName>
+        <a 
+            *ngIf="checkGeneric(object, propertyName) === '0'; else NotFound" 
+            [href]="'modChecker#' + object"
+            [class.found]="true">
+            {{object}}
+        </a>
+        <ng-template #NotFound>
+            <div 
+                [class.found]="checkGeneric(object, propertyName) === '0' || checkGeneric(object, propertyName) === '3'"
+                [class.missing]="checkGeneric(object, propertyName) === '1'">
+                {{object}}
+            </div>
+        </ng-template>
+    </ng-template>
+</div>
+<div *ngIf="isArray(object)">
+    <ul>
+        <li *ngFor="let obj of object; let i = index">
+            <app-data-checker-renderer [object]="obj" [propertyName]="'' + i" [dataSource]="[]" [refdata]="refdata">
+
+            </app-data-checker-renderer>
+        </li>
+    </ul>
+</div>
+<div *ngIf="isCompound(object)">
+    <ul>
+        <li *ngFor="let propertyName of getProperties(object)">
+            <app-data-checker-renderer [object]="propertyName" [propertyName]="'property'" [dataSource]="[]" [refdata]="refdata"></app-data-checker-renderer>:
+            <app-data-checker-renderer [object]="object[propertyName]" [propertyName]="propertyName" [dataSource]="[]" [refdata]="refdata"></app-data-checker-renderer>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,26 @@
+.terrain {
+    position:absolute;
+}
+
+.unit {
+    position:absolute;
+}
+
+.interface {
+    position:absolute;
+}
+
+img {
+    pointer-events:none;
+}
+
+.hoverPanel {
+    background-color:darkslategray;
+    color:white;
+    border:1px;
+    border-color:black;
+    position:absolute;
+    min-width:128px;
+    min-height:48px;
+    font-size:xx-small;
+}

@@ -1,0 +1,10 @@
+.mapContainer {
+    display:flex;
+    position:relative;
+    user-select:none;
+}
+
+.map {
+    display:flex;
+    position:absolute;
+}
