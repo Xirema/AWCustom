@@ -1,8 +1,8 @@
 import {CommanderType, PlayerType} from './Commander';
 import {UnitType, WeaponType} from './Unit';
-import { MovementClass } from './Movement';
+import { MovementClass, MovementRule } from './Movement';
 import { PassiveUnitEffect, ActiveUnitEffect, PassiveTerrainEffect, ActiveTerrainEffect, PassiveGlobalEffect, ActiveGlobalEffect } from './Effect';
-import { Settings } from './Settings';
+import { Config, Settings } from './Settings';
 import { TerrainType } from './Terrain';
 import { TextResource, ImageResource } from '../GameResource/Resource';
 import { DefaultResourcePack } from './DefaultResourcePack';
@@ -22,6 +22,7 @@ export interface ModData {
     weapons:WeaponType[];
     terrains:TerrainType[];
     movements:MovementClass[];
+    movementRules:MovementRule[];
     commanders:CommanderType[];
     players:PlayerType[];
     passiveUnitEffects:PassiveUnitEffect[];
@@ -31,4 +32,5 @@ export interface ModData {
     passiveGlobalEffects:PassiveGlobalEffect[];
     activeGlobalEffects:ActiveGlobalEffect[];
     defaultSettings:Settings[];
+    config:Config;
 }

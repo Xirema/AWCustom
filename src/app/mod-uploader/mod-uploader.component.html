@@ -3,6 +3,7 @@
     <label for="file">Choose File</label>
     <input type="file"
            id="file"
+           accept=".json"
            (change)="handleFileInput($event)" #file>
 </div>
 <h2 class="error" *ngIf="errorMessage != null">{{errorMessage}}</h2>

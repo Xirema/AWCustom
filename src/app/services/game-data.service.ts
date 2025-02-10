@@ -7,7 +7,7 @@ import {MovementClass, MovementRule} from '../GameData/Movement';
 import {PassiveUnitEffect, ActiveUnitEffect, PassiveTerrainEffect, ActiveTerrainEffect, PassiveGlobalEffect, ActiveGlobalEffect} from '../GameData/Effect';
 import {CommanderType, PlayerType} from '../GameData/Commander';
 import {Settings} from '../GameData/Settings';
-import { ModMetadata } from '../GameData/ModMetadata';
+import { ModData, ModMetadata } from '../GameData/ModMetadata';
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +98,10 @@ export class GameDataService {
       headers = headers.append(value, JSON.stringify(options[value]));
     }
     return this.httpClient.get<ModMetadata[]>("data/getMods", {headers:headers, responseType:"json"});
+  }
+
+  public getMod(modId:string):Observable<ModData> {
+    return this.httpClient.get<ModData>("data/getMod", {headers:{modId:modId}});
   }
 
   // public getTextResources(modId:string):Observable<TextResource[]> {

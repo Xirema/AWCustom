@@ -2,7 +2,7 @@
     "protocol":"AWC000001",
     "modMetadata":{
         "name":"AWBW",
-        "version":"BETA 0.03",
+        "version":"BETA 0.06",
         "defaultResourcePacks":[
             {
                 "name":"default"
@@ -1883,9 +1883,29 @@
         }
         ,
         {
+            "name":"sonjads_d2d",
+            "targets":["own"],
+            "visionMod":1,
+            "hiddenHitPoints":["enemy"],
+            "badLuckMod":4
+        }
+        ,
+        {
+            "name":"sonjads_enemyterrain_d2d",
+            "targets":["enemy", "neutral"],
+            "terrainStarsFlatMod":-1
+        }
+        ,
+        {
             "name":"sonja_cop",
             "targets":["own"],
             "visionMod":1
+        }
+        ,
+        {
+            "name":"sonjads_enemyterrain_cop",
+            "targets":["enemy", "neutral"],
+            "terrainStarsFlatMod":-1
         }
         ,
         {
@@ -1893,6 +1913,12 @@
             "targets":["own"],
             "visionMod":1,
             "counterFirst":true
+        }
+        ,
+        {
+            "name":"sonjads_enemyterrain_scop",
+            "targets":["enemy", "neutral"],
+            "terrainStarsFlatMod":-2
         }
         ,
         {
@@ -2022,6 +2048,13 @@
             "name":"sturm_d2d",
             "targets":["own"],
             "firepowerMod":20,
+            "defenseMod":20
+        }
+        ,
+        {
+            "name":"sturmawbw_d2d",
+            "targets":["own"],
+            "firepowerMod":-20,
             "defenseMod":20
         }
         ,
@@ -2558,6 +2591,20 @@
         }
         ,
         {
+            "name":"sonjads",
+
+            "passiveUnitEffectsD2d": ["sonjads_d2d", "sonjads_enemyterrain_d2d"],
+            
+            "copCost":27000,
+            "passiveUnitEffectsCop": ["sonja_cop", "sonjads_enemyterrain_cop"],
+            "passiveTerrainEffectsCop": ["sonja_cop"],
+            
+            "scopCost":45000,
+            "passiveUnitEffectsScop": ["sonja_scop", "sonjads_enemyterrain_scop"],
+            "passiveTerrainEffectsScop": ["sonja_cop"]
+        }
+        ,
+        {
             "name":"adder",
             
             "copCost":18000,
@@ -2653,6 +2700,19 @@
             
             "scopCost":90000,
             "passiveUnitEffectsScop": ["sturm_cop"],
+            "activeGlobalEffectsScop": ["sturm_scop"]
+        }
+        ,
+        {
+            "name":"sturmawbw",
+
+            "passiveUnitEffectsD2d": ["sturmawbw_d2d"],
+            "passiveGlobalEffectsD2d": ["sturm_d2d_normal_flat", "sturm_d2d_rain_flat"],
+            
+            "copCost":54000,
+            "activeGlobalEffectsCop": ["sturm_cop"],
+            
+            "scopCost":90000,
             "activeGlobalEffectsScop": ["sturm_scop"]
         }
         ,
@@ -2849,4 +2909,11 @@
             "unitLimit":50
         }
     ]
+    ,
+    "config":{
+        "minTerrainStars":0,
+        "unlimitedUnload":true,
+        "terrainDefenseScalesWithHitpoints":true,
+        "terrainFirepowerScalesWithHitpoints":false
+    }
 }

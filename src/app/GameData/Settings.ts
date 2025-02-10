@@ -12,3 +12,10 @@ export interface Settings {
     coMeterSize?:number;
     coMeterMultiplier?:number;
 }
+
+export interface Config {
+    minTerrainStars?:number;
+    unlimitedUnload?:boolean;
+    terrainDefenseScalesWithHitpoints?:boolean;
+    terrainFirepowerScalesWithHitpoints?:boolean;
+}

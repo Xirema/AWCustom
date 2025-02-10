@@ -84,7 +84,8 @@
             "sslCert":"ssl/cert.pem",
             "ssl":false,
             "proxyConfig": "proxy.config.json",
-            "disableHostCheck":true
+            "disableHostCheck":true,
+            "port":2025
           }
         },
         "extract-i18n": {

@@ -43,11 +43,11 @@
     <h1 style="color:darkgreen">Loading...</h1>
 </div>
 
-<div *ngIf="loaded === 'loaded'">
-    <h1 id="start">Mod: {{modMetadata.modId ?? ''}} - {{modMetadata.name}} ({{modMetadata.version}})<span *ngIf="modMetadata.expired"> (Exp: {{modMetadata.expired}})</span></h1>
+<div *ngIf="loaded === 'loaded' && modData">
+    <h1 id="start">Mod: {{modData.modMetadata.modId ?? ''}} - {{modData.modMetadata.name}} ({{modData.modMetadata.version}})<span *ngIf="modData.modMetadata.expired"> (Exp: {{modData.modMetadata.expired}})</span></h1>
     <h3>
         <ul>
-            <li *ngFor="let name of ['Units', 'Weapons', 'Terrains', 'Movement Classes', 'Movement Rules', 'Passive Unit Effects', 'Active Unit Effects', 'Passive Terrain Effects', 'Active Terrain Effects', 'Passive Global Effects', 'Active Global Effects', 'Commanders', 'Players', 'Default Settings']">
+            <li *ngFor="let name of ['Units', 'Weapons', 'Terrains', 'Movement Classes', 'Movement Rules', 'Passive Unit Effects', 'Active Unit Effects', 'Passive Terrain Effects', 'Active Terrain Effects', 'Passive Global Effects', 'Active Global Effects', 'Commanders', 'Players', 'Default Settings', 'Config']">
                 <a
                 [href]="'modChecker#' + name"
                 rel="noopener"
@@ -57,18 +57,19 @@
             </li>
         </ul>
     </h3>
-    <app-data-checker-table [name]="'Units'" [data]="unitTypes" [refdata]="[unitTypes, weaponTypes, movementClasses, classificationTypes]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Weapons'" [data]="weaponTypes" [refdata]="[unitTypes, weaponTypes]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Terrains'" [data]="terrainTypes" [refdata]="[terrainTypes, unitTypes, activeUnitEffects, activeTerrainEffects, activeGlobalEffects]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Movement Classes'" [data]="movementClasses" [refdata]="[movementClasses, terrainTypes, variantTypes, movementRules]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Movement Rules'" [data]="movementRules" [refdata]="[movementClasses]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Passive Unit Effects'" [data]="passiveUnitEffects" [refdata]="[passiveUnitEffects, unitTypes, terrainTypes, classificationTypes, variantTypes, targetTypes]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Active Unit Effects'" [data]="activeUnitEffects" [refdata]="[activeUnitEffects, unitTypes, terrainTypes, classificationTypes, targetTypes]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Passive Terrain Effects'" [data]="passiveTerrainEffects" [refdata]="[passiveTerrainEffects, unitTypes, terrainTypes, classificationTypes, targetTypes]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Active Terrain Effects'" [data]="activeTerrainEffects" [refdata]="[activeTerrainEffects, unitTypes, terrainTypes, targetTypes]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Passive Global Effects'" [data]="passiveGlobalEffects" [refdata]="[passiveGlobalEffects, variantTypes, targetTypes]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Active Global Effects'" [data]="activeGlobalEffects" [refdata]="[activeGlobalEffects, targetTypes, missileTargetTypes]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Commanders'" [data]="commanderTypes" [refdata]="[commanderTypes, passiveUnitEffects, activeUnitEffects, passiveTerrainEffects, activeTerrainEffects, passiveGlobalEffects, activeGlobalEffects]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Players'" [data]="playerTypes" [refdata]="[playerTypes, commanderTypes]"></app-data-checker-table>
-    <app-data-checker-table [name]="'Default Settings'" [data]="settings" [refdata]="[settings, playerTypes, commanderTypes, variantTypes]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Units'" [data]="modData.units" [refdata]="[modData.units, modData.weapons, modData.movements, classificationTypes]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Weapons'" [data]="modData.weapons" [refdata]="[modData.units, modData.weapons]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Terrains'" [data]="modData.terrains" [refdata]="[modData.terrains, modData.units, modData.activeUnitEffects, modData.activeTerrainEffects, modData.activeGlobalEffects]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Movement Classes'" [data]="modData.movements" [refdata]="[modData.movements, modData.terrains, variantTypes, modData.movementRules]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Movement Rules'" [data]="modData.movementRules" [refdata]="[modData.movements]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Passive Unit Effects'" [data]="modData.passiveUnitEffects" [refdata]="[modData.passiveUnitEffects, modData.units, modData.terrains, classificationTypes, variantTypes, targetTypes]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Active Unit Effects'" [data]="modData.activeUnitEffects" [refdata]="[modData.activeUnitEffects, modData.units, modData.terrains, classificationTypes, targetTypes]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Passive Terrain Effects'" [data]="modData.passiveTerrainEffects" [refdata]="[modData.passiveTerrainEffects, modData.units, modData.terrains, classificationTypes, targetTypes]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Active Terrain Effects'" [data]="modData.activeTerrainEffects" [refdata]="[modData.activeTerrainEffects, modData.units, modData.terrains, targetTypes]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Passive Global Effects'" [data]="modData.passiveGlobalEffects" [refdata]="[modData.passiveGlobalEffects, variantTypes, targetTypes]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Active Global Effects'" [data]="modData.activeGlobalEffects" [refdata]="[modData.activeGlobalEffects, targetTypes, missileTargetTypes]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Commanders'" [data]="modData.commanders" [refdata]="[modData.commanders, modData.passiveUnitEffects, modData.activeUnitEffects, modData.passiveTerrainEffects, modData.activeTerrainEffects, modData.passiveGlobalEffects, modData.activeGlobalEffects]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Players'" [data]="modData.players" [refdata]="[modData.players, modData.commanders]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Default Settings'" [data]="modData.defaultSettings" [refdata]="[modData.defaultSettings, modData.players, modData.commanders, variantTypes]"></app-data-checker-table>
+    <app-data-checker-table [name]="'Config'" [data]="[modData.config]" [refdata]="[]"></app-data-checker-table>
 </div>

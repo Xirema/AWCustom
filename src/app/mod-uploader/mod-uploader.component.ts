@@ -17,8 +17,11 @@ export class ModUploaderComponent implements OnInit {
   }
 
   handleFileInput(e:any):void {
-    console.log(e);
-    let files = e.target.files as FileList;
+    this.resultMessage = null;
+    this.errorMessage = null;
+    let fileSelector = e.target as HTMLInputElement;
+    let files = fileSelector.files as FileList;
+
     if(files.length == 0) {
       return;
     }
@@ -33,6 +36,7 @@ export class ModUploaderComponent implements OnInit {
       } catch (error) {
         this.errorMessage = JSON.stringify(error);
       }
+      fileSelector.value = "";
     }
     let item = files.item(0);
     if(item != null)

@@ -19,6 +19,8 @@ export interface PassiveUnitEffect {
     terrainStarsFlatMod?:number;
     terrainStarsDefense?:number;
     terrainStarsFirepower?:number;
+    terrainStarsFlatDefense?:number;
+    terrainStarsFlatFirepower?:number;
     counterfireMod?:number;
     counterFirst?:boolean;
     captureRateMod?:number;

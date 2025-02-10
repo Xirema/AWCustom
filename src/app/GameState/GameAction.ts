@@ -9,11 +9,11 @@ export interface Move {
 export interface GameAction {
     currentGameHash:string;
     actionType:string;
-    sourceType:number; //0 == Unit, 1 == Terrain, 2 == Player
-    targetType?:number;
+    sourceType:string; //unit, terrain, player
     sourceId:string;
+    targetType?:number;
     targetId?:string;
-    moves:Move[];
+    moves?:Move[];
 }
 
 export interface MoveResult {

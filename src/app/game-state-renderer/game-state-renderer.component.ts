@@ -183,19 +183,7 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
 
         this.settings = await settingsFuture;
         let modId = this.settings.modId;
-        let unitTypesFuture = firstValueFrom(this.gameDataService.getUnitTypes(modId));
-        let terrainTypesFuture = firstValueFrom(this.gameDataService.getTerrainTypes(modId));
-        let movementTypesFuture = firstValueFrom(this.gameDataService.getMovementClasses(modId));
-        let movementRulesFuture = firstValueFrom(this.gameDataService.getMovementRules(modId));
-        let weaponTypesFuture = firstValueFrom(this.gameDataService.getWeaponTypes(modId));
-        let commanderTypesFuture = firstValueFrom(this.gameDataService.getCommanderTypes(modId));
-        let playerTypesFuture = firstValueFrom(this.gameDataService.getPlayerTypes(modId));
-        let pueFuture = firstValueFrom(this.gameDataService.getPassiveUnitEffects(modId));
-        let aueFuture = firstValueFrom(this.gameDataService.getActiveUnitEffects(modId));
-        let pteFuture = firstValueFrom(this.gameDataService.getPassiveTerrainEffects(modId));
-        let ateFuture = firstValueFrom(this.gameDataService.getActiveTerrainEffects(modId));
-        let pgeFuture = firstValueFrom(this.gameDataService.getPassiveGlobalEffects(modId));
-        let ageFuture = firstValueFrom(this.gameDataService.getActiveGlobalEffects(modId));
+        let modDataFuture = firstValueFrom(this.gameDataService.getMod(modId));
 
         this.game = await gameFuture;
         this.units = toMapWithMapper(await unitsFuture, u => coordIdentity(u), coordHash, coordEquals);
@@ -203,15 +191,17 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
         let terrainSetup = this.getTerrainStats();
         this.players = toMapWithMapper(await playersFuture, p => p.id, stringHash);
 
-        this.unitTypes = toMapWithMapper(await unitTypesFuture, u => u.name, stringHash);
-        this.terrainTypes = toMapWithMapper(await terrainTypesFuture, t => t.name, stringHash);
-        this.movementTypes = toMapWithMapper(await movementTypesFuture, m => m.name, stringHash);
-        this.movementRules = toMapWithMapper(await movementRulesFuture, m => m.name, stringHash);
-        this.weaponTypes = toMapWithMapper(await weaponTypesFuture, w => w.name, stringHash);
-        this.commanderTypes = toMapWithMapper(await commanderTypesFuture, c => c.name, stringHash);
-        this.playerTypes = toMapWithMapper(await playerTypesFuture, p => p.name, stringHash);
-        this.passiveUnitEffects = toMapWithMapper(await pueFuture, e => e.name, stringHash);
-        this.passiveGlobalEffects = toMapWithMapper(await pgeFuture, e => e.name, stringHash);
+        let modData = await modDataFuture;
+
+        this.unitTypes = toMapWithMapper(modData.units, u => u.name, stringHash);
+        this.terrainTypes = toMapWithMapper(modData.terrains, t => t.name, stringHash);
+        this.movementTypes = toMapWithMapper(modData.movements, m => m.name, stringHash);
+        this.movementRules = toMapWithMapper(modData.movementRules, m => m.name, stringHash);
+        this.weaponTypes = toMapWithMapper(modData.weapons, w => w.name, stringHash);
+        this.commanderTypes = toMapWithMapper(modData.commanders, c => c.name, stringHash);
+        this.playerTypes = toMapWithMapper(modData.players, p => p.name, stringHash);
+        this.passiveUnitEffects = toMapWithMapper(modData.passiveUnitEffects, e => e.name, stringHash);
+        this.passiveGlobalEffects = toMapWithMapper(modData.passiveGlobalEffects, e => e.name, stringHash);
         await terrainSetup;
     }
 

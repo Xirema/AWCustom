@@ -7,7 +7,7 @@ import {TerrainType} from '../GameData/Terrain';
 import {MovementClass, MovementRule} from '../GameData/Movement';
 import {Settings} from '../GameData/Settings';
 import { ImageResource, TextResource } from '../GameResource/Resource';
-import { ModMetadata } from '../GameData/ModMetadata';
+import { ModData, ModMetadata } from '../GameData/ModMetadata';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -25,6 +25,7 @@ export class DataCompletenessCheckerComponent implements OnInit {
     this.loaded = 'loading';
     this.errorText = undefined;
     try {
+      let modMetadata:ModMetadata | undefined;
       if(!this.selectedMod || this.selectedMod === '-1') {
         let modNameElement = document.getElementById("modName") as HTMLInputElement;
         let modVersionElement = document.getElementById("modVersion") as HTMLInputElement;
@@ -44,66 +45,33 @@ export class DataCompletenessCheckerComponent implements OnInit {
           this.loaded = 'failed';
           return;
         }
-        this.modMetadata = await firstValueFrom(this.gameDataService.getModData({name:modName, version:modVersion}));
+        modMetadata = await firstValueFrom(this.gameDataService.getModData({name:modName, version:modVersion}));
       } else {
-        let modMetadata = this.modList.find(m => m.modId === this.selectedMod);
+        modMetadata = this.modList.find(m => m.modId == this.selectedMod);
         if(!modMetadata) {
           console.error('Invalid Mod in ModList');
           return;
         }
-        this.modMetadata = modMetadata;
       }
 
-      console.log('modData', this.modMetadata);
-      if(!this.modMetadata.modId) {
+      console.log('modData', modMetadata);
+      if(!modMetadata.modId) {
         return;
       }
-      let modId = this.modMetadata.modId;
-      let unitTypes = firstValueFrom(this.gameDataService.getUnitTypes(modId));
-      let classifications = unitTypes.then(unitTypes => {
-        let foundClassifications = new Map<string, number>();
-        let classificationTypes:{name:string, notLinkable?:boolean}[] = [];
-        unitTypes.forEach(unitType => {
-          unitType.classifications?.forEach(classification => {
-            let count = foundClassifications.get(classification) ?? 0;
-            foundClassifications.set(classification, count+1);
-          });
+      let modId = modMetadata.modId;
+      this.modData = await firstValueFrom(this.gameDataService.getMod(modId));
+      let unitTypes = this.modData.units;
+      let foundClassifications = new Map<string, number>();
+      let classificationTypes:{name:string, notLinkable?:boolean}[] = [];
+      unitTypes.forEach(unitType => {
+        unitType.classifications?.forEach(classification => {
+          let count = foundClassifications.get(classification) ?? 0;
+          foundClassifications.set(classification, count+1);
         });
-        classificationTypes = [...foundClassifications].map(v => v[0]).map(s => {return {name:s, notLinkable:true}});
-        return {foundClassifications:foundClassifications, classificationTypes:classificationTypes};
       });
-      let terrainTypes = firstValueFrom(this.gameDataService.getTerrainTypes(modId));
-      let weaponTypes = firstValueFrom(this.gameDataService.getWeaponTypes(modId));
-      let commanderTypes = firstValueFrom(this.gameDataService.getCommanderTypes(modId));
-      let movementClasses = firstValueFrom(this.gameDataService.getMovementClasses(modId));
-      let movementRules = firstValueFrom(this.gameDataService.getMovementRules(modId));
-
-      let passiveUnitEffects = firstValueFrom(this.gameDataService.getPassiveUnitEffects(modId));
-      let passiveTerrainEffects = firstValueFrom(this.gameDataService.getPassiveTerrainEffects(modId));
-      let passiveGlobalEffects = firstValueFrom(this.gameDataService.getPassiveGlobalEffects(modId));
-      let activeUnitEffects = firstValueFrom(this.gameDataService.getActiveUnitEffects(modId));
-      let activeTerrainEffects = firstValueFrom(this.gameDataService.getActiveTerrainEffects(modId));
-      let activeGlobalEffects = firstValueFrom(this.gameDataService.getActiveGlobalEffects(modId));
-      let playerTypes = firstValueFrom(this.gameDataService.getPlayerTypes(modId));
-      let settings = firstValueFrom(this.gameDataService.getSettings(modId));
-
-      this.unitTypes = await unitTypes;
-      this.weaponTypes = await weaponTypes;
-      this.terrainTypes = await terrainTypes;
-      this.commanderTypes = await commanderTypes;
-      this.movementClasses = await movementClasses;
-      this.movementRules = await movementRules;
-      this.passiveUnitEffects = await passiveUnitEffects;
-      this.passiveTerrainEffects = await passiveTerrainEffects;
-      this.passiveGlobalEffects = await passiveGlobalEffects;
-      this.activeUnitEffects = await activeUnitEffects;
-      this.activeTerrainEffects = await activeTerrainEffects;
-      this.activeGlobalEffects = await activeGlobalEffects;
-      this.playerTypes = await playerTypes;
-      this.settings = await settings;
-      let ret = await classifications;
-      this.foundClassifications = ret.foundClassifications;
-      this.classificationTypes = ret.classificationTypes;
+      classificationTypes = [...foundClassifications].map(v => v[0]).map(s => {return {name:s, notLinkable:true}});
+      this.foundClassifications = foundClassifications;
+      this.classificationTypes = classificationTypes;
       this.loaded = 'loaded';
     } catch (err:any) {
       this.errorText = err.error;
@@ -123,39 +91,8 @@ export class DataCompletenessCheckerComponent implements OnInit {
 
   selectedMod?:string;
   modList:ModMetadata[] = [];
-  modMetadata:ModMetadata = {name:'', version:''};
-  unitTypes:UnitType[] = [];
-  weaponTypes:WeaponType[] = [];
-  commanderTypes:CommanderType[] = [];
-  terrainTypes:TerrainType[] = [];
-  movementClasses:MovementClass[] = [];
-  movementRules:MovementRule[] = [];
-  playerTypes:PlayerType[] = [];
+  modData?:ModData;
   classificationTypes:{name:string, nonLinkable?:boolean}[] = [];
-
-  passiveUnitEffects:EffectData.PassiveUnitEffect[] = [];
-  passiveTerrainEffects:EffectData.PassiveTerrainEffect[] = [];
-  passiveGlobalEffects:EffectData.PassiveGlobalEffect[] = [];
-  activeUnitEffects:EffectData.ActiveUnitEffect[] = [];
-  activeTerrainEffects:EffectData.ActiveTerrainEffect[] = [];
-  activeGlobalEffects:EffectData.ActiveGlobalEffect[] = [];
-
-  // textResources:TextResource[] = [];
-  // unitTextResources:TextResource[] = [];
-  // weaponTextResources:TextResource[] = [];
-  // terrainTextResources:TextResource[] = [];
-  // moveTextResources:TextResource[] = [];
-  // commanderTextResources:TextResource[] = [];
-  // playerTextResources:TextResource[] = [];
-  // settingTextResources:TextResource[] = [];
-
-  // unitImageResources:ImageResource[] = [];
-  // terrainImageResources:ImageResource[] = [];
-  // commanderImageResources:ImageResource[] = [];
-  // playerImageResources:ImageResource[] = [];
-  // settingImageResources:ImageResource[] = [];
-
-  settings:Settings[] = [];
 
   variantTypes = [{name:'normal', notLinkable:true}, {name:'rain', notLinkable:true}, {name:'snow', notLinkable:true}, {name:'flat', notLinkable:true}];
   targetTypes = [{name:'own', notLinkable:true}, {name:'self', notLinkable:true}, {name:'ally', notLinkable:true}, {name:'neutral', notLinkable:true}, {name:'enemy', notLinkable:true}];
