@@ -98,7 +98,7 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
     movementTypes = new HashMap<string, MovementClass>(stringHash);
     movementRules = new HashMap<string, MovementRule>(stringHash);
 
-    selectedResourcePack?:string;
+    selectedResourcePack?:string[];
     resourcePackList:PackMetadata[] = [];
 
     images = new HashMap<ImageResourceKey, ImageResource>(imageResourceHasher, imageResourceEqual);
@@ -146,8 +146,8 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
         try {
             let params = await firstValueFrom(this.activatedRoute.queryParams);
             let gameId:string = params['id'];
-            await this.updateStates(gameId);
             this.resourcePackList = await firstValueFrom(this.resourceService.listPacks());
+            await this.updateStates(gameId);
             this.loaded = true;
         } catch (e:any) {
             console.error('Problem loading page', e);
@@ -165,11 +165,13 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
     }
 
     async setResourcePack():Promise<void> {
-        if(!this.selectedResourcePack || this.selectedResourcePack === '-1') {
-            console.error('Invalid Resource Pack Id');
+        let resourcePacks = this.selectedResourcePack?.filter(packId => packId != '-1');
+        if(resourcePacks == null || resourcePacks.length == 0) {
+            this.images = new HashMap<ImageResourceKey, ImageResource>(imageResourceHasher, imageResourceEqual);
+            this.texts = [];
             return;
         }
-        let resourcePack = await firstValueFrom(this.resourceService.getResourcePack(this.selectedResourcePack));
+        let resourcePack = await firstValueFrom(this.resourceService.getResourcePack(resourcePacks[0]));
         this.images = toMapWithMapper(resourcePack.imageResources, i => imageResourceIdentity(i), imageResourceHasher, imageResourceEqual);
         this.texts = resourcePack.textResources;
     }
@@ -202,6 +204,11 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
         this.playerTypes = toMapWithMapper(modData.players, p => p.name, stringHash);
         this.passiveUnitEffects = toMapWithMapper(modData.passiveUnitEffects, e => e.name, stringHash);
         this.passiveGlobalEffects = toMapWithMapper(modData.passiveGlobalEffects, e => e.name, stringHash);
+        let defaultResourcePacks = modData.modMetadata.defaultResourcePacks;
+        if(defaultResourcePacks != null && defaultResourcePacks.length != 0) {
+            this.selectedResourcePack = this.resourcePackList.filter(pack => defaultResourcePacks?.find(defPack => pack.name == defPack.name)).map(pack => pack.packId ?? '-1');
+            this.setResourcePack();
+        }
         await terrainSetup;
     }
 

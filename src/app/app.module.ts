@@ -12,6 +12,7 @@ import { GameStateRendererComponent, HoverPanelRendererComponent, TerrainRendere
 import { PackUploaderComponent } from './mod-uploader/pack-uploader.component';
 import { ResourceCheckerComponent } from './resource-checker/resource-checker.component';
 import { FormsModule } from '@angular/forms';
+import { NavigatorComponent } from './navigation-header/nav.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     HoverPanelRendererComponent,
     InterfaceRendererComponent,
     PackUploaderComponent,
-    ResourceCheckerComponent
+    ResourceCheckerComponent,
+    NavigatorComponent
   ],
   imports: [
     BrowserModule,

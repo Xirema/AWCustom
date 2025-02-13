@@ -1,0 +1,51 @@
+div {
+  //margin:5px;
+  background-color:cadetblue;
+  padding: 10px 0px;
+  position:sticky;
+  top: 0;
+  margin:0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  //text-align:center;
+}
+
+li {
+  display:inline;
+  margin:0;
+  padding:0;
+}
+
+a,span{
+  //display:block;
+  padding:10px 40px;
+  font-family:'Courier New', Courier, monospace;
+  color:lightblue;
+  font-weight: bold;
+  font-size:larger;
+  text-decoration: none;
+  font-variant:small-caps;
+  margin:0;
+}
+
+span {
+  cursor:pointer;
+}
+
+a:hover {
+  background-color:darkcyan;
+  //color:
+}
+
+.selected {
+  color:black;
+  background-color:lightblue;
+  border-width:3px;
+  padding:7px 37px;
+  border-style:inset;
+  border-color:cadetblue;
+}

@@ -1,0 +1,24 @@
+<div>
+  <ul>
+    <li>
+      <a href="/" *ngIf="!selected('home'); Else IsHome;">Home</a>
+      <ng-template #IsHome><span class="selected">Home</span></ng-template>
+    </li>
+    <li>
+      <a href="/game?id=-1" *ngIf="!selected('testGame'); Else IsGame;">Test Game</a>
+      <ng-template #IsGame><span class="selected">Test Game</span></ng-template>
+    </li>
+    <li>
+      <a href="/modChecker" *ngIf="!selected('modChecker'); Else IsModChecker;">Mod Data Checker</a>
+      <ng-template #IsModChecker><span class="selected">Mod Data Checker</span></ng-template>
+    </li>
+    <li>
+      <a href="/modUpload" *ngIf="!selected('modUpload'); Else IsModUpload;">Mod Uploader</a>
+      <ng-template #IsModUpload><span class="selected">Mod Uploader</span></ng-template>
+    </li>
+    <li>
+      <a href="/packUpload" *ngIf="!selected('packUpload'); Else IsPackUpload;">Resource Pack Uploader</a>
+      <ng-template #IsPackUpload><span class="selected">Resource Pack Uploader</span></ng-template>
+    </li>
+  </ul>
+</div>

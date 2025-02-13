@@ -47,7 +47,7 @@
     <h1 id="start">Mod: {{modData.modMetadata.modId ?? ''}} - {{modData.modMetadata.name}} ({{modData.modMetadata.version}})<span *ngIf="modData.modMetadata.expired"> (Exp: {{modData.modMetadata.expired}})</span></h1>
     <h3>
         <ul>
-            <li *ngFor="let name of ['Units', 'Weapons', 'Terrains', 'Movement Classes', 'Movement Rules', 'Passive Unit Effects', 'Active Unit Effects', 'Passive Terrain Effects', 'Active Terrain Effects', 'Passive Global Effects', 'Active Global Effects', 'Commanders', 'Players', 'Default Settings', 'Config']">
+            <li *ngFor="let name of ['Metadata', 'Units', 'Weapons', 'Terrains', 'Movement Classes', 'Movement Rules', 'Passive Unit Effects', 'Active Unit Effects', 'Passive Terrain Effects', 'Active Terrain Effects', 'Passive Global Effects', 'Active Global Effects', 'Commanders', 'Players', 'Default Settings', 'Config']">
                 <a
                 [href]="'modChecker#' + name"
                 rel="noopener"
@@ -57,6 +57,7 @@
             </li>
         </ul>
     </h3>
+    <app-data-checker-table [name]="'Metadata'" [data]="[modData.modMetadata]" [refdata]="[]"></app-data-checker-table>
     <app-data-checker-table [name]="'Units'" [data]="modData.units" [refdata]="[modData.units, modData.weapons, modData.movements, classificationTypes]"></app-data-checker-table>
     <app-data-checker-table [name]="'Weapons'" [data]="modData.weapons" [refdata]="[modData.units, modData.weapons]"></app-data-checker-table>
     <app-data-checker-table [name]="'Terrains'" [data]="modData.terrains" [refdata]="[modData.terrains, modData.units, modData.activeUnitEffects, modData.activeTerrainEffects, modData.activeGlobalEffects]"></app-data-checker-table>

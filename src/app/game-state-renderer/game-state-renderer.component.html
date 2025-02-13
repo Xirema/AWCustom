@@ -1,6 +1,6 @@
-<div *ngIf="loaded; else NotLoaded">
+<div *ngIf="loaded; else NotLoaded" class="main">
     <label for="resourcePackSelect">Resource Pack:</label>
-    <select name="resourcePackSelect" [(ngModel)]="selectedResourcePack" (change)="setResourcePack()">
+    <select name="resourcePackSelect" [(ngModel)]="selectedResourcePack" (change)="setResourcePack()" multiple>
         <option value="-1"></option>
         <option *ngFor="let pack of resourcePackList" [value]="pack.packId">{{pack.name}} - {{pack.version}}</option>
     </select>

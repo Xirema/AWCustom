@@ -7,6 +7,7 @@ import { PostTestComponent } from './post-test/post-test.component';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { PackUploaderComponent } from './mod-uploader/pack-uploader.component';
 import { ResourceCheckerComponent } from './resource-checker/resource-checker.component';
+import { HomeComponent } from './home-page/home.component';
 
 const routes: Routes = [
     {path: 'modUpload', component:ModUploaderComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
     {path: 'game', component:GameStateRendererComponent},
     {path: 'postTest', component:PostTestComponent},
     {path: 'testComponent', component:TestComponentComponent},
-    {path: 'packChecker', component:ResourceCheckerComponent}
+    {path: 'packChecker', component:ResourceCheckerComponent},
+    {path: '', component:HomeComponent}
 ]; // sets up routes constant where you define your routes
 
 // configures NgModule imports and exports
