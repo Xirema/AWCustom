@@ -13,6 +13,7 @@ import { PackUploaderComponent } from './mod-uploader/pack-uploader.component';
 import { ResourceCheckerComponent } from './resource-checker/resource-checker.component';
 import { FormsModule } from '@angular/forms';
 import { NavigatorComponent } from './navigation-header/nav.component';
+import { HomeComponent } from './home-page/home.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NavigatorComponent } from './navigation-header/nav.component';
     InterfaceRendererComponent,
     PackUploaderComponent,
     ResourceCheckerComponent,
-    NavigatorComponent
+    NavigatorComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
