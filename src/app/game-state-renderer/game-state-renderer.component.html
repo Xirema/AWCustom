@@ -1,4 +1,4 @@
-<div *ngIf="loaded; else NotLoaded" class="main">
+<div *ngIf="loaded; else NotLoaded" class="main" oncontextmenu="return false;">
     <label for="resourcePackSelect">Resource Pack:</label>
     <select name="resourcePackSelect" [(ngModel)]="selectedResourcePack" (change)="setResourcePack()" multiple>
         <option value="-1"></option>

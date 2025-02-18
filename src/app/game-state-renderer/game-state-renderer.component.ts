@@ -875,12 +875,20 @@ export class UnitRendererComponent implements OnChanges {
     updateSrc():void {
         let owner = this.playerStates?.get(this.unitState?.owner ?? '');
         let armyColor = owner?.armyColor;
-        let imageResourceKey = {
+        let imageResourceKey:ImageResourceKey = {
             key:this.unitState?.name ?? '',
             type:'unit',
             armyColor:armyColor
-        }
+        };
         let imageResource = this.imageResources?.get(imageResourceKey);
+        if(!imageResource) {
+          imageResourceKey.orientation = 0;
+          imageResource = this.imageResources?.get(imageResourceKey);
+        }
+        if(!imageResource) {
+          imageResourceKey.armyColor = undefined;
+          imageResource = this.imageResources?.get(imageResourceKey);
+        }
         if(imageResource)
             this.unitSrc = `data:image/png;base64,${imageResource.smallImage}`;
         else
@@ -939,9 +947,13 @@ export class TerrainRendererComponent implements OnChanges {
             orientation:this.terrainState?.orientation
         };
         let imageResource = this.imageResources?.get(imageResourceKey);
-        if(!imageResource && imageResourceKey.orientation != null) {
+        if(!imageResource) {
             imageResourceKey.orientation = 0;
             imageResource = this.imageResources?.get(imageResourceKey);
+        }
+        if(!imageResource) {
+          imageResourceKey.armyColor = undefined;
+          imageResource = this.imageResources?.get(imageResourceKey);
         }
         if(imageResource)
             this.terrainSrc = `data:image/png;base64,${imageResource.smallImage}`;
@@ -1026,11 +1038,19 @@ export class InterfaceRendererComponent implements OnChanges {
     }
 
     updateSrc():void {
-        let imageResourceKey = {
+        let imageResourceKey:ImageResourceKey = {
             key:this.interfaceState?.name ?? '',
             type:'interface'
         };
         let imageResource = this.imageResources?.get(imageResourceKey);
+        if(!imageResource) {
+            imageResourceKey.orientation = 0;
+            imageResource = this.imageResources?.get(imageResourceKey);
+        }
+        if(!imageResource) {
+          imageResourceKey.armyColor = undefined;
+          imageResource = this.imageResources?.get(imageResourceKey);
+        }
         if(imageResource)
             this.interfaceSrc = `data:image/png;base64,${imageResource.smallImage}`;
         else

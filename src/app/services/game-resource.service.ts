@@ -52,12 +52,12 @@ export class GameResourceService{
                 headers = headers.append('version', pack.version);
             }
         } else {
-            headers = headers.append('packId', pack.packId);
+            headers = headers.append('packId', pack.packId + '');
         }
         return this.httpClient.get<PackMetadata>('resource/getMetadata', {headers:headers});
     }
 
-    public postNewPack(cookies:string, pack:string):Observable<string> {
+    public postNewPack(cookies:string, pack:string | ArrayBuffer):Observable<string> {
         let headers = new HttpHeaders;
         headers = headers.append("cookies", cookies);
         return this.httpClient.post('resource/uploadPack', pack, {headers:headers, responseType:'text'});

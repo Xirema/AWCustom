@@ -21,7 +21,7 @@ export class PackUploaderComponent implements OnInit {
     }
     let fileReader = new FileReader();
     fileReader.onload = () => {
-      let fileData:string = fileReader.result as string;
+      let fileData:ArrayBuffer = fileReader.result as ArrayBuffer;
       try {
         this.resourceService.postNewPack(this.getCookie(), fileData).subscribe({
           next: result => this.resultMessage = result, 
@@ -33,7 +33,8 @@ export class PackUploaderComponent implements OnInit {
     }
     let item = files.item(0);
     if(item != null)
-      fileReader.readAsText(item);
+      fileReader.readAsArrayBuffer(item);
+      //fileReader.readAsText(item);
   }
 
   getCookie():string {

@@ -3,6 +3,8 @@ export interface PackMetadata {
     version:string;
     created?:string;
     packId?:string;
+    expired?:string;
+    protocol?:number;
 }
 
 export interface ResourcePack {
