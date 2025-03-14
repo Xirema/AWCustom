@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {TerrainType} from '../GameData/Terrain';
 import {UnitType, WeaponType} from '../GameData/Unit';
 import {MovementClass, MovementRule} from '../GameData/Movement';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, firstValueFrom, from} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ResourcePack, PackMetadata } from '../GameResource/Resource';
 import { IDBService } from './idb.service';
 

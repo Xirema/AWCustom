@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { DataCompletenessCheckerComponent } from './data-completeness-checker/data-completeness-checker.component';
@@ -15,34 +15,28 @@ import { FormsModule } from '@angular/forms';
 import { NavigatorComponent } from './navigation-header/nav.component';
 import { HomeComponent } from './home-page/home.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    DataCompletenessCheckerComponent,
-    ModUploaderComponent,
-    TestComponentComponent,
-    DataCheckerTableComponent,
-    DataCheckerRendererComponent,
-    GameStateRendererComponent,
-    UnitRendererComponent,
-    TerrainRendererComponent,
-    HoverPanelRendererComponent,
-    InterfaceRendererComponent,
-    PackUploaderComponent,
-    ResourceCheckerComponent,
-    NavigatorComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [
-  ],
-  bootstrap: [
-    AppComponent
-  ]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        DataCompletenessCheckerComponent,
+        ModUploaderComponent,
+        TestComponentComponent,
+        DataCheckerTableComponent,
+        DataCheckerRendererComponent,
+        GameStateRendererComponent,
+        UnitRendererComponent,
+        TerrainRendererComponent,
+        HoverPanelRendererComponent,
+        InterfaceRendererComponent,
+        PackUploaderComponent,
+        ResourceCheckerComponent,
+        NavigatorComponent,
+        HomeComponent
+    ],
+    bootstrap: [
+        AppComponent
+    ], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule], providers: [
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
