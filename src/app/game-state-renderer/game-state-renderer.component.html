@@ -61,21 +61,20 @@
             </span>
         </div>
     </div>  
-    <hover-panel-renderer 
-      [imageResources]="images" 
-      [textResources]="texts"
-      [terrainState]="hoveredTerrain"
-      [unitState]="hoveredUnit"
-      [unitData]="unitTypes"
-      [terrainData]="terrainTypes"
-      [playerStates]="players"
-      [gameStateRenderer]="this"
-    >
-    </hover-panel-renderer>
 </div>
-<!-- @if (loaded) {
-
-} -->
+@if (loaded) {
+  <hover-panel-renderer 
+    [imageResources]="images" 
+    [textResources]="texts"
+    [terrainState]="hoveredTerrain"
+    [unitState]="hoveredUnit"
+    [unitData]="unitTypes"
+    [terrainData]="terrainTypes"
+    [playerStates]="players"
+    [gameStateRenderer]="this"
+  >
+  </hover-panel-renderer>
+}
 <ng-template #NotLoaded>
     <span *ngIf="loaded === null; else FailedToLoad">
         <em>Now Loading...</em>
