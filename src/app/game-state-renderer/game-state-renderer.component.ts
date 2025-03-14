@@ -65,7 +65,8 @@ function imageResourceEqual(a:ImageResourceKey, b:ImageResourceKey): boolean {
 @Component({
     selector: 'app-game-state-renderer',
     templateUrl: './game-state-renderer.component.html',
-    styleUrls: ['./game-state-renderer.component.scss']
+    styleUrls: ['./game-state-renderer.component.scss'],
+    standalone: false
 })
 export class GameStateRendererComponent implements OnInit, AfterViewInit {
     loaded:boolean | null = null;
@@ -857,9 +858,10 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
 }
 
 @Component({
-    selector:'unit-renderer',
-    templateUrl:'./unit-renderer.component.html',
-    styleUrls:['./parts.component.scss']
+    selector: 'unit-renderer',
+    templateUrl: './unit-renderer.component.html',
+    styleUrls: ['./parts.component.scss'],
+    standalone: false
 })
 export class UnitRendererComponent implements OnChanges {
     @Input('unitState') unitState?:UnitState;
@@ -924,9 +926,10 @@ export class UnitRendererComponent implements OnChanges {
 
 
 @Component({
-    selector:'terrain-renderer',
-    templateUrl:'./terrain-renderer.component.html',
-    styleUrls:['./parts.component.scss']
+    selector: 'terrain-renderer',
+    templateUrl: './terrain-renderer.component.html',
+    styleUrls: ['./parts.component.scss'],
+    standalone: false
 })
 export class TerrainRendererComponent implements OnChanges {
     @Input('terrainState') terrainState?:TerrainState;
@@ -982,9 +985,10 @@ export class TerrainRendererComponent implements OnChanges {
 }
 
 @Component({
-    selector:'hover-panel-renderer',
-    templateUrl:'./hover-panel-renderer.component.html',
-    styleUrls:['./parts.component.scss']
+    selector: 'hover-panel-renderer',
+    templateUrl: './hover-panel-renderer.component.html',
+    styleUrls: ['./parts.component.scss'],
+    standalone: false
 })
 export class HoverPanelRendererComponent implements OnChanges {
     @Input('unitState') unitState?:UnitState;
@@ -1024,9 +1028,10 @@ class InterfaceState {
 }
 
 @Component({
-    selector:'interface-renderer',
-    templateUrl:'./interface-renderer.component.html',
-    styleUrls:['./parts.component.scss']
+    selector: 'interface-renderer',
+    templateUrl: './interface-renderer.component.html',
+    styleUrls: ['./parts.component.scss'],
+    standalone: false
 })
 export class InterfaceRendererComponent implements OnChanges {
     @Input('interfaceState') interfaceState?:InterfaceState;

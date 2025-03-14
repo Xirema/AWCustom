@@ -6,7 +6,8 @@ import { firstValueFrom } from "rxjs";
 @Component({
     selector: 'app-resource-checker',
     templateUrl: './resource-checker.component.html',
-    styleUrls: ['./resource-checker.component.scss']
+    styleUrls: ['./resource-checker.component.scss'],
+    standalone: false
 })
 export class ResourceCheckerComponent implements OnInit {
     constructor(private resourceService:GameResourceService) {}

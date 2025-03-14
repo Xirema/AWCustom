@@ -11,9 +11,10 @@ import { ModData, ModMetadata } from '../GameData/ModMetadata';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'app-data-completeness-checker',
-  templateUrl: './data-completeness-checker.component.html',
-  styleUrls: ['./data-completeness-checker.component.scss']
+    selector: 'app-data-completeness-checker',
+    templateUrl: './data-completeness-checker.component.html',
+    styleUrls: ['./data-completeness-checker.component.scss'],
+    standalone: false
 })
 export class DataCompletenessCheckerComponent implements OnInit {
 

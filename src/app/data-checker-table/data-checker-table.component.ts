@@ -6,9 +6,10 @@ export enum CheckResult {
 }
 
 @Component({
-  selector: 'app-data-checker-table',
-  templateUrl: './data-checker-table.component.html',
-  styleUrls: ['./data-checker-table.component.scss']
+    selector: 'app-data-checker-table',
+    templateUrl: './data-checker-table.component.html',
+    styleUrls: ['./data-checker-table.component.scss'],
+    standalone: false
 })
 export class DataCheckerTableComponent implements OnInit, OnChanges {
   @Input('data') data:any[] = [];
@@ -56,9 +57,10 @@ export class DataCheckerTableComponent implements OnInit, OnChanges {
 }
 
 @Component({
-  selector: 'app-data-checker-renderer',
-  templateUrl: './data-checker-renderer.component.html',
-  styleUrls: ['./data-checker-table.component.scss']
+    selector: 'app-data-checker-renderer',
+    templateUrl: './data-checker-renderer.component.html',
+    styleUrls: ['./data-checker-table.component.scss'],
+    standalone: false
 })
 export class DataCheckerRendererComponent implements OnInit, OnChanges {
   @Input('object') object:any;

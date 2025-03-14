@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { GameResourceService } from '../services/game-resource.service';
 
 @Component({
-  selector: 'app-pack-uploader',
-  templateUrl: './pack-uploader.component.html',
-  styleUrls: ['./mod-uploader.component.scss']
+    selector: 'app-pack-uploader',
+    templateUrl: './pack-uploader.component.html',
+    styleUrls: ['./mod-uploader.component.scss'],
+    standalone: false
 })
 export class PackUploaderComponent implements OnInit {
   constructor(private resourceService:GameResourceService) { }

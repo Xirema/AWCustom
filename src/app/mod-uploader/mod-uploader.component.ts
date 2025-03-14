@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {GameDataService} from '../services/game-data.service';
 
 @Component({
-  selector: 'app-mod-uploader',
-  templateUrl: './mod-uploader.component.html',
-  styleUrls: ['./mod-uploader.component.scss']
+    selector: 'app-mod-uploader',
+    templateUrl: './mod-uploader.component.html',
+    styleUrls: ['./mod-uploader.component.scss'],
+    standalone: false
 })
 export class ModUploaderComponent implements OnInit {
   constructor(private gameDataService:GameDataService) { }

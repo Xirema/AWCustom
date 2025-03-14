@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { IDBService } from '../services/idb.service';
 
 @Component({
-  selector: 'app-test-component',
-  templateUrl: './test-component.component.html',
-  styleUrls: ['./test-component.component.scss']
+    selector: 'app-test-component',
+    templateUrl: './test-component.component.html',
+    styleUrls: ['./test-component.component.scss'],
+    standalone: false
 })
 export class TestComponentComponent implements OnInit {
 

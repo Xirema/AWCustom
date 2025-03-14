@@ -3,7 +3,8 @@ import { PostTestService } from '../services/post-test.service';
 @Component({
     selector: 'app-post-test',
     template: '<h1>{{postTestString}}</h1>',
-    styleUrls: []
+    styleUrls: [],
+    standalone: false
 })
 export class PostTestComponent implements OnInit{
     constructor(private postTestService:PostTestService) {}
