@@ -236,6 +236,7 @@ export class GameStateRendererComponent implements OnInit, AfterViewInit {
         this.hoveredTerrain = this.terrains.get(position);
         this.hoveredUnit = this.units.get(position);
         if(!this.cursorLocation) {
+            this.cursorLocation = position;
             return;
         }
         if(!coordEquals(this.cursorLocation, position)) {
@@ -1009,6 +1010,7 @@ export class HoverPanelRendererComponent implements OnChanges {
     hoverStyle:string = '';
     terrainName:string = '';
     unitName:string = '';
+    shouldHoverRight = false;
 }
 
 class InterfaceState {

@@ -24,6 +24,15 @@ img {
     position:absolute;
     min-width:128px;
     min-height:48px;
-    font-size:xx-small;
+    font-size:smaller;
     font-family:'Courier New', Courier, monospace;
+    bottom:0;
+}
+
+.hoverLeft {
+  left:0;
+}
+
+.hoverRight {
+  right:0;
 }

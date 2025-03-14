@@ -59,20 +59,23 @@
                     >
                 </interface-renderer>
             </span>
-            <hover-panel-renderer 
-                [imageResources]="images" 
-                [textResources]="texts"
-                [terrainState]="hoveredTerrain"
-                [unitState]="hoveredUnit"
-                [unitData]="unitTypes"
-                [terrainData]="terrainTypes"
-                [playerStates]="players"
-                [gameStateRenderer]="this"
-                >
-            </hover-panel-renderer>
         </div>
-    </div>
+    </div>  
+    <hover-panel-renderer 
+      [imageResources]="images" 
+      [textResources]="texts"
+      [terrainState]="hoveredTerrain"
+      [unitState]="hoveredUnit"
+      [unitData]="unitTypes"
+      [terrainData]="terrainTypes"
+      [playerStates]="players"
+      [gameStateRenderer]="this"
+    >
+    </hover-panel-renderer>
 </div>
+<!-- @if (loaded) {
+
+} -->
 <ng-template #NotLoaded>
     <span *ngIf="loaded === null; else FailedToLoad">
         <em>Now Loading...</em>
